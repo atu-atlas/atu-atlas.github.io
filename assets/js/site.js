@@ -73,7 +73,7 @@ const COD_SITE = {
     { key: 'atlas', label: 'Atlas' },
     { key: 'mw', label: 'MW', icon: 'assets/images/icons/IW8-icon.svg' },
     { key: 'mwii', label: 'MWII', icon: 'assets/images/icons/Cortez-icon.svg' },
-    { key: 'mwiii', label: 'MWIII', icon: 'assets/images/icons/MWIII-icon.png' },
+    { key: 'mwiii', label: 'MWIII', icon: 'assets/images/icons/Jupiter-icon.svg' },
     { key: 'cw', label: 'CW', icon: 'assets/images/icons/T9-icon.svg' },
     { key: 'vg', label: 'VG', icon: 'assets/images/icons/S4-icon.svg' }
   ]

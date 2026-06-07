@@ -143,6 +143,7 @@ img {
 .nav-game-icon {
   height: 52px;
   width: auto;
+  max-width: 84px;
   display: block;
   opacity: 0.92;
   transition: transform 0.16s ease, opacity 0.16s ease, filter 0.16s ease;
