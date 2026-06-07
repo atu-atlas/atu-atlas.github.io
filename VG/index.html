@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COD Vanguard - Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div id="site-loader">
+    <div class="loader-inner">
+      <div class="loader-logo">ATLAS</div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+      <div class="loader-text">Loading...</div>
+    </div>
+  </div>
+  <header class="cod-nav" id="site-nav"></header>
+  <main id="page-root"></main>
+  <footer class="footer">Atlas | by atu</footer>
+  <script id="md-inline-vg" type="text/plain">
+## Versions
+Selected list of versions & seasons
+
+Number|Season|Splash
+-|:-:|:-:
+`0.2`|Open Beta|<img src="https://www.cnet.com/a/img/resize/e194bc24b3491037ac44a0cf1ed9fc0386382a09/hub/2021/09/13/60f5fb8e-512a-4eb6-ba3d-b0c54c7611f4/screen-shot-2021-09-13-at-5-25-03-pm.png?auto=webp&fit=crop&height=675&width=1200" style="height:512px;">
+`1.10`|<img src="/assets/images/icons/seasons/icon_season_s13.png" style="width:128px;height:128px;">|<img src="/assets/images/splashes/1.51.bmp" style="height:512px;">
+`1.14`-`16`|<img src="/assets/images/icons/seasons/icon_season_s14.png" style="width:128px;height:128px;">|<img src="/assets/images/splashes/1.53.bmp" style="height:512px;">
+`1.24`-`26`|<img src="/assets/images/icons/seasons/icon_season_s17.png" style="width:128px;height:128px;">|<img src="/assets/images/splashes/1.62.bmp" style="height:512px;">
+
+## Menus
+Useful & interesting menus
+
+- `openmenu mainlockoutmenu`
+- `openmenu mainmenuoffline`
+- `openmenu systemlinklobby`
+
+## DVARs
+Multi-purpose commands
+
+- `execution_hint_enabled`
+This will show/hide a hint whenever you're able to perform an execution, the UI elements for controller are unfinished in this game (0-1)
+- `lui_showBuildAndServerText`
+Hides the top right watermark on menus. NOT RECOMMENDED FOR PLAYERS WITH TECH ISSUES, (0-1)
+- `lui_cod_points_enabled`
+This will show/hide COD Points in menus (0-1)
+
+## Inventories
+- `setPrivateLoadout loadouts 0 name`
+Example: *setPrivateLoadout loadouts 0 name "New meta, chat"*
+- `setPrivateLoadout loadouts 0 weaponSetups 0 weapon`
+Example: *setPrivateLoadout loadouts 0 weaponSetups 0 weapon s4_ar_stango44*
+- `setPrivateLoadout loadouts 0 weaponSetups 0 camo`
+Example: *setPrivateLoadout loadouts 0 weaponSetups 0 camo s4_camo_11a*
+
+## Camouflages
+Multiplayer mastery
+Name|Icon|ID
+-|:-:|-
+Gold|<img src="/assets/images/icons/camos/v_ui_elmnt_camo_110.png" style="width:128px;height:128px;">|`s4_camo_11a`
+Diamond|<img src="/assets/images/icons/camos/v_ui_elmnt_camo_111.png" style="width:128px;height:128px;">|`s4_camo_11b`
+Atomic|<img src="/assets/images/icons/camos/v_ui_elmnt_camo_112.png" style="width:128px;height:128px;">|`s4_camo_11c`
+
+## Exclusive weapons
+Name|Icon|ID
+-|:-:|-
+Fists|<img src="/assets/images/icons/items/v_ui_icon_weapon_me_fists_00.png" style="height:128px;">|`s4_me_fists`
+Lee Enfield|<img src="/assets/images/icons/items/v_ui_icon_weapon_mr_lecho_00.png" style="height:128px;">|`s4_mr_lecho`
+War machine|<img src="/assets/images/icons/items/v_ui_icon_weapon_la_walpha2_00.png" style="height:128px;">|`s4_la_walpha2`
+Deathmachine|<img src="/assets/images/icons/items/v_ui_icon_weapon_mg_fromeo45_00.png" style="height:128px;">|`s4_mg_streak`
+Flamethrower|<img src="/assets/images/icons/items/v_ui_icon_weapon_flima35_00.png" style="height:128px;">|`s4_gw_flima35`
+
+## Zombies
+<img src="/assets/images/key-art/VG-Zombies.jpg">
+
+*"Rise, my revenants! A new chapter of warfare is about to begin."*
+
+Zombies Inventories
+- `setZMLoadout loadouts 0 weaponSetups 0 weapon`
+Example: *setZMLoadout loadouts 0 weaponSetups 0 weapon s4_pi_raygun*
+- `setZMLoadout loadouts 0 weaponSetups 0 camo`
+Example: *setZMLoadout loadouts 0 weaponSetups 0 camo s4_camo_11a_zm*
+
+Wonder weapons
+Name|Icon|ID
+-|:-:|-
+Ray Gun|<img src="/assets/images/icons/items/v_ui_icon_weapon_pi_raygun.png" style="height:128px;">|`s4_pi_raygun`
+Wunderwaffe DG-2|<img src="/assets/images/icons/items/v_ui_icon_weapon_ar_tgun.png" style="height:128px;">|`s4_ar_tgun`
+
+Zombies Camouflages
+Name|Icon|ID
+-|:-:|-
+Golden Viper|<img src="/assets/images/icons/camos/v_ui_elmnt_camo_gold_zm_e_s.png" style="width:128px;height:128px;">|`s4_camo_11a_zm`
+Plague Diamond|<img src="/assets/images/icons/camos/v_ui_elmnt_camo_diamond_zm_a_s.png" style="width:128px;height:128px;">|`s4_camo_11b_zm`
+Dark Aether|<img src="/assets/images/icons/camos/v_ui_elmnt_camo_atomic_c_zm_c.png" style="width:128px;height:128px;">|`s4_camo_11c_zm`
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../assets/js/site.js"></script>
+  <script>renderPage('vg');</script>
+</body>
+</html>
