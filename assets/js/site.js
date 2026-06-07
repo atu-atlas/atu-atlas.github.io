@@ -643,25 +643,25 @@ function renderHome() {
           </div>
         </div>
         <div class="overview-grid">
-          <article class="feature-card" style="--card-image:url('/assets/images/blog/feed-news-1.jpg')">
+          <article class="feature-card" style="--card-image:url('/assets/images/blog/feed-news-3.jpg')">
             <div class="feature-inner">
-              <div class="feature-kicker" style="color:rgb(0, 255, 26)">Content</div>
-              <div class="feature-title">New versions</div>
-              <p class="feature-text">New versions listed for several titles.</p>
-            </div>
-          </article>
-          <article class="feature-card" style="--card-image:url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3BlY3R4MGY5Z3pzdGkyY2VpMW81dnpvZGFqemVld3kxaWlodjNiaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BYAcxAAzaHCFaYWALw/giphy.gif')">
-            <div class="feature-inner">
-              <div class="feature-kicker" style="color:rgb(255, 247, 0)">Visuals</div>
-              <div class="feature-title">GIFs</div>
-              <p class="feature-text">Why staring at a picture, when you can watch it?</p>
+              <div class="feature-kicker" style="color:rgb(250, 158, 21)">Content</div>
+              <div class="feature-title">New exclusives</div>
+              <p class="feature-text">Some heroes die hard. Others draw first blood.</p>
             </div>
           </article>
           <article class="feature-card" style="--card-image:url('/assets/images/blog/feed-news-2.jpg')">
             <div class="feature-inner">
-              <div class="feature-kicker" style="color:rgb(250, 90, 21)">Structure</div>
-              <div class="feature-title">Stay frosty</div>
-              <p class="feature-text">Cleaning stuff in preparation for something new.</p>
+              <div class="feature-kicker" style="color:rgb(0, 255, 251)">Visuals</div>
+              <div class="feature-title">Previews</div>
+              <p class="feature-text">See a preview of several command effects in a dropdown.</p>
+            </div>
+          </article>
+          <article class="feature-card" style="--card-image:url('/assets/images/blog/feed-news.jpg')">
+            <div class="feature-inner">
+              <div class="feature-kicker" style="color:rgb(255, 0, 72)">Structure</div>
+              <div class="feature-title">We’ve got a job to do</div>
+              <p class="feature-text">Black Ops: Cold War is now avaliable.</p>
             </div>
           </article>
         </div>
