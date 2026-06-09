@@ -23,8 +23,9 @@
   <main id="page-root"></main>
   <footer class="footer">Atlas | by atu</footer>
   <script id="md-inline-mw" type="text/plain">
+
 ## Versions
-Selected list of versions & seasons
+Selected list of versions & seasons.
 
 Number|Season|Picture
 -|:-:|:-:
@@ -49,7 +50,7 @@ Number|Season|Picture
 `1.67`-`69`|Retail|<img src="/assets/images/splashes/1.0.bmp" style="height:512px;">
 
 ## Menus
-Useful & interesting menus
+Useful & interesting menus.
 
 - `luiOpenMenu mainlockoutmenu`
 **<img src="/assets/images/in-game/mainmenu.png"> Main menu**
@@ -64,7 +65,7 @@ Bundle list menu, inventory and version dependent.
 - `luiOpenMenu wzseasonalopeningscreenpc`
 
 ## DVARs
-Multi-purpose commands
+Multi-purpose commands.
 
 - `seta MONKPPPQR`
 This defines if the game frontend will be using seasonal assets or not (0-1)
@@ -88,6 +89,8 @@ This will show/hide COD Points on menus (0-1)
 This will show/hide developer info in an overlay (0-1) it might require an external implementation.
 
 ## Inventories
+Item containers stored in your profile.
+
 - `setPrivateLoadout loadouts 0 name`
 Loadout name, example: *setPrivateLoadout loadouts 0 name "Fist of iron"*
 - `setPrivateLoadout loadouts 0 weaponSetups 0 weapon`
@@ -100,6 +103,7 @@ Gestures customization, example: *setPrivateLoadoutsPlayerData customizationSetu
 Operator execution customization, example: *  setPrivateLoadoutsPlayerData customizationSetup operatorCustomization ghost_western execution 327*
 
 ## Camouflages
+
 Name|Icon|ID
 -|:-:|-
 Gold|<img src="/assets/images/icons/camos/ui_camo_11a.png" style="width:128px;height:128px;">|`camo_11a`
@@ -107,7 +111,7 @@ Platinum|<img src="/assets/images/icons/camos/ui_camo_11b.png" style="width:128p
 Damascus|<img src="/assets/images/icons/camos/ui_camo_11c.png" style="width:128px;height:128px;">|`camo_11c`
 Obsidian|<img src="/assets/images/icons/camos/ui_camo_11d.png" style="width:128px;height:128px;">|`camo_11d`
 
-## Gestures
+**Gestures**
 Name|Icon|ID
 -|:-:|-
 Thumbs Up|<img src="/assets/images/icons/gestures/ui_gesture_thumbs_up.png" style="width:128px;height:128px;">|`210000`
@@ -116,17 +120,44 @@ Light em Up|<img src="/assets/images/icons/gestures/ui_gesture_lights_on.png" st
 Crush|<img src="/assets/images/icons/gestures/ui_gesture_chest_beat.png" style="width:128px;height:128px;">|`210001`
 Attack|<img src="/assets/images/icons/gestures/ui_gesture_chest_beat.png" style="width:128px;height:128px;">|`210019`
 
-## Executions
+**Executions**
 Name|Icon|ID
 -|:-:|-
 Slideshot¹|<img src="/assets/images/icons/executions/ui_operator_execution_west_ghost_1.png" style="width:128px;height:128px;">|`327`
 
 ¹ The pistol used in this execution is broken after an unknown Vanguard version.
 
+**Unicode**
+Specific characters with unique effects on text cells.
+Character|Effect
+:-:|:-:
+^1|Burnt Orange
+^2|Green
+^3|Yellow
+^4|Blue
+^5|Cyan
+^6|Magenta
+^7|Default Blue
+^8|White
+^9|White
+^0|Black
+^%|Orange
+^&|Red
+^*|Magenta
+^(|Light Green
+^)|Powder Blue
+^-|Baby Blue
+^+|Orange
+^.|Very Light Green
+^,|Orange
+^'|Gray
+^;|White
+^:|White
+
 ## WARZONE
 <img src="/assets/images/key-art/WZ.gif">
 
-*"Gas is closing in fast, get to the safe zone."*
+*“Gas is closing in fast, get to the safe zone.”*
 
 - `set QTQRQPLNK 1;set MLQNQTRRTK 1;set MKQQKMRORQ 16;exec br_core.cfg`
 Full Warzone trigger.
@@ -149,7 +180,9 @@ This defines if the next match on escape_4 it's going to use night assets or not
 - `seta scr_escape4_ee_6_2_enabled; seta scr_escape4_ee_6_3_enabled`
 These will define if the next match will open/close the bunkers under escape_4, disabled by default (0-1)
 
-## Game modes
+**Game modes**
+Warzone game modes full list.
+
 Name|Icon|Full command
 -|:-:|-
 Battle Royale|<img src="/assets/images/icons/modes/icon_br_mode_wz.png" style="width:128px;height:128px;"><img src="/assets/images/icons/modes/icon_br_mode_wz_metaverse.png" style="width:128px;height:128px;">|`scr_br_gametype br`
@@ -160,7 +193,9 @@ Resurgence|<img src="/assets/images/icons/modes/icon_mode_wz_br_rebirth.png" sty
 Plunder|<img src="/assets/images/icons/modes/icon_br_mode_wz_metaverse_plunder.png" style="width:128px;height:128px;"><img src="/assets/images/icons/modes/icon_br_mode_wz_vanguard_plunder.png" style="width:128px;height:128px;">|`scr_br_gametype dmz`
 King Slayer|<img src="/assets/images/icons/modes/icon_mode_wz_br_kingslayer.png" style="width:128px;height:128px;">|`scr_br_gametype kingslayer`
 
-## Events
+**Events**
+Limited time events from Warzone.
+
 Name|Version|Icon|Full command
 -|-|:-:|-
 The Destruction of Verdansk P1|1.34|<img src="https://static.wikia.nocookie.net/callofduty/images/b/bc/DestructionOfVerdansk_Mode_Icon_WZ.png">|`seta scr_br_gametype "reveal";seta scr_br_alt_mode_zxp 1`
@@ -175,6 +210,8 @@ Operation: Last Call|1.63+¹|<img src="/assets/images/icons/modes/icon_mode_wz_b
 ¹Starting version 1.65 the event still works but not properly.
 
 ## WZ Inventories
+Item containers stored in your WZ profile.
+
 - `setWZPrivateLoadout loadouts 0 name`
 Loadout name, example: *setWZPrivateLoadout loadouts 0 name "Fist of iron"*
 - `setWZPrivateLoadout loadouts 0 weaponSetups 0 weapon`
@@ -183,6 +220,8 @@ Weapon setup, example: *setWZPrivateLoadout loadouts 0 weaponSetups 0 weapon iw8
 Weapon setup camouflage, example: *setWZPrivateLoadout loadouts 0 weaponSetups 0 camo camo_mp_t9mastery_gold*
 
 ## WZ Camouflages
+Cross-titles camouflages.
+
 **Cold War, Multiplayer mastery¹**
 Name|Icon|ID
 -|:-:|-
@@ -228,14 +267,15 @@ Dark Aether|<img src="/assets/images/icons/camos/v_ui_elmnt_camo_atomic_c_zm_c.p
 
 ¹Only available on versions 1.46+
 
-## Exclusive weapons
+**Exclusive weapons**
+Uncommon, and not accessible weapons.
+
 Name|Icon|ID
 -|:-:|-
 Combat bow|<img src="/assets/images/icons/items/icon_weapon_sn_t9explosivebow.png" style="height:128px;">|`iw8_sn_t9explosivebow`
 Lee Enfield|<img src="/assets/images/icons/items/v_ui_icon_weapon_mr_lecho_00.png" style="height:128px;">|`s4_mr_lecho`
 War machine|<img src="/assets/images/icons/items/v_ui_icon_weapon_la_walpha2_00.png" style="height:128px;">|`s4_la_walpha2`
 Deathmachine|<img src="/assets/images/icons/items/v_ui_icon_weapon_mg_fromeo45_00.png" style="height:128px;">|`s4_mg_streak`
-
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
