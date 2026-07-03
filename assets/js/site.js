@@ -69,7 +69,6 @@ const COD_SITE = {
   },
 
   nav: [
-    { key: 'home', label: 'News' },
     { key: 'atlas', label: 'Atlas' },
     { key: 'mw', label: 'MW', icon: 'assets/images/icons/IW8-icon.svg' },
     { key: 'mwii', label: 'MWII', icon: 'assets/images/icons/Cortez-icon.svg' },
@@ -79,7 +78,7 @@ const COD_SITE = {
   ]
 };
 
-function renderNav(activeKey = 'home') {
+function renderNav(activeKey = 'atlas') {
   const nav = document.getElementById('site-nav');
   if (!nav) return;
 
@@ -91,23 +90,38 @@ function renderNav(activeKey = 'home') {
     }
     </a>
   `;
-  const links = COD_SITE.nav.map(renderLink).join('');
+  const linksWithBrand = (() => {
+    const items = [...COD_SITE.nav];
+    const atlas = items.find(i => i.key === 'atlas');
+    const others = items.filter(i => i.key !== 'atlas');
+
+    const atlasHtml = atlas
+      ? `
+        <a class="nav-link-item nav-link-${atlas.key} ${atlas.key === activeKey ? 'active' : ''}" href="${pageUrl(atlas.key)}">
+          <img class="nav-game-icon nav-game-icon--slightly-larger" style="transform: scale(1.08);" src="${assetUrl('assets/images/icons/Atlas.svg')}" alt="${atlas.label}">
+        </a>
+      `
+      : '';
+
+    const middleHtml = others.map(renderLink).join('');
+
+    return [atlasHtml, middleHtml].join('');
+  })();
 
   nav.innerHTML = `
     <div class="cod-nav-inner">
-      <div class="brand">
-        <div>
-         <img  class="brand-logo" src="/assets/images/icons/Atlas.png"></img>
-      </div>
-      <div class="nav-links">${links}</div>
+      <div class="nav-links">${linksWithBrand}</div>
       <div class="nav-actions">
+        <button class="theme-toggle-btn" id="theme-toggle" type="button" aria-label="Toggle theme"></button>
       </div>
       <button class="mobile-toggle" id="mobile-toggle" aria-label="Open navigation">☰</button>
     </div>
 
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-stack">
-        ${links}
+        ${linksWithBrand}
+        <button class="theme-toggle-btn mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Toggle theme"></button>
+      </div>
     </div>
   `;
 
@@ -116,10 +130,75 @@ function renderNav(activeKey = 'home') {
   if (toggle && menu) {
     toggle.addEventListener('click', () => menu.classList.toggle('open'));
   }
+
+  initTheme();
+  setupThemeToggleButtons();
 }
 
 function isHomePage() {
   return document.getElementById('home-root') !== null;
+}
+
+function getSavedTheme() {
+  return window.localStorage.getItem('atlasTheme');
+}
+
+function saveTheme(theme) {
+  window.localStorage.setItem('atlasTheme', theme);
+}
+
+function getPreferredTheme() {
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
+function getCurrentTheme() {
+  const saved = getSavedTheme();
+  if (saved === 'light' || saved === 'dark') {
+    return saved;
+  }
+  return getPreferredTheme();
+}
+
+function applyTheme(theme) {
+  document.body.classList.remove('theme-light', 'theme-dark');
+  document.body.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark');
+  saveTheme(theme);
+  updateThemeToggleButtons(theme);
+}
+
+function updateThemeToggleButtons(theme) {
+  const label = theme === 'light' ? '☀️' : '🌙';
+  const title = theme === 'light' ? 'Light theme' : 'Dark theme';
+  const buttons = [
+    document.getElementById('theme-toggle'),
+    document.getElementById('theme-toggle-mobile'),
+  ];
+  buttons.forEach((button) => {
+    if (!button) return;
+    button.textContent = label;
+    button.title = title;
+  });
+}
+
+function setupThemeToggleButtons() {
+  const onToggle = () => {
+    const current = getCurrentTheme();
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  };
+
+  const primary = document.getElementById('theme-toggle');
+  const mobile = document.getElementById('theme-toggle-mobile');
+
+  if (primary) primary.addEventListener('click', onToggle);
+  if (mobile) mobile.addEventListener('click', onToggle);
+}
+
+function initTheme() {
+  const theme = getCurrentTheme();
+  applyTheme(theme);
 }
 
 function rootPrefix() {
@@ -128,7 +207,6 @@ function rootPrefix() {
 
 function pageUrl(key) {
   const map = {
-    home: '',
     atlas: 'Atlas/',
     mw: 'MW/',
     mwii: 'MWII/',
@@ -246,18 +324,6 @@ function transformRenderedContent(container) {
       });
       [...container.querySelectorAll('.command-info-btn')].forEach(el => {
         el.setAttribute('aria-expanded', 'false');
-      });
-
-      [...container.querySelectorAll('.expand-btn')].forEach(btn => {
-        btn.addEventListener('click', () => {
-          const wrap = btn.closest('.command-text-wrap');
-          if (!wrap) return;
-
-          wrap.classList.toggle('expanded');
-          const expanded = wrap.classList.contains('expanded');
-          btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-          btn.textContent = expanded ? 'Show less' : 'Show more';
-        });
       });
 
       if (!isOpen) {
@@ -489,8 +555,7 @@ async function renderPage(pageKey) {
     'theme-mwii',
     'theme-mwiii',
     'theme-cw',
-    'theme-vg',
-    'theme-fn'
+    'theme-vg'
   );
 
   if (pageKey === 'mw') document.body.classList.add('theme-mw');
@@ -498,13 +563,11 @@ async function renderPage(pageKey) {
   else if (pageKey === 'mwiii') document.body.classList.add('theme-mwiii');
   else if (pageKey === 'cw') document.body.classList.add('theme-cw');
   else if (pageKey === 'vg') document.body.classList.add('theme-vg');
-  else if (pageKey === 'fn') document.body.classList.add('theme-fn');
   const page = COD_SITE.pages[pageKey];
   renderNav(pageKey);
   const shell = document.getElementById('page-root');
   if (!shell || !page) return;
 
-  const jumpLinks = ['overview', 'toc', 'main-content'];
   shell.innerHTML = `
     <section class="hero" style="--hero-image:url('${page.hero}')">
       <div class="hero-grid">
@@ -515,14 +578,11 @@ async function renderPage(pageKey) {
           <h1 class="hero-title">${page.title}</h1>
           <p class="hero-desc">${page.desc}</p>
           <div class="hero-quote">${page.quote}</div>
-          </div>
         </div>
       </div>
     </section>
 
-
-
-      <div class="section-grid">
+    <div class="section-grid">
         <aside class="side-panel" id="toc-panel">
           <div id="toc" class="toc-list"><span>Loading…</span></div>
         </aside>
@@ -617,65 +677,24 @@ function renderHome() {
     'theme-mwii',
     'theme-mwiii',
     'theme-cw',
-    'theme-vg',
-    'theme-fn'
+    'theme-vg'
   );
-  renderNav('home');
+  renderNav('');
   const root = document.getElementById('home-root');
   if (!root) return;
 
-  const gameCards = Object.values(COD_SITE.pages).map(page => `
-    <a class="game-card" href="${pageUrl(page.key)}" style="display:block;">
-      <div class="game-thumb" style="--card-image:url('${page.hero}')">
-        <div class="game-tag">${page.name}</div>
-      </div>
-      <div class="game-body">
-        <p>${page.desc}</p>
-      </div>
-    </a>
-  `).join('');
   root.innerHTML = `
       <section class="home-panel" id="features">
         <div class="section-heading">
           <div>
-            <h2>What's new?</h2>
-            <p>News flash! You can read these</p>
+            <h2>Welcome</h2>
+            <p>Welcome to the Atlas site.</p>
           </div>
         </div>
-        <div class="overview-grid">
-          <article class="feature-card" style="--card-image:url('/assets/images/blog/feed-news-3.jpg')">
-            <div class="feature-inner">
-              <div class="feature-kicker" style="color:rgb(250, 158, 21)">Content</div>
-              <div class="feature-title">New exclusives</div>
-              <p class="feature-text">Some heroes die hard. Others draw first blood.</p>
-            </div>
-          </article>
-          <article class="feature-card" style="--card-image:url('/assets/images/blog/feed-news-2.jpg')">
-            <div class="feature-inner">
-              <div class="feature-kicker" style="color:rgb(0, 255, 251)">Visuals</div>
-              <div class="feature-title">Previews</div>
-              <p class="feature-text">See a preview of several command effects in a dropdown.</p>
-            </div>
-          </article>
-          <article class="feature-card" style="--card-image:url('/assets/images/blog/feed-news.jpg')">
-            <div class="feature-inner">
-              <div class="feature-kicker" style="color:rgb(255, 0, 72)">Structure</div>
-              <div class="feature-title">We’ve got a job to do</div>
-              <p class="feature-text">Black Ops: Cold War is now avaliable.</p>
-            </div>
-          </article>
-        </div>
       </section>
-            <section class="home-panel" id="games">
-        <div class="section-heading">
-          <div>
-            <h2>Page Info</h2>
-            <p>Choose your favourite game for commands, events, camos, and other fun</p>
-          </div>
-        </div>
-        <div class="card-grid">${gameCards}</div>
-      </section>
-    </div>
   `;
   hideLoader();
 }
+
+window.renderPage = renderPage;
+window.renderHome = renderHome;
