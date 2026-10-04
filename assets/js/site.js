@@ -15,7 +15,7 @@ const COD_SITE = {
       key: 'mw',
       title: '<img src="/assets/images/logos/IW8-logo.svg">',
       name: 'Modern Warfare',
-      kicker: 'Odin Collection',
+      kicker: 'Odin',
       desc: 'Grounded combat and fast-paced action across several huge environments.',
       hero: '/assets/images/key-art/ModernWarfare.jpg',
       file: 'md/MW.md',
@@ -26,7 +26,7 @@ const COD_SITE = {
       key: 'mwii',
       title: '<img src="/assets/images/logos/Cortez-logo.svg">',
       name: 'Modern Warfare II',
-      kicker: 'Cortez Collection',
+      kicker: 'Cortez',
       desc: 'Unprecedented global conflict and high-stakes infiltration tactics with cutting-edge equipment.',
       hero: '/assets/images/key-art/ModernWarfare-II.jpg',
       file: 'md/MWII.md',
@@ -37,7 +37,7 @@ const COD_SITE = {
       key: 'mwiii',
       title: '<img src="/assets/images/logos/Jupiter-logo.svg">',
       name: 'Modern Warfare III',
-      kicker: 'Jupiter Collection',
+      kicker: 'Jupiter',
       desc: 'Adapt or die in a fight against the ultimate threat. Time to settle old scores and start new ones.',
       hero: '/assets/images/key-art/ModernWarfare-III.jpg',
       file: 'md/MWIII.md',
@@ -48,7 +48,7 @@ const COD_SITE = {
       key: 'cw',
       title: '<img src="/assets/images/logos/T9-logo.svg">',
       name: 'Black Ops: Cold War',
-      kicker: 'Zeus Collection',
+      kicker: 'Zeus',
       desc: 'Descend into the dark center of a global conspiracy to destabilize the global balance of power.',
       hero: '/assets/images/key-art/ColdWar.jpg',
       file: 'md/CW.md',
@@ -59,7 +59,7 @@ const COD_SITE = {
       key: 'vg',
       title: '<img src="/assets/images/logos/S4-logo.svg">',
       name: 'Vanguard',
-      kicker: 'Fore Collection',
+      kicker: 'Fore',
       desc: 'Rise on every front with reactive environments, mysterious entities, and harrowing stories.',
       hero: '/assets/images/key-art/Vanguard.jpg',
       file: 'md/VG.md',
@@ -102,10 +102,15 @@ function renderNav(activeKey = 'atlas') {
         </a>
       `
       : '';
+    const homeHtml = `
+      <a class="nav-link-item nav-link-home ${activeKey === '' ? 'active' : ''}" href="${rootPrefix()}index.html">
+        <span>Home</span>
+      </a>
+    `;
 
     const middleHtml = others.map(renderLink).join('');
 
-    return [atlasHtml, middleHtml].join('');
+    return [atlasHtml, homeHtml, middleHtml].join('');
   })();
 
   nav.innerHTML = `
@@ -683,13 +688,42 @@ function renderHome() {
   const root = document.getElementById('home-root');
   if (!root) return;
 
+  const heroImage = new URL(assetUrl('assets/images/key-art/COD-Franchise.png'), document.baseURI).href;
+  const collections = Object.values(COD_SITE.pages).filter(page => page.key !== 'atlas');
   root.innerHTML = `
-      <section class="home-panel" id="features">
+      <section class="hero home-hero" style="--hero-image:url('${heroImage}')">
+        <div class="hero-grid home-hero-grid">
+          <div class="hero-copy">
+            <div class="hero-kicker">Community-driven</div>
+            <h1 class="hero-title">Atlas</h1>
+            <p class="hero-desc">Video-games information, all in one place.</p>
+          <div class="home-actions">
+              <a class="btn-cod home-action" href="${pageUrl('atlas')}">Explore Atlas <span aria-hidden="true">&#8594;</span></a>
+              <a class="btn-cod-alt home-action" href="#collections">Browse collections</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="home-collections" id="collections" aria-labelledby="collections-title">
         <div class="section-heading">
           <div>
-            <h2>Welcome</h2>
-            <p>Welcome to the Atlas site.</p>
+            <h2 id="collections-title">Game collections</h2>
+            <p>♫ So many elements for you to consider ♫</p>
           </div>
+          <a class="home-section-link" href="${pageUrl('atlas')}">Main Atlas <span aria-hidden="true">&#8594;</span></a>
+        </div>
+        <div class="card-grid home-collection-grid">
+          ${collections.map(page => `
+            <a class="game-card collection-${page.key}" href="${pageUrl(page.key)}">
+              <div class="game-thumb" style="--card-image:url('${new URL(assetUrl(page.hero), document.baseURI).href}')">
+                <span class="game-tag">${page.name}</span>
+              </div>
+              <div class="game-body">
+                <span class="collection-kicker feature-kicker">${page.kicker}</span>
+                <p>${page.desc}</p>
+              </div>
+            </a>
+          `).join('')}
         </div>
       </section>
   `;

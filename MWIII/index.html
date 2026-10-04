@@ -55,20 +55,20 @@ Bundle list menu, inventory and version dependent.
 Operator selection menu without factions, as seen in Warzone 2.0
 
 **Online**
-- `luiluiOpenMenu hqmainmenu`
+- `luiOpenMenu hqmainmenu`
 **CODHQ style main menu, network dependent.**
-- `luiluiOpenMenu mpmainmenu`
+- `luiOpenMenu mpmainmenu`
 **Multiplayer main menu, network dependent.**
-- `luiluiOpenMenu brmainmenu`
+- `luiOpenMenu brmainmenu`
 **Warzone 2.0 main menu, network dependent.**
-- `luiluiOpenMenu warzoneprivatematchlobby`
-- `luiluiOpenMenu obmainmenu`
+- `luiOpenMenu warzoneprivatematchlobby`
+- `luiOpenMenu obmainmenu`
 **Modern Warfare Zombies main menu, network dependent.**
-- `luiluiOpenMenu battlemapsectorpreview`
+- `luiOpenMenu battlemapsectorpreview`
 **Battle Pass preview menu, network & season dependent, requires external implementation.**
-- `luiluiOpenMenu bpsectorpreview`
+- `luiOpenMenu bpsectorpreview`
 **Battle Pass sector previews, network & season dependent, requires external implementation.**
-- `luiluiOpenMenu bpmap`
+- `luiOpenMenu bpmap`
 **Battle Pass map menu, network & season dependent, requires external implementation.**
 
 ## DVARs
@@ -114,18 +114,6 @@ This defines how the tab looks in online menus (0 default - 2 grey) season and n
 This defines how the tab looks in online menus (0 default - 2 grey) season and network dependent.
 
 ## Inventories
-**Private matches**
-- `setJupiterPrivateLoadout loadouts 0 name`
-Loadout name, example: *setJupiterPrivateLoadout loadouts 0 name "Fist of iron"*
-- `setJupiterPrivateLoadout loadouts 0 weaponSetups 0 weapon`
-Weapon setup, example: *setJupiterPrivateLoadout loadouts 0 weaponSetups 0 weapon jup_jp19_ar_acharlie*
-- `setJupiterPrivateLoadout loadouts 0 weaponSetups 0 camo`
-Weapon setup camouflage, example: *setJupiterPrivateLoadout loadouts 0 weaponSetups 0 camo jup_camo_comp_01*
-- `setJupiterPrivateLoadout loadouts 0 equipmentSetups 0 equipment`
-Equipment setup, example: *setJupiterPrivateLoadout loadouts 0 equipmentSetups 0 equipment equip_frag*
-- `setJupiterPrivateLoadout loadouts 0 fieldUpgradeSetups 0 fieldUpgrade`
-Field upgrade setup, example: *setJupiterPrivateLoadout loadouts 0 fieldUpgradeSetups 0 fieldUpgrade super_deadsilence*
-**Public matches**
 - `setJupiterPublicLoadout loadouts 0 name`
 Loadout name, example: *setJupiterPublicLoadout loadouts 0 name "Fist of iron"*
 - `setJupiterPublicLoadout loadouts 0 weaponSetups 0 weapon`
