@@ -541,8 +541,8 @@ body.theme-light .cod-nav-inner {
 
 .side-panel {
   position: sticky;
-  top: 120px;
-  padding: 20px;
+  top: 68px;
+  padding: 16px;
 }
 
 .panel-title {
@@ -556,12 +556,12 @@ body.theme-light .cod-nav-inner {
 .toc-list,
 .quick-list {
   display: grid;
-  gap: 9px;
+  gap: 4px;
 }
 
 .toc-list a,
 .quick-list a {
-  padding: 10px 12px;
+  padding: 6px 9px;
   border-radius: 12px;
   color: var(--muted);
   background: var(--surface-soft);
@@ -570,11 +570,66 @@ body.theme-light .cod-nav-inner {
   font-weight: 650;
 }
 
+.toc-section {
+  min-width: 0;
+}
+
+.toc-section-row {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.toc-section-row > a {
+  flex: 1;
+}
+
 .toc-list a:hover,
 .quick-list a:hover {
   background: var(--surface-soft);
   border-color: var(--line);
   color: var(--text);
+}
+
+.toc-toggle {
+  flex: 0 0 36px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.toc-toggle::before {
+  content: "+";
+}
+
+.toc-toggle[aria-expanded="true"]::before {
+  content: "\2212";
+}
+
+.toc-toggle:hover,
+.toc-toggle:focus-visible {
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.toc-subcategories {
+  display: grid;
+  gap: 3px;
+  margin: 3px 0 2px 10px;
+  padding-left: 7px;
+  border-left: 1px solid var(--line);
+}
+
+.toc-subcategories a {
+  padding: 5px 8px;
+  font-size: 0.9rem;
+}
+
+.toc-subcategories[hidden] {
+  display: none;
 }
 
 .content-panel {
@@ -689,6 +744,28 @@ body.theme-light .cod-nav-inner {
   margin-top: 2.6rem;
   padding-top: 0.35rem;
   border-top: 1px solid var(--line);
+  scroll-margin-top: 96px;
+}
+
+.article-content h2 .heading-anchor {
+  margin-left: 0.45em;
+  color: var(--soft);
+  font-family: "Inter", sans-serif;
+  font-size: 0.7em;
+  font-weight: 500;
+  opacity: 0;
+  text-decoration: none;
+  text-transform: none;
+  transition: opacity 0.15s ease;
+}
+
+.article-content h2 .heading-anchor::after {
+  content: "#";
+}
+
+.article-content h2:hover .heading-anchor,
+.article-content h2:focus-within .heading-anchor {
+  opacity: 1;
 }
 
 .article-content p + h2 {

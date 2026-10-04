@@ -258,9 +258,25 @@ function preprocessMarkdown(md) {
 
 function transformRenderedContent(container) {
   const headings = [...container.querySelectorAll('h2, h3')];
-  headings.forEach(h => {
-    const id = slugify(h.textContent);
-    if (id) h.id = id;
+  const usedIds = new Set();
+  headings.forEach((h, index) => {
+    const baseId = slugify(h.textContent) || `section-${index + 1}`;
+    let id = baseId;
+    let suffix = 2;
+    while (usedIds.has(id)) {
+      id = `${baseId}-${suffix}`;
+      suffix += 1;
+    }
+    usedIds.add(id);
+    h.id = id;
+
+    if (h.tagName === 'H2') {
+      const anchor = document.createElement('a');
+      anchor.className = 'heading-anchor';
+      anchor.href = `#${id}`;
+      anchor.setAttribute('aria-label', `Link to ${h.textContent.replace(/\s+/g, ' ').trim()}`);
+      h.appendChild(anchor);
+    }
   });
 
   [...container.querySelectorAll('li')].forEach((li, index) => {
@@ -357,9 +373,10 @@ function transformRenderedContent(container) {
 
   [...container.querySelectorAll('a[href^="#"]')].forEach(link => {
     link.addEventListener('click', e => {
-      const target = container.querySelector(link.getAttribute('href'));
+      const target = document.getElementById(link.getAttribute('href').slice(1));
       if (!target) return;
       e.preventDefault();
+      window.history.pushState(null, '', link.getAttribute('href'));
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
@@ -537,13 +554,68 @@ function buildTOC(container) {
   const toc = document.getElementById('toc');
   if (!toc) return;
   const headings = [...container.querySelectorAll('h2, h3')].filter(h => h.id);
-  if (!headings.length) {
+  const sections = [];
+  headings.forEach(heading => {
+    if (heading.tagName === 'H2') {
+      sections.push({ heading, children: [] });
+    } else if (sections.length) {
+      sections[sections.length - 1].children.push(heading);
+    }
+  });
+
+  if (!sections.length) {
     toc.innerHTML = '<div class="quick-list"><span>No sections detected.</span></div>';
     return;
   }
-  toc.innerHTML = `<div class="toc-list">${headings.map(h => `
-    <a href="#${h.id}">${h.textContent.replace(/\s+/g, ' ').trim()}</a>
-  `).join('')}</div>`;
+
+  const list = document.createElement('div');
+  list.className = 'toc-list';
+  sections.forEach(({ heading, children }) => {
+    const section = document.createElement('section');
+    section.className = 'toc-section';
+
+    const row = document.createElement('div');
+    row.className = 'toc-section-row';
+    const link = document.createElement('a');
+    link.href = `#${heading.id}`;
+    link.textContent = heading.textContent.replace(/\s+/g, ' ').trim();
+    row.appendChild(link);
+
+    if (children.length) {
+      const childList = document.createElement('div');
+      childList.className = 'toc-subcategories';
+      childList.hidden = true;
+      const toggle = document.createElement('button');
+      toggle.className = 'toc-toggle';
+      toggle.type = 'button';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', `Expand ${link.textContent} subcategories`);
+      toggle.setAttribute('aria-controls', `toc-children-${heading.id}`);
+
+      childList.id = `toc-children-${heading.id}`;
+      children.forEach(child => {
+        const childLink = document.createElement('a');
+        childLink.href = `#${child.id}`;
+        childLink.textContent = child.textContent.replace(/\s+/g, ' ').trim();
+        childList.appendChild(childLink);
+      });
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        toggle.setAttribute('aria-label', `${expanded ? 'Expand' : 'Collapse'} ${link.textContent} subcategories`);
+        childList.hidden = expanded;
+      });
+
+      row.appendChild(toggle);
+      section.append(row, childList);
+    } else {
+      section.appendChild(row);
+    }
+
+    list.appendChild(section);
+  });
+  toc.replaceChildren(list);
 }
 
 function extractPreview(html) {
@@ -656,6 +728,11 @@ async function renderPage(pageKey) {
         </article>
       `;
     }).join('');
+
+    if (window.location.hash) {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target) target.scrollIntoView();
+    }
   } catch (err) {
     document.getElementById('content').innerHTML = `<div class="error-state">Failed to load page content.</div>`;
     console.error(err);
