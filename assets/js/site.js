@@ -42,7 +42,7 @@ const COD_SITE = {
       hero: '/assets/images/key-art/ModernWarfare-III.jpg',
       file: 'md/MWIII.md',
       quote: '“Take this to hell with you, Captain... Never bury your enemies alive.”',
-      badge: 'Jupiter'
+      badge: 'IW9-Jup'
     },
     cw: {
       key: 'cw',
@@ -68,25 +68,25 @@ const COD_SITE = {
     },
     bo6: {
       key: 'bo6',
-      title: 'Black Ops 7">',
+      title: '<img src="/assets/images/logos/Cerberus-logo.svg">',
       name: 'Black Ops 6',
       kicker: 'Cerberus',
       desc: 'Forced to go rogue. Hunted from within.',
       hero: '/assets/images/key-art/BlackOps-6.jpg',
       file: 'md/BO6.md',
       quote: '“I got a message for Woods, tell him: Bishop takes Rook”',
-      badge: 'Cerberus'
+      badge: 'T10'
     },
     bo7: {
       key: 'bo7',
-      title: 'Black Ops 7">',
+      title: '<img src="/assets/images/logos/Saturn-logo.svg">',
       name: 'Black Ops 7',
       kicker: 'Saturn',
       desc: 'Embrace the madness.',
       hero: '/assets/images/key-art/BlackOps-7.jpg',
       file: 'md/BO7.md',
       quote: '“Sorry, Mason. Playing the good guy only gets you so far.”',
-      badge: 'Saturn'
+      badge: 'IW9-Sat'
     }
   },
 
@@ -141,6 +141,7 @@ function renderNav(activeKey = 'atlas') {
     <div class="cod-nav-inner">
       <div class="nav-links">${linksWithBrand}</div>
       <div class="nav-actions">
+        <button class="theme-toggle-btn nav-visibility-btn" id="nav-toggle" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true">Collapse</button>
         <button class="theme-toggle-btn" id="theme-toggle" type="button" aria-label="Toggle theme"></button>
       </div>
       <button class="mobile-toggle" id="mobile-toggle" aria-label="Open navigation">☰</button>
@@ -149,6 +150,7 @@ function renderNav(activeKey = 'atlas') {
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-stack">
         ${linksWithBrand}
+        <button class="theme-toggle-btn nav-visibility-btn mobile-nav-visibility-btn" id="nav-toggle-mobile" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true">Collapse</button>
         <button class="theme-toggle-btn mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Toggle theme"></button>
       </div>
     </div>
@@ -160,8 +162,84 @@ function renderNav(activeKey = 'atlas') {
     toggle.addEventListener('click', () => menu.classList.toggle('open'));
   }
 
+  setupNavVisibilityButtons(nav);
   initTheme();
   setupThemeToggleButtons();
+}
+
+function setupNavVisibilityButtons(nav) {
+  const toggleButtons = [
+    document.getElementById('nav-toggle'),
+    document.getElementById('nav-toggle-mobile'),
+  ];
+  const navInner = nav.querySelector('.cod-nav-inner');
+  nav.classList.add('is-collapsed');
+  let collapsedByClick = nav.classList.contains('is-collapsed');
+  const setNavCollapsed = (collapsed) => {
+    const currentWidth = navInner.getBoundingClientRect().width;
+    if (!collapsed) {
+      navInner.style.transition = 'none';
+      navInner.style.width = '';
+      nav.classList.remove('is-collapsed');
+      toggleButtons.forEach((button) => {
+        if (!button) return;
+        button.textContent = '−';
+        button.setAttribute('aria-label', 'Collapse navigation bar');
+        button.setAttribute('aria-expanded', 'true');
+      });
+      navInner.getBoundingClientRect();
+      navInner.style.transition = '';
+      return;
+    }
+
+    navInner.style.transition = 'none';
+    navInner.style.width = `${currentWidth}px`;
+    nav.classList.add('is-collapsed');
+    toggleButtons.forEach((button) => {
+      if (!button) return;
+      button.textContent = '+';
+      button.setAttribute('aria-label', 'Expand navigation bar');
+      button.setAttribute('aria-expanded', 'false');
+    });
+
+    const navLinks = navInner.querySelectorAll('.nav-link-item');
+    const linkTransitions = [...navLinks].map((link) => link.style.transition);
+    navLinks.forEach((link) => {
+      link.style.transition = 'none';
+    });
+    navInner.style.width = '';
+    const targetWidth = navInner.getBoundingClientRect().width;
+    navLinks.forEach((link, index) => {
+      link.style.transition = linkTransitions[index];
+    });
+    navInner.style.width = `${currentWidth}px`;
+    navInner.getBoundingClientRect();
+    navInner.style.transition = '';
+    navInner.style.width = `${targetWidth}px`;
+
+    if (Math.abs(currentWidth - targetWidth) < 1) {
+      navInner.style.width = '';
+      return;
+    }
+    const onTransitionEnd = (event) => {
+      if (event.propertyName !== 'width') return;
+      navInner.style.width = '';
+      navInner.removeEventListener('transitionend', onTransitionEnd);
+    };
+    navInner.addEventListener('transitionend', onTransitionEnd);
+  };
+
+  toggleButtons.forEach((button) => {
+    if (button) {
+      button.textContent = '+';
+      button.setAttribute('aria-label', 'Expand navigation bar');
+      button.setAttribute('aria-expanded', 'false');
+    }
+    if (button) button.addEventListener('click', () => {
+      collapsedByClick = !nav.classList.contains('is-collapsed');
+      setNavCollapsed(collapsedByClick);
+    });
+  });
 }
 
 function isHomePage() {
@@ -644,13 +722,6 @@ function buildTOC(container) {
   toc.replaceChildren(list);
 }
 
-function extractPreview(html) {
-  const temp = document.createElement('div');
-  temp.innerHTML = html;
-  const paras = [...temp.querySelectorAll('p')].map(p => p.textContent.trim()).filter(Boolean);
-  return paras[0] || '';
-}
-
 async function renderPage(pageKey) {
   showLoader();
   document.body.classList.remove(
@@ -695,7 +766,6 @@ async function renderPage(pageKey) {
         </aside>
 
         <main class="content-panel" id="main-content">
-          <div id="overview-cards" class="overview-grid"></div>
           <div id="content" class="article-content">
             <div class="loading-state"><div class="spinner"></div><div>Loading...</div></div>
           </div>
@@ -736,28 +806,6 @@ async function renderPage(pageKey) {
     buildTOC(content);
     setupCopyButtons(content);
     hideLoader();
-
-    const cards = document.getElementById('overview-cards');
-    const h2s = [...content.querySelectorAll('h2')].slice(0, 3);
-    const featureImages = [
-      '/assets/images/blog/Feed-pic.jpg',
-      '/assets/images/blog/Feed-pic-2.jpg',
-      '/assets/images/blog/Feed-pic-3.jpg',
-    ];
-
-    cards.innerHTML = h2s.map((h, i) => {
-      const p = h.nextElementSibling ? extractPreview(h.nextElementSibling.outerHTML) : page.desc;
-      const image = featureImages[i % featureImages.length];
-      return `
-        <article class="feature-card" style="--card-image:url('${image}')">
-          <div class="feature-inner">
-            <div class="feature-kicker">${page.badge}</div>
-            <div class="feature-title">${h.textContent}</div>
-            <p class="feature-text">${escapeHtml((p || page.desc).slice(0, 140))}</p>
-          </div>
-        </article>
-      `;
-    }).join('');
 
     if (window.location.hash) {
       const target = document.getElementById(window.location.hash.slice(1));
@@ -828,7 +876,7 @@ function renderHome() {
                 <span class="game-tag">${page.name}</span>
               </div>
               <div class="game-body">
-                <span class="collection-kicker feature-kicker">${page.kicker}</span>
+                <span class="collection-kicker">${page.kicker}</span>
                 <p>${page.desc}</p>
               </div>
             </a>
