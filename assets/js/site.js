@@ -16,7 +16,7 @@ const COD_SITE = {
       title: '<img src="/assets/images/logos/IW8-logo.svg">',
       name: 'Modern Warfare',
       kicker: 'Odin',
-      desc: 'Grounded combat and fast-paced action across several huge environments.',
+      desc: 'Grounded combat and fast-paced action.',
       hero: '/assets/images/key-art/ModernWarfare.jpg',
       file: 'md/MW.md',
       quote: '“We get dirty and the world stays clean. That`s the mission.”',
@@ -27,7 +27,7 @@ const COD_SITE = {
       title: '<img src="/assets/images/logos/Cortez-logo.svg">',
       name: 'Modern Warfare II',
       kicker: 'Cortez',
-      desc: 'Unprecedented global conflict and high-stakes infiltration tactics with cutting-edge equipment.',
+      desc: 'Unprecedented global conflict and high-stakes infiltration tactics.',
       hero: '/assets/images/key-art/ModernWarfare-II.jpg',
       file: 'md/MWII.md',
       quote: '“Be careful who you trust, Sergeant. People you know can hurt you the most.”',
@@ -38,7 +38,7 @@ const COD_SITE = {
       title: '<img src="/assets/images/logos/Jupiter-logo.svg">',
       name: 'Modern Warfare III',
       kicker: 'Jupiter',
-      desc: 'Adapt or die in a fight against the ultimate threat. Time to settle old scores and start new ones.',
+      desc: 'Adapt or die in a fight against the ultimate threat.',
       hero: '/assets/images/key-art/ModernWarfare-III.jpg',
       file: 'md/MWIII.md',
       quote: '“Take this to hell with you, Captain... Never bury your enemies alive.”',
@@ -60,11 +60,33 @@ const COD_SITE = {
       title: '<img src="/assets/images/logos/S4-logo.svg">',
       name: 'Vanguard',
       kicker: 'Fore',
-      desc: 'Rise on every front with reactive environments, mysterious entities, and harrowing stories.',
+      desc: 'Rise on every front.',
       hero: '/assets/images/key-art/Vanguard.jpg',
       file: 'md/VG.md',
       quote: '“Ever heard of Vanguard? I created Vanguard.”',
       badge: 'S4'
+    },
+    bo6: {
+      key: 'bo6',
+      title: '<img src="/assets/images/logos/Cerberus-logo.svg">',
+      name: 'Black Ops 6',
+      kicker: 'Cerberus',
+      desc: 'Forced to go rogue. Hunted from within.',
+      hero: '/assets/images/key-art/BlackOps-6.jpg',
+      file: 'md/BO6.md',
+      quote: '“I got a message for Woods, tell him: Bishop takes Rook”',
+      badge: 'Cerberus'
+    },
+    bo7: {
+      key: 'bo7',
+      title: '<img src="/assets/images/logos/Saturn-logo.png">',
+      name: 'Black Ops 7',
+      kicker: 'Saturn',
+      desc: 'Embrace the madness.',
+      hero: '/assets/images/key-art/BlackOps-7.jpg',
+      file: 'md/BO7.md',
+      quote: '“Sorry, Mason. Playing the good guy only gets you so far.”',
+      badge: 'Saturn'
     }
   },
 
@@ -74,7 +96,9 @@ const COD_SITE = {
     { key: 'mwii', label: 'MWII', icon: 'assets/images/icons/Cortez-icon.svg' },
     { key: 'mwiii', label: 'MWIII', icon: 'assets/images/icons/Jupiter-icon.svg' },
     { key: 'cw', label: 'CW', icon: 'assets/images/icons/T9-icon.svg' },
-    { key: 'vg', label: 'VG', icon: 'assets/images/icons/S4-icon.svg' }
+    { key: 'vg', label: 'VG', icon: 'assets/images/icons/S4-icon.svg' },
+    { key: 'bo6', label: 'BO6', icon: 'assets/images/icons/Cer-icon.svg' },
+    { key: 'bo7', label: 'BO7', icon: 'assets/images/icons/Sat-icon.svg' }
   ]
 };
 
@@ -217,7 +241,9 @@ function pageUrl(key) {
     mwii: 'MWII/',
     mwiii: 'MWIII/',
     cw: 'CW/',
-    vg: 'VG/'
+    vg: 'VG/',
+    bo6: 'BO6/',
+    bo7: 'BO7/'
   };
   return rootPrefix() + map[key];
 }
@@ -632,7 +658,9 @@ async function renderPage(pageKey) {
     'theme-mwii',
     'theme-mwiii',
     'theme-cw',
-    'theme-vg'
+    'theme-vg',
+    'theme-bo6',
+    'theme-bo7'
   );
 
   if (pageKey === 'mw') document.body.classList.add('theme-mw');
@@ -640,6 +668,8 @@ async function renderPage(pageKey) {
   else if (pageKey === 'mwiii') document.body.classList.add('theme-mwiii');
   else if (pageKey === 'cw') document.body.classList.add('theme-cw');
   else if (pageKey === 'vg') document.body.classList.add('theme-vg');
+  else if (pageKey === 'bo6') document.body.classList.add('theme-bo6');
+  else if (pageKey === 'bo7') document.body.classList.add('theme-bo7');
   const page = COD_SITE.pages[pageKey];
   renderNav(pageKey);
   const shell = document.getElementById('page-root');
@@ -759,7 +789,9 @@ function renderHome() {
     'theme-mwii',
     'theme-mwiii',
     'theme-cw',
-    'theme-vg'
+    'theme-vg',
+    'theme-bo6',
+    'theme-bo7'
   );
   renderNav('');
   const root = document.getElementById('home-root');

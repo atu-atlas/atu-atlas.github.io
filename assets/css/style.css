@@ -113,6 +113,16 @@
   --color-accent-soft: rgba(255, 193, 77, 0.25);
 }
 
+.theme-bo6 {
+  --color-accent: #fc6c1f;
+  --color-accent-soft: rgba(255, 113, 77, 0.25);
+}
+
+.theme-bo7 {
+  --color-accent: #fc6c1f;
+  --color-accent-soft: rgba(77, 107, 255, 0.25);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1189,24 +1199,42 @@ body.theme-light .home-actions .btn-cod-alt:hover {
   --collection-glow: rgba(255, 149, 10, 0.32);
 }
 
+.collection-bo6 {
+  --collection-accent: #fc6c1f;
+  --collection-glow: rgba(252, 108, 31, 0.32);
+}
+
+.collection-bo7 {
+  --collection-accent: #4d6bff;
+  --collection-glow: rgba(77, 107, 255, 0.32);
+}
+
 .card-grid.home-collection-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 14px;
 }
 
+.home-collection-grid .game-card:nth-child(-n + 4) {
+  grid-column: span 3;
+}
+
+.home-collection-grid .game-card:nth-child(n + 5) {
+  grid-column: span 4;
+}
+
 .home-collection-grid .game-body {
-  min-height: 140px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: 8px 12px 10px;
 }
 
 .collection-kicker {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   color: var(--collection-accent, var(--color-accent));
   font-family: "Oswald", sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   text-transform: uppercase;
 }
 
@@ -1215,9 +1243,10 @@ body.theme-light .collection-kicker.feature-kicker {
 }
 
 .home-collection-grid .game-body p {
-  flex: 1;
-  font-size: 0.87rem;
-  line-height: 1.55;
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  margin-bottom: 0;
 }
 
 .home-collection-grid .game-card:hover,
@@ -1327,6 +1356,15 @@ body.theme-light .collection-kicker.feature-kicker {
   .card-grid:not(.home-collection-grid),
   .overview-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .card-grid.home-collection-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  }
+
+  .home-collection-grid .game-card:nth-child(-n + 4),
+  .home-collection-grid .game-card:nth-child(n + 5) {
+    grid-column: auto;
   }
 
   .hero-grid {
