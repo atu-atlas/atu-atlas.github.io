@@ -23,7 +23,61 @@
   <main id="page-root"></main>
   <footer class="footer">Atlas | by atu</footer>
   <script id="md-inline-bo7" type="text/plain">
-Soon, stay frosty.
+## Menus
+Useful & interesting menus
+- `luiOpenMenu mainlockoutmenu`
+**<img src="/assets/images/in-game/saturn/mainmenu.png"> Main menu**
+- `luiopenmenu customizemenu`
+**<img src="/assets/images/in-game/saturn/customizemenu.png"> Customization menu**
+Unused leftover customization menu, sub-menus are inventory dependent.
+- `luiopenmenu mybundleselect`
+**<img src="/assets/images/in-game/saturn/mybundleselect.png"> Bundle locker menu**
+Bundle list menu, inventory and version dependent.
+- `luiopenmenu frontendcameramover`
+**<img src="/assets/images/in-game/saturn/frontendcameramover.png"> Frontend Camera Mover**
+Camera control menu for frontend scenes.
+
+## DVARs
+Multi-purpose commands
+- `r_dof_enable`
+This will enable/disable depth of field (0-1)
+- `lui_cod_points_enabled`
+This will show/hide COD Points on menus (0-1)
+
+## Inventories
+- `setStorageFile sat_mp_loadouts_private loadouts name`
+Loadout name, ex: *setStorageFile sat_mp_loadouts_private loadouts name "Fist of iron"*
+- `setStorageFile sat_mp_loadouts_private loadouts weaponSetups 0 weaponlootid`
+Weapon setup, ex: *setStorageFile sat_mp_loadouts_private loadouts 0 weaponSetups 0 weaponlootid 88933*
+- `setStorageFile sat_mp_loadouts_private loadouts weaponSetups 0 camoLootID`
+Weapon setup camouflage, ex: *setStorageFile sat_mp_loadouts_private loadouts 0 weaponSetups 0 camoLootID 105203*
+
+### Exclusive weapons
+
+Name|Icon|Index|ID
+-|:-:|-|-
+Ray Gun|<img src="/assets/images/icons/que.png">|`121970`|`sat_ww_raygun`
+Ray Gun Mark II|<img src="/assets/images/icons/que.png">|`121969`|`sat_ww_raygunmark2`
+Necrofluid Gauntlet|<img src="/assets/images/icons/que.png">|`101506`|`sat_ww_firefly`
+Little Green Menace-1|<img src="/assets/images/icons/que.png">|`101174`|`sat_ww_ruby`
+Blundergat|<img src="/assets/images/icons/que.png">|`102433`|`sat_ww_mantis`
+Jotunn Star|<img src="/assets/images/icons/que.png">|`121037`|`sat_ww_locust`
+Nekomancer|<img src="/assets/images/icons/que.png">|`126903`|`sat_ww_hornet`
+Warden's Blight|<img src="/assets/images/icons/que.png">||`sat_ww_scarab_zm`
+
+### Camouflages
+**Multiplayer mastery**
+Name|Icon|Index|ID
+-|:-:|-|-
+Shattered Gold|<img src="/assets/images/icons/que.png">|`sat_camo_comp_01_mp`|105203
+
+## WZ 2
+### Camouflages
+**BO6 Multiplayer mastery**
+Name|Icon|Index|ID
+-|:-:|-|-
+Dark Matter|<img src="/assets/images/icons/que.png">|`cer_camo_comp_04_mp`|72167
+
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="../assets/js/site.js"></script>

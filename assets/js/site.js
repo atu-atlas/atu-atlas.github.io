@@ -68,7 +68,7 @@ const COD_SITE = {
     },
     bo6: {
       key: 'bo6',
-      title: '<img src="/assets/images/logos/Cerberus-logo.svg">',
+      title: 'Black Ops 7">',
       name: 'Black Ops 6',
       kicker: 'Cerberus',
       desc: 'Forced to go rogue. Hunted from within.',
@@ -79,7 +79,7 @@ const COD_SITE = {
     },
     bo7: {
       key: 'bo7',
-      title: '<img src="/assets/images/logos/Saturn-logo.png">',
+      title: 'Black Ops 7">',
       name: 'Black Ops 7',
       kicker: 'Saturn',
       desc: 'Embrace the madness.',
