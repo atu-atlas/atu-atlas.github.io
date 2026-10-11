@@ -2,8 +2,8 @@ const COD_SITE = {
   pages: {
     atlas: {
       key: 'atlas',
-      title: 'Atlas',
-      name: 'Atlas',
+      title: 'FAQ',
+      name: 'FAQ',
       kicker: 'Incoming Intel',
       desc: 'Atlas for video-games information, all in one place',
       hero: '/assets/images/key-art/COD-Franchise.png',
@@ -91,7 +91,7 @@ const COD_SITE = {
   },
 
   nav: [
-    { key: 'atlas', label: 'Atlas' },
+    { key: 'atlas', label: 'FAQ' },
     { key: 'mw', label: 'MW', icon: 'assets/images/icons/IW8-icon.svg' },
     { key: 'mwii', label: 'MWII', icon: 'assets/images/icons/Cortez-icon.svg' },
     { key: 'mwiii', label: 'MWIII', icon: 'assets/images/icons/Jupiter-icon.svg' },
@@ -121,14 +121,14 @@ function renderNav(activeKey = 'atlas') {
 
     const atlasHtml = atlas
       ? `
-        <a class="nav-link-item nav-link-${atlas.key} ${atlas.key === activeKey ? 'active' : ''}" href="${pageUrl(atlas.key)}">
-          <img class="nav-game-icon nav-game-icon--slightly-larger" style="transform: scale(1.08);" src="${assetUrl('assets/images/icons/Atlas.svg')}" alt="${atlas.label}">
+        <a class="nav-link-item nav-link-${atlas.key}" href="${rootPrefix()}index.html">
+          <img class="nav-game-icon nav-game-icon--slightly-larger" style="transform: scale(1.08);" src="${assetUrl('assets/images/icons/Atlas.svg')}" alt="Atlas">
         </a>
       `
       : '';
     const homeHtml = `
-      <a class="nav-link-item nav-link-home ${activeKey === '' ? 'active' : ''}" href="${rootPrefix()}index.html">
-        <span>Home</span>
+      <a class="nav-link-item nav-link-home ${activeKey === 'atlas' ? 'active' : ''}" href="${pageUrl('atlas')}">
+        <span>FAQ</span>
       </a>
     `;
 
@@ -314,7 +314,7 @@ function rootPrefix() {
 
 function pageUrl(key) {
   const map = {
-    atlas: 'Atlas/',
+    atlas: 'FAQ/',
     mw: 'MW/',
     mwii: 'MWII/',
     mwiii: 'MWIII/',
@@ -746,7 +746,16 @@ async function renderPage(pageKey) {
   const shell = document.getElementById('page-root');
   if (!shell || !page) return;
 
-  shell.innerHTML = `
+  shell.innerHTML = pageKey === 'atlas' ? `
+    <section class="faq-page">
+      <header class="faq-header">
+        <h1>FAQ</h1>
+      </header>
+      <div id="content" class="article-content faq-content">
+        <div class="loading-state"><div class="spinner"></div><div>Loading...</div></div>
+      </div>
+    </section>
+  ` : `
     <section class="hero" style="--hero-image:url('${page.hero}')">
       <div class="hero-grid">
         <aside class="hero-rail">
@@ -787,24 +796,28 @@ async function renderPage(pageKey) {
 
   try {
     let raw = '';
-    try {
-      const candidates = [page.file, `./${page.file}`, `${window.location.pathname.replace(/[^/]*$/, '')}${page.file}`];
-      let loaded = false;
-      for (const candidate of candidates) {
-        try {
-          const res = await fetch(candidate);
-          if (res.ok) {
-            raw = await res.text();
-            loaded = true;
-            break;
-          }
-        } catch (_) { }
-      }
-      if (!loaded) throw new Error('Fetch failed');
-    } catch (_) {
-      const inline = document.getElementById(`md-inline-${page.key}`);
-      if (!inline) throw _;
+    const inline = document.getElementById(`md-inline-${page.key}`);
+    if (pageKey === 'atlas' && inline) {
       raw = inline.textContent || inline.innerText || '';
+    } else {
+      try {
+        const candidates = [page.file, `./${page.file}`, `${window.location.pathname.replace(/[^/]*$/, '')}${page.file}`];
+        let loaded = false;
+        for (const candidate of candidates) {
+          try {
+            const res = await fetch(candidate);
+            if (res.ok) {
+              raw = await res.text();
+              loaded = true;
+              break;
+            }
+          } catch (_) { }
+        }
+        if (!loaded) throw new Error('Fetch failed');
+      } catch (_) {
+        if (!inline) throw _;
+        raw = inline.textContent || inline.innerText || '';
+      }
     }
     const processed = preprocessMarkdown(raw);
     const html = marked.parse(processed, { breaks: true, gfm: true });
@@ -812,6 +825,7 @@ async function renderPage(pageKey) {
     content.innerHTML = html;
 
     transformRenderedContent(content);
+    if (pageKey === 'atlas') createFAQItems(content);
     convertEventTables(content);
     setupExpandableCommands(content);
     buildTOC(content);
@@ -826,6 +840,56 @@ async function renderPage(pageKey) {
     document.getElementById('content').innerHTML = `<div class="error-state">Failed to load page content.</div>`;
     console.error(err);
   }
+}
+
+function createFAQItems(container) {
+  const isQuestion = (element) => {
+    if (element.tagName !== 'P') return false;
+    const question = element.textContent.trim();
+    return (element.children.length === 1 && element.firstElementChild.tagName === 'EM')
+      || question === 'What\'s "Atlas"?';
+  };
+
+  [...container.querySelectorAll('p')].filter(isQuestion).forEach((question) => {
+    const item = document.createElement('details');
+    item.className = 'faq-item';
+
+    const summary = document.createElement('summary');
+    summary.textContent = question.textContent.trim();
+    item.appendChild(summary);
+
+    const answer = document.createElement('div');
+    answer.className = 'faq-answer';
+    let next = question.nextElementSibling;
+    while (next && next.tagName !== 'H2' && !isQuestion(next)) {
+      const current = next;
+      next = next.nextElementSibling;
+      answer.appendChild(current);
+    }
+    if (answer.childElementCount) item.appendChild(answer);
+    question.replaceWith(item);
+  });
+
+  [...container.querySelectorAll('h2')].filter(heading => ['credits', 'legals'].includes(heading.id)).forEach((heading) => {
+    const item = document.createElement('details');
+    item.className = 'faq-item';
+    item.id = heading.id;
+
+    const summary = document.createElement('summary');
+    summary.textContent = heading.firstChild.textContent.trim();
+    item.appendChild(summary);
+
+    const answer = document.createElement('div');
+    answer.className = 'faq-answer';
+    let next = heading.nextElementSibling;
+    while (next && next.tagName !== 'H2') {
+      const current = next;
+      next = next.nextElementSibling;
+      answer.appendChild(current);
+    }
+    if (answer.childElementCount) item.appendChild(answer);
+    heading.replaceWith(item);
+  });
 }
 
 function showLoader() {
@@ -865,9 +929,9 @@ function renderHome() {
             <div class="hero-kicker">Community-driven</div>
             <h1 class="hero-title">Atlas</h1>
             <p class="hero-desc">Video-games information, all in one place.</p>
-          <div class="home-actions">
-              <a class="btn-cod home-action" href="${pageUrl('atlas')}">Explore Atlas <span aria-hidden="true">&#8594;</span></a>
-              <a class="btn-cod-alt home-action" href="#collections">Browse collections</a>
+            <div class="home-actions">
+              <a class="home-action" href="#collections">Browse collections</a>
+              <a class="home-action" href="${pageUrl('atlas')}">Read FAQ</a>
             </div>
           </div>
         </div>
@@ -878,7 +942,6 @@ function renderHome() {
             <h2 id="collections-title">Game collections</h2>
             <p>♫ So many elements for you to consider ♫</p>
           </div>
-          <a class="home-section-link" href="${pageUrl('atlas')}">Main Atlas <span aria-hidden="true">&#8594;</span></a>
         </div>
         <div class="card-grid home-collection-grid">
           ${collections.map(page => `

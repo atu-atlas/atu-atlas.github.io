@@ -235,7 +235,7 @@ body.theme-light .cod-nav-inner {
 
 .nav-link-item {
   padding: 9px 12px;
-  color: #d9dde3;
+  color: var(--text);
   font-weight: 700;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -799,6 +799,106 @@ body.theme-light .cod-nav-inner {
   color: var(--text);
 }
 
+.faq-page {
+  width: min(100% - 40px, 820px);
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 84px) 0 24px;
+}
+
+.faq-header {
+  margin-bottom: 32px;
+}
+
+.faq-header h1 {
+  margin: 0;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+}
+
+.faq-content {
+  line-height: 1.7;
+}
+
+.faq-content h2 {
+  margin: 38px 0 10px;
+  padding: 0;
+  border: 0;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.faq-content h2:first-child {
+  margin-top: 0;
+}
+
+.faq-content h2 .heading-anchor {
+  display: none;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-item summary {
+  position: relative;
+  padding: 18px 42px 18px 0;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 650;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  color: var(--soft);
+  font-size: 1.35rem;
+  font-weight: 400;
+  transform: translateY(-50%);
+}
+
+.faq-item[open] summary::after {
+  content: "\2212";
+}
+
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 3px;
+}
+
+.faq-answer {
+  padding: 0 36px 18px 0;
+  color: var(--muted);
+}
+
+.faq-answer p,
+.faq-answer li {
+  color: inherit;
+}
+
+.faq-answer p:first-child {
+  margin-top: 0;
+}
+
+.faq-answer p:last-child,
+.faq-answer ul:last-child {
+  margin-bottom: 0;
+}
+
 .article-content img:not([src$=".svg"]) {
   border-radius: 18px;
   margin: 1rem 0;
@@ -831,6 +931,11 @@ img[src*="/assets/images/icons/camos/"] {
   color: #f1f3f6;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 0 14px 14px 0;
+}
+
+body.theme-light .article-content blockquote {
+  color: var(--text);
+  background: rgba(15, 25, 45, 0.045);
 }
 
 .article-content pre {
@@ -1092,7 +1197,7 @@ table img {
 .error-state {
   text-align: center;
   padding: 48px 20px;
-  color: #d4d7dd;
+  color: var(--muted);
 }
 
 .spinner {
@@ -1122,37 +1227,26 @@ table img {
 .home-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 24px;
   margin-top: 24px;
 }
 
 .home-action {
-  min-height: 44px;
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 6px;
+  color: #e8ebef;
+  font-size: 0.9rem;
+  font-weight: 650;
   text-decoration: none;
-  transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease, filter 0.2s ease;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease;
 }
 
 .home-action:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.home-actions .btn-cod:hover {
-  filter: brightness(1.08);
-}
-
-.home-actions .btn-cod-alt:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-body.theme-light .home-actions .btn-cod-alt:hover {
-  border-color: rgba(15, 25, 45, 0.24);
-  background: rgba(226, 232, 242, 0.96);
-}
-
-.home-action:active {
-  transform: translateY(0) scale(0.98);
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .home-action:focus-visible {
@@ -1169,13 +1263,6 @@ body.theme-light .home-actions .btn-cod-alt:hover {
   margin: 0 auto;
   padding: 48px 28px 0;
   scroll-margin-top: 96px;
-}
-
-.home-section-link {
-  color: var(--text);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-decoration: none;
 }
 
 .collection-mw {
@@ -1213,6 +1300,34 @@ body.theme-light .home-actions .btn-cod-alt:hover {
   --collection-glow: rgba(77, 107, 255, 0.32);
 }
 
+body.theme-light .collection-mw {
+  --collection-text: #006b9e;
+}
+
+body.theme-light .collection-mwii {
+  --collection-text: #14752f;
+}
+
+body.theme-light .collection-mwiii {
+  --collection-text: #c62828;
+}
+
+body.theme-light .collection-cw {
+  --collection-text: #3d3dff;
+}
+
+body.theme-light .collection-vg {
+  --collection-text: #a85b00;
+}
+
+body.theme-light .collection-bo6 {
+  --collection-text: #b74400;
+}
+
+body.theme-light .collection-bo7 {
+  --collection-text: #3150c6;
+}
+
 .card-grid.home-collection-grid {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 14px;
@@ -1236,7 +1351,7 @@ body.theme-light .home-actions .btn-cod-alt:hover {
 .collection-kicker {
   display: block;
   margin-bottom: 2px;
-  color: var(--collection-accent, var(--color-accent));
+  color: var(--collection-text, var(--collection-accent, var(--color-accent)));
   font-family: "Oswald", sans-serif;
   font-size: 0.76rem;
   letter-spacing: 0.08em;
@@ -1599,6 +1714,10 @@ img[src*="assets/images/icons/seasons/"] {
   border-radius: 0 !important;
 }
 
+.theme-light .nav-link-atlas img.nav-game-icon[src*="/assets/images/icons/Atlas.svg"] {
+  filter: brightness(0) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .copy-btn {
     transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
@@ -1717,6 +1836,33 @@ body.theme-light .card-grid article {
   border: 1px solid rgba(0, 0, 0, 0.06) !important;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.96)) !important;
   box-shadow: none !important;
+}
+
+body.theme-light .side-panel {
+  border-color: rgba(49, 64, 85, 0.24);
+  border-left-color: var(--color-accent);
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(20, 30, 40, 0.06);
+}
+
+body.theme-light .toc-list a,
+body.theme-light .quick-list a,
+body.theme-light .toc-toggle {
+  color: #354052;
+  background: #f7f9fc;
+  border-color: rgba(49, 64, 85, 0.22);
+}
+
+body.theme-light .toc-list a:hover,
+body.theme-light .quick-list a:hover {
+  color: #12131a;
+  border-color: rgba(49, 64, 85, 0.42);
+}
+
+body.theme-light .toc-toggle:hover,
+body.theme-light .toc-toggle:focus-visible {
+  color: #12131a;
+  border-color: rgba(49, 64, 85, 0.42);
 }
 
 body.theme-light .hero-grid {

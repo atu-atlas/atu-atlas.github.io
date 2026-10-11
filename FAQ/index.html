@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div id="site-loader">
+    <div class="loader-inner">
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+      <div class="loader-text">Loading...</div>
+    </div>
+  </div>
+  <header class="cod-nav" id="site-nav"></header>
+  <main id="page-root"></main>
+  <footer class="footer">Atlas | by atu</footer>
+  <script id="md-inline-atlas" type="text/plain">
+
+## Intro
+What's "Atlas"?
+Hello, friend! This is a work in progress "Atlas" for guiding curious players.
+Please note that anything here that looks unfinished it's a work in progress.
+
+## DVARs
+*What's a DVAR?*
+
+It means **Dynamic variable**, is a configuration variable used to store and manage game settings, it allows you to modify the game’s behavior via scripts or console commands (In this case, we're talking about commands)
+
+*Why does it looks like random letters?*
+
+You're probably looking at a **hash**ed dvar!
+
+A **hash** is a process that converts data into a fixed-length string of characters. In this case, it transforms a **legible dvar** into a **unique identifier**, making it easy to verify but nearly impossible to reverse-engineer. This means that, it's still a dvar, but it **looks different**.
+
+*How do I know what the dvar is for?*
+
+Well, if you can, you read it! Unless the dvar is hashed, the behaviour of it it's pretty much explicit.
+
+## Engine
+*What engine does COD uses?*
+
+Early on during Call of Duty development, Infinity Ward modified its own version of the id Tech 3 engine, calling it "IW Engine"
+- **IW3** was named after Infinity Ward making **3 titles** (Call of Duty 4 being the last one)
+- Eventually, every studio forked and made it's own advancements based on IW3, until the **HQ** concept, which introduced a way of development were every studio works in the **same unified engine line**.
+- **IW8** is named after **Infinity Ward's eighth** title, **Modern Warfare**. **Vanguard** uses a really really similar engine with some mods, it's called **S4** because it's **Sledgehammer's fourth**.
+- **Cold War**, T9, being **Treyarch's ninth** game, is the last title made on their version of the IW engine (Started as a IW3 fork on World at War, T4)
+- Then, **IW9** is **named after MWII**. Every other HQ game uses the **same engine**, that's why they use more often **word codenames** instead, because **it's all IW9** (With the expception of Black Ops 6, as it was developed at the same time that MWII)
+
+## Credits
+**I only recopiled a few things, thanks to the following people for helping me with this project:**
+r4v3n, Lifix, Laura, purrplee, Kechioma, Jy, Sebass, Pipes, Dyl_Cam, RyGuy, Emran_Ahm3d, Delta, Joel, Dest1yo, yoyo1love, & vaultboy262.
+Original design and coding was done by Artur & purrplee.
+
+## Legals
+**Property of Activision Publishing, Inc.**
+The information published here is compiled through technical analysis, publicly available information, and community research. Provided for informational, educational, archiving, and documentation purposes only.
+I do not condemn or encourage the use of third-party tools, or unauthorized use of any propertary software. This website does not distribute original game files.
+All registered trademarks, game titles, logos, and other intellectual property referenced on this website belong to their respective owners. This is not affiliated, endorsed, sponsored, or approved by any game developer, publisher, or rights holder previously mentioned.
+By reading this website, you acknowledge that all information is provided "as is" without any guarantees regarding accuracy, completeness, or fitness for a particular purpose
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="../assets/js/site.js"></script>
+  <script>renderPage('atlas');</script>
+</body>
+</html>
