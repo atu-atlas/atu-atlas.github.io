@@ -762,6 +762,7 @@ async function renderPage(pageKey) {
 
     <div class="section-grid">
         <aside class="side-panel" id="toc-panel">
+          <button class="side-panel-toggle" id="toc-panel-toggle" type="button" aria-label="Collapse table of contents" aria-controls="toc" aria-expanded="true"></button>
           <div id="toc" class="toc-list"><span>Loading…</span></div>
         </aside>
 
@@ -773,6 +774,16 @@ async function renderPage(pageKey) {
       </div>
     </div>
   `;
+
+  const sectionGrid = shell.querySelector('.section-grid');
+  const sidePanelToggle = document.getElementById('toc-panel-toggle');
+  if (sectionGrid && sidePanelToggle) {
+    sidePanelToggle.addEventListener('click', () => {
+      const collapsed = sectionGrid.classList.toggle('is-sidebar-collapsed');
+      sidePanelToggle.setAttribute('aria-label', `${collapsed ? 'Expand' : 'Collapse'} table of contents`);
+      sidePanelToggle.setAttribute('aria-expanded', String(!collapsed));
+    });
+  }
 
   try {
     let raw = '';
