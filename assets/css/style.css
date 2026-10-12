@@ -1725,10 +1725,14 @@ img[src*="assets/images/icons/seasons/"] {
 
 .theme-light img[src*="/assets/images/icons/seasons/"],
 .theme-light img[src*="/assets/images/icons/seasons/"] {
-  filter: brightness(0) !important;
+  filter: invert(1) !important;
   box-shadow: none !important;
   border: none !important;
   border-radius: 0 !important;
+}
+
+.theme-light img[src$="/assets/images/icons/que.png"] {
+  filter: invert(1) !important;
 }
 
 .theme-light .nav-link-atlas img.nav-game-icon[src*="/assets/images/icons/Atlas.svg"] {
