@@ -1723,9 +1723,12 @@ img[src*="assets/images/icons/seasons/"] {
   border-radius: 0 !important;
 }
 
-.theme-light img[src$="que.png"],
-.theme-light img[src*="assets/images/icons/seasons/"] {
-  filter: invert(1) !important;
+.theme-light img[src*="/assets/images/icons/seasons/"],
+.theme-light img[src*="/assets/images/icons/seasons/"] {
+  filter: brightness(0) !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
 }
 
 .theme-light .nav-link-atlas img.nav-game-icon[src*="/assets/images/icons/Atlas.svg"] {

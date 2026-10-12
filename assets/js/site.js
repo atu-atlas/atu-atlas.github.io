@@ -1,3 +1,10 @@
+function buildGameLogo(logoDark, logoLight, alt) {
+  const dark = assetUrl(logoDark);
+  const light = logoLight ? assetUrl(logoLight) : '';
+  const current = getCurrentTheme() === 'light' && light ? light : dark;
+  return `<img class="page-logo" src="${current}" data-logo-dark="${dark}" data-logo-light="${light}" alt="${alt}">`;
+}
+
 const COD_SITE = {
   pages: {
     atlas: {
@@ -13,7 +20,7 @@ const COD_SITE = {
     },
     mw: {
       key: 'mw',
-      title: '<img src="/assets/images/logos/IW8-logo.svg">',
+      title: buildGameLogo('assets/images/logos/IW8-logo.svg', 'assets/images/logos/light/IW8-logo.svg', 'Modern Warfare'),
       name: 'Modern Warfare',
       kicker: 'Odin',
       desc: 'Grounded combat and fast-paced action.',
@@ -24,7 +31,7 @@ const COD_SITE = {
     },
     mwii: {
       key: 'mwii',
-      title: '<img src="/assets/images/logos/Cortez-logo.svg">',
+      title: buildGameLogo('assets/images/logos/Cortez-logo.svg', 'assets/images/logos/light/Cortez-logo.svg', 'Modern Warfare II'),
       name: 'Modern Warfare II',
       kicker: 'Cortez',
       desc: 'Unprecedented global conflict and high-stakes infiltration tactics.',
@@ -35,7 +42,7 @@ const COD_SITE = {
     },
     mwiii: {
       key: 'mwiii',
-      title: '<img src="/assets/images/logos/Jupiter-logo.svg">',
+      title: buildGameLogo('assets/images/logos/Jupiter-logo.svg', 'assets/images/logos/light/Jupiter-logo.svg', 'Modern Warfare III'),
       name: 'Modern Warfare III',
       kicker: 'Jupiter',
       desc: 'Adapt or die in a fight against the ultimate threat.',
@@ -46,7 +53,7 @@ const COD_SITE = {
     },
     cw: {
       key: 'cw',
-      title: '<img src="/assets/images/logos/T9-logo.svg">',
+      title: buildGameLogo('assets/images/logos/T9-logo.svg', 'assets/images/logos/light/T9-logo.svg', 'Black Ops Cold War'),
       name: 'Black Ops: Cold War',
       kicker: 'Zeus',
       desc: 'Descend into the dark center of a global conspiracy to destabilize the global balance of power.',
@@ -57,7 +64,7 @@ const COD_SITE = {
     },
     vg: {
       key: 'vg',
-      title: '<img src="/assets/images/logos/S4-logo.svg">',
+      title: buildGameLogo('assets/images/logos/S4-logo.svg', 'assets/images/logos/light/S4-logo.svg', 'Vanguard'),
       name: 'Vanguard',
       kicker: 'Fore',
       desc: 'Rise on every front.',
@@ -68,7 +75,7 @@ const COD_SITE = {
     },
     bo6: {
       key: 'bo6',
-      title: '<img src="/assets/images/logos/Cerberus-logo.svg">',
+      title: buildGameLogo('assets/images/logos/Cerberus-logo.svg', 'assets/images/logos/light/Cerberus-logo.svg', 'Black Ops 6'),
       name: 'Black Ops 6',
       kicker: 'Cerberus',
       desc: 'Forced to go rogue. Hunted from within.',
@@ -79,7 +86,7 @@ const COD_SITE = {
     },
     bo7: {
       key: 'bo7',
-      title: '<img src="/assets/images/logos/Saturn-logo.svg">',
+      title: buildGameLogo('assets/images/logos/Saturn-logo.svg', 'assets/images/logos/light/Saturn-logo.svg', 'Black Ops 7'),
       name: 'Black Ops 7',
       kicker: 'Saturn',
       desc: 'Embrace the madness.',
@@ -268,6 +275,12 @@ function applyTheme(theme) {
       ? icon.dataset.iconLight
       : icon.dataset.iconDark;
     if (source && icon.getAttribute('src') !== source) icon.setAttribute('src', source);
+  });
+  document.querySelectorAll('[data-logo-dark][data-logo-light]').forEach((logo) => {
+    const source = theme === 'light' && logo.dataset.logoLight
+      ? logo.dataset.logoLight
+      : logo.dataset.logoDark;
+    if (source && logo.getAttribute('src') !== source) logo.setAttribute('src', source);
   });
 }
 
@@ -794,6 +807,8 @@ async function renderPage(pageKey) {
       </div>
     </div>
   `;
+
+  applyTheme(getCurrentTheme());
 
   const sectionGrid = shell.querySelector('.section-grid');
   const sidePanelToggle = document.getElementById('toc-panel-toggle');
