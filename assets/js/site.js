@@ -92,13 +92,13 @@ const COD_SITE = {
 
   nav: [
     { key: 'atlas', label: 'FAQ' },
-    { key: 'mw', label: 'MW', icon: 'assets/images/icons/IW8-icon.svg' },
-    { key: 'mwii', label: 'MWII', icon: 'assets/images/icons/Cortez-icon.svg' },
-    { key: 'mwiii', label: 'MWIII', icon: 'assets/images/icons/Jupiter-icon.svg' },
-    { key: 'cw', label: 'CW', icon: 'assets/images/icons/T9-icon.svg' },
+    { key: 'mw', label: 'MW', icon: 'assets/images/icons/IW8-icon.svg', iconLight: 'assets/images/icons/light/IW8-icon.svg' },
+    { key: 'mwii', label: 'MWII', icon: 'assets/images/icons/Cortez-icon.svg', iconLight: 'assets/images/icons/light/Cortez-icon.svg' },
+    { key: 'mwiii', label: 'MWIII', icon: 'assets/images/icons/Jupiter-icon.svg', iconLight: 'assets/images/icons/light/Jupiter-icon.svg' },
+    { key: 'cw', label: 'CW', icon: 'assets/images/icons/T9-icon.svg', iconLight: 'assets/images/icons/light/T9-icon.svg' },
     { key: 'vg', label: 'VG', icon: 'assets/images/icons/S4-icon.svg' },
-    { key: 'bo6', label: 'BO6', icon: 'assets/images/icons/Cer-icon.svg' },
-    { key: 'bo7', label: 'BO7', icon: 'assets/images/icons/Sat-icon.svg' }
+    { key: 'bo6', label: 'BO6', icon: 'assets/images/icons/Cer-icon.svg', iconLight: 'assets/images/icons/light/Cer-icon.svg' },
+    { key: 'bo7', label: 'BO7', icon: 'assets/images/icons/Sat-icon.svg', iconLight: 'assets/images/icons/light/Sat-icon.svg' }
   ]
 };
 
@@ -109,7 +109,7 @@ function renderNav(activeKey = 'atlas') {
   const renderLink = (item) => `
     <a class="nav-link-item nav-link-${item.key} ${item.key === activeKey ? 'active' : ''}" href="${pageUrl(item.key)}">
       ${item.icon
-      ? `<img class="nav-game-icon ${item.key === 'vg' ? 'nav-game-icon-vg' : ''}" src="${assetUrl(item.icon)}" alt="${item.label}">`
+      ? `<img class="nav-game-icon ${item.key === 'vg' ? 'nav-game-icon-vg' : ''}" src="${assetUrl(item.iconLight && getCurrentTheme() === 'light' ? item.iconLight : item.icon)}" data-icon-dark="${assetUrl(item.icon)}" data-icon-light="${item.iconLight ? assetUrl(item.iconLight) : ''}" alt="${item.label}">`
       : `<span>${item.label}</span>`
     }
     </a>
@@ -122,7 +122,7 @@ function renderNav(activeKey = 'atlas') {
     const atlasHtml = atlas
       ? `
         <a class="nav-link-item nav-link-${atlas.key}" href="${rootPrefix()}index.html">
-          <img class="nav-game-icon nav-game-icon--slightly-larger" style="transform: scale(1.08);" src="${assetUrl('assets/images/icons/Atlas.svg')}" alt="Atlas">
+          <img class="nav-game-icon nav-game-icon--slightly-larger" src="${assetUrl('assets/images/icons/Atlas.svg')}" alt="Atlas">
         </a>
       `
       : '';
@@ -141,8 +141,8 @@ function renderNav(activeKey = 'atlas') {
     <div class="cod-nav-inner">
       <div class="nav-links">${linksWithBrand}</div>
       <div class="nav-actions">
+        <button class="theme-toggle-btn" id="theme-toggle" type="button" aria-label="Color theme"></button>
         <button class="theme-toggle-btn nav-visibility-btn" id="nav-toggle" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true">Collapse</button>
-        <button class="theme-toggle-btn" id="theme-toggle" type="button" aria-label="Toggle theme"></button>
       </div>
       <button class="mobile-toggle" id="mobile-toggle" aria-label="Open navigation">☰</button>
     </div>
@@ -150,8 +150,8 @@ function renderNav(activeKey = 'atlas') {
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-stack">
         ${linksWithBrand}
+        <button class="theme-toggle-btn mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Color theme"></button>
         <button class="theme-toggle-btn nav-visibility-btn mobile-nav-visibility-btn" id="nav-toggle-mobile" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true">Collapse</button>
-        <button class="theme-toggle-btn mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Toggle theme"></button>
       </div>
     </div>
   `;
@@ -246,66 +246,77 @@ function isHomePage() {
   return document.getElementById('home-root') !== null;
 }
 
-function getSavedTheme() {
-  return window.localStorage.getItem('atlasTheme');
-}
-
-function saveTheme(theme) {
-  window.localStorage.setItem('atlasTheme', theme);
-}
-
 function getPreferredTheme() {
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
-  }
-  return 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function getThemePreference() {
+  const preference = window.localStorage.getItem('atlasThemePreference');
+  return preference === 'light' || preference === 'dark' ? preference : 'auto';
 }
 
 function getCurrentTheme() {
-  const saved = getSavedTheme();
-  if (saved === 'light' || saved === 'dark') {
-    return saved;
-  }
-  return getPreferredTheme();
+  const preference = getThemePreference();
+  return preference === 'auto' ? getPreferredTheme() : preference;
 }
 
 function applyTheme(theme) {
   document.body.classList.remove('theme-light', 'theme-dark');
   document.body.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark');
-  saveTheme(theme);
-  updateThemeToggleButtons(theme);
+  document.querySelectorAll('.cod-nav .nav-game-icon[data-icon-dark][data-icon-light]').forEach((icon) => {
+    const source = theme === 'light' && icon.dataset.iconLight
+      ? icon.dataset.iconLight
+      : icon.dataset.iconDark;
+    if (source && icon.getAttribute('src') !== source) icon.setAttribute('src', source);
+  });
 }
 
-function updateThemeToggleButtons(theme) {
-  const label = theme === 'light' ? '☀️' : '🌙';
-  const title = theme === 'light' ? 'Light theme' : 'Dark theme';
+function updateThemeToggleButtons(preference) {
+  const options = {
+    auto: { icon: '🕒', label: 'Auto' },
+    light: { icon: '☀️', label: 'Light' },
+    dark: { icon: '🌙', label: 'Dark' },
+  };
+  const option = options[preference];
   const buttons = [
     document.getElementById('theme-toggle'),
     document.getElementById('theme-toggle-mobile'),
   ];
+
   buttons.forEach((button) => {
     if (!button) return;
-    button.textContent = label;
-    button.title = title;
+    button.textContent = option.icon;
+    button.title = `${option.label} theme`;
+    button.setAttribute('aria-label', `${option.label} theme. Click to change theme.`);
   });
 }
 
 function setupThemeToggleButtons() {
+  const selectors = [
+    document.getElementById('theme-toggle'),
+    document.getElementById('theme-toggle-mobile'),
+  ];
+  const preferences = ['auto', 'light', 'dark'];
   const onToggle = () => {
-    const current = getCurrentTheme();
-    applyTheme(current === 'light' ? 'dark' : 'light');
+    const current = getThemePreference();
+    const next = preferences[(preferences.indexOf(current) + 1) % preferences.length];
+    window.localStorage.setItem('atlasThemePreference', next);
+    applyTheme(next === 'auto' ? getPreferredTheme() : next);
+    updateThemeToggleButtons(next);
   };
 
-  const primary = document.getElementById('theme-toggle');
-  const mobile = document.getElementById('theme-toggle-mobile');
-
-  if (primary) primary.addEventListener('click', onToggle);
-  if (mobile) mobile.addEventListener('click', onToggle);
+  selectors.forEach((button) => {
+    if (button) button.addEventListener('click', onToggle);
+  });
+  updateThemeToggleButtons(getThemePreference());
 }
 
 function initTheme() {
-  const theme = getCurrentTheme();
-  applyTheme(theme);
+  const colorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  applyTheme(getCurrentTheme());
+  colorScheme.addEventListener('change', () => {
+    if (getThemePreference() === 'auto') applyTheme(getPreferredTheme());
+  });
 }
 
 function rootPrefix() {
