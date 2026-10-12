@@ -23,8 +23,50 @@
   <main id="page-root"></main>
   <footer class="footer">Atlas | by atu</footer>
   <script id="md-inline-bo6" type="text/plain">
-Soon, stay frosty.
-<img src="/assets/images/icons/the-truth-lies.png">
+## Menus
+Useful & interesting menus
+- `luiOpenMenu mainlockoutmenu`
+**<img src="/assets/images/in-game/cerberus/mainmenu.png"> Main menu**
+- `luiopenmenu customizemenu`
+**<img src="/assets/images/in-game/cerberus/customizemenu.png"> Customization menu**
+Unused leftover customization menu, sub-menus are inventory dependent.
+- `luiopenmenu frontendcameramover`
+**<img src="/assets/images/in-game/cerberus/frontendcameramover.png"> Frontend Camera Mover**
+Camera control menu for frontend scenes.
+
+## DVARs
+Multi-purpose commands
+-`setgamemode mp;xstartprivateparty;luiOpenMenu privatematchlobby;xstartlobby_patched`
+Multiplayer private match trigger.
+-`setgamemode zm;xstartprivateparty;luiOpenMenu zmpubliclobby;xstartlobby_patched`
+Zombie match trigger.
+- `r_dof_enable`
+This will enable/disable depth of field (0-1)
+- `lui_cod_points_enabled`
+This will show/hide COD Points on menus (0-1)
+
+## Inventories
+
+### Exclusive weapons
+
+Name|Icon|ID|Index
+-|:-:|-|-
+Ray Gun|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun.png" style="height:64px;">|`t10_pi_p19_raygun`|`65018`
+Ray Gun Mark II|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygunmark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2`|`65019`
+Ray Gun Mark II-W|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygunmark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2w`|`94229`
+Ray Gun Mark II-P|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygunmark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2p`|`94228`
+Ray Gun Mark II-R|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygunmark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2r`|`94227`
+Thrustodyne M23|<img src="/assets/images/icons/items/cerberus/ui_icon_zm_wonder_weapon_jetgun.png" style="height:64px;">|`t10_lm_p19_jetgun`|`19730`
+Wunderwaffe DG-2|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_dg2.png" style="height:64px;">|`t10_ar_p19_dg2`|`86214`
+Staff of Ice|<img src="/assets/images/icons/items/cerberus/ice_staff.png" style="height:64px;">|`t10_la_p19_opalww`|`51131`
+DRI-11 Beamsmasher|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_lm_p25_drillgun`|`50898`
+Bastard Sword|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstoneww.png" style="height:64px;">|`t10_me_p19_bloodstoneww`|`63101`
+Durendal|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstoneeasy`|`85534`
+Caliburn|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstonefun.png" style="height:64px;">|`t10_me_p19_bloodstonefun`|`85399`
+Solais|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstonelife`|`85400`
+Balmung|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstonedope`|`87545`
+Gorgofex|<img src="/assets/images/icons/items/cerberus/gorgo.png" style="height:64px;">|`t10_pi_p19_jadeww`|`?`
+Mangler cannon|<img src="/assets/images/icons/items/cerberus/mangler.png" style="height:64px;">|`t10_la_mangler_cannon`|`27987`
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="../assets/js/site.js"></script>
