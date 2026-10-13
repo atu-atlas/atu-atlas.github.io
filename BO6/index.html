@@ -43,42 +43,124 @@ Multi-purpose commands
 Multiplayer private match trigger.
 - `setgamemode zm;xstartprivateparty;luiOpenMenu zmpubliclobby;xstartlobby_patched`
 Zombie match trigger.
-- `setgamemode wz;xstartprivateparty;luiOpenMenu warzoneprivatematchlobby;xstartlobby_patched`
-Warzone private match trigger.
 - `r_dof_enable`
 This will enable/disable depth of field (0-1)
 - `lui_cod_points_enabled`
 This will show/hide COD Points on menus (0-1)
 
 ## Inventories
-- `setStorageFile cerberus_mp_loadouts_private loadouts 0 name`
-Loadout name, ex: *setStorageFile cerberus_mp_loadouts_private loadouts 0 name "Fist of iron"*
-Weapon setup camouflage, ex:
+- `setStorageFile "cerberus_mp_loadouts_private" "loadouts" 0 "name"`
+Loadout name, ex: *setStorageFile "cerberus_mp_loadouts_private" "loadouts" 0 "name" "Fist of iron"*
+- `setStorageFile "cerberus_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "weaponlootid"`
+Weapon setup, ex: *setStorageFile "cerberus_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "weaponlootid" 35282*
+- `setStorageFile "cerberus_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID"`
+Weapon setup camouflage, ex: *setStorageFile "cerberus_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID" 72158*
 
 ### Exclusive weapons
 
+Name|Icon|ID|Index
+-|:-:|-|-
+Fists|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_fists`|`83193`
+Death machine|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_deathmachine`|`96279`
+War machine|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_warmachine`|`91894`
+Hand cannon|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_handcannon`|`91419`
+Mangler cannon|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_la_mangler_cannon`|`27987`
+Ray Gun|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun.png" style="height:64px;">|`t10_pi_p19_raygun`|`65018`
+Ray Gun Mark II|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2`|`65465`
+Ray Gun Mark II-W|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2w`|`94229`
+Ray Gun Mark II-P|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2p`|`94228`
+Ray Gun Mark II-R|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2r`|`94229`
+Thrustodyne M23|<img src="/assets/images/icons/items/cerberus/ui_icon_zm_wonder_weapon_jetgun.png" style="height:64px;">|`t10_lm_p19_jetgun`|`19730`
+Wunderwaffe DG-2|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_dg2.png" style="height:64px;">|`t10_ar_p19_dg2`|`86214`
+Staff of Ice|<img src="/assets/images/icons/items/cerberus/ice_staff.png" style="height:64px;">|`t10_la_p19_opalww`|`51131`
+DRI-11 Beamsmasher|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_lm_p25_drillgun`|`50898`
+Bastard Sword|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstoneww.png" style="height:64px;">|`t10_me_p19_bloodstoneww`|`63101`
+Durendal|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstoneeasy`|`85534`
+Caliburn|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstonefun.png" style="height:64px;">|`t10_me_p19_bloodstonefun`|`85399`
+Solais|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstonelife`|`5400`
+Balmung|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstonedope`|`87545`
+Gorgofex|<img src="/assets/images/icons/items/cerberus/gorgo.png" style="height:64px;">|`t10_pi_p19_jadeww`|`94414`
+
+### Camouflages
+**Multiplayer mastery**
+Name|Icon|ID|Index
+-|:-:|-|-
+Gold|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_mp.png" style="width:64px;height:64px;">|`cer_camo_comp_01_mp`|`72158`
+Diamond |<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_mp.png" style="width:64px;height:64px;">|`cer_camo_comp_02_mp`|?
+Dark Spine|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_mp.png" style="width:64px;height:64px;">|`cer_camo_comp_03_mp`|?
+Dark Matter|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_mp.png" style="width:64px;height:64px;">|`cer_camo_comp_04_mp`|?
+
+**Zombies mastery**
+Name|Icon|ID|Index
+-|:-:|-|-
+Mystic Gold|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_zm.png" style="width:64px;height:64px;">|`cer_camo_comp_01_zm`|?
+Opal|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_zm.png" style="width:64px  ;height:64px;">|`cer_camo_comp_02_zm`|?
+Afterlife|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_zm.png" style="width:64px;height:64px;">|`cer_camo_comp_03_zm`|?
+Nebula|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_zm.png" style="width:64px;height:64px;">|`cer_camo_comp_04_zm`|?
+
+**Warzone mastery**
+Name|Icon|ID|Index
+-|:-:|-|-
+Gold Tiger|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_wz.png" style="width:64px;height:64px;">|`cer_camo_comp_01_wz`|?
+King’s Ransom|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_wz.png" style="width:64px;height:64px;">|`cer_camo_comp_02_wz`|?
+Catalyst|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_wz.png" style="width:64px;height:64px;">|`cer_camo_comp_03_wz`|?
+Abyss|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_wz.png" style="width:64px;height:64px;">|`cer_camo_comp_04_wz`|?
+
+## WZ 2
+
+### DVARs
+- `setgamemode wz;xstartprivateparty;luiOpenMenu warzoneprivatematchlobby;xstartlobby_patched`
+Warzone private match trigger.
+
+### Inventories
+- `setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "name"`
+Loadout name, ex: *setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "name" "Fist of iron"*
+- `setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "weaponSetups" 0 "weaponlootid"`
+Weapon setup, ex: *setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "weaponSetups" 0 "weaponlootid" 35282*
+- `setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID"`
+Weapon setup camouflage, ex: *setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID" 72158*
+
+### Camouflages
+
+**MWIII Multiplayer mastery**
 Name|Icon|ID
--|:-:|-
-Fists|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_fists`
-Death machine|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_deathmachine`
-War machine|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_warmachine`
-Hand cannon|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_handcannon`
-Mangler cannon|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_la_mangler_cannon`
-Ray Gun|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun.png" style="height:64px;">|`t10_pi_p19_raygun`
-Ray Gun Mark II|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2`
-Ray Gun Mark II-W|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2w`
-Ray Gun Mark II-P|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2p`
-Ray Gun Mark II-R|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2r`
-Thrustodyne M23|<img src="/assets/images/icons/items/cerberus/ui_icon_zm_wonder_weapon_jetgun.png" style="height:64px;">|`t10_lm_p19_jetgun`
-Wunderwaffe DG-2|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_dg2.png" style="height:64px;">|`t10_ar_p19_dg2`
-Staff of Ice|<img src="/assets/images/icons/items/cerberus/ice_staff.png" style="height:64px;">|`t10_la_p19_opalww`
-DRI-11 Beamsmasher|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_lm_p25_drillgun`
-Bastard Sword|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstoneww.png" style="height:64px;">|`t10_me_p19_bloodstoneww`
-Durendal|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstoneeasy`
-Caliburn|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstonefun.png" style="height:64px;">|`t10_me_p19_bloodstonefun`
-Solais|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstonelife`
-Balmung|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_me_p19_bloodstonedope`
-Gorgofex|<img src="/assets/images/icons/items/cerberus/gorgo.png" style="height:64px;">|`t10_pi_p19_jadeww`
+:-:|:-:|-
+Gilded|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_01.png" style="width:64px;height:64px;">|`jup_camo_comp_01`
+Forged|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_02.png" style="width:64px;height:64px;">|`jup_camo_comp_02`
+Priceless|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_03.png" style="width:64px;height:64px;">|`jup_camo_comp_03`
+Interstellar|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_04.png" style="width:64px;height:64px;">|`jup_camo_comp_04`
+
+**MWIII Weapon Prestige**
+Name|Icon|ID
+:-:|:-:|-
+One Trick|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_01.png" style="width:64px;height:64px;">|`jup_camo_prest_01`
+Molten Obsidian|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_02.png" style="width:64px;height:64px;">|`jup_camo_prest_02`
+Mercury|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_03.png" style="width:64px;height:64px;">|`jup_camo_prest_03`
+Constellation's End|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_04.gif" style="width:64px;height:64px;">|`jup_camo_prest_04`
+
+**MWII Multiplayer mastery**
+Name|Icon|ID
+:-:|:-:|-
+Gold|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_01.png" style="width:64px;height:64px;">|`camo_comp_01`
+Platinum|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_02.png" style="width:64px;height:64px;">|`camo_comp_02`
+Polyatomic|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_03.png" style="width:64px;height:64px;">|`camo_comp_03`
+Orion|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_04.png" style="width:64px;height:64px;">|`camo_comp_04`
+
+**MWIII ZM Mastery**
+Name|Icon|ID
+:-:|:-:|-
+Golden Enigma|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_01.png" style="width:64px;height:64px;">|`jup_camo_ob_comp_01`
+Zircon Scale|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_02.png" style="width:64px;height:64px;">|`jup_camo_ob_comp_02`
+Serpentinite|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_03.png" style="width:64px;height:64px;">|`jup_camo_ob_comp_03`
+Borealis|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_04.png" style="width:64px;height:64px;">|`jup_camo_ob_comp_04
+
+**MWII ZM Mastery**
+Name|Icon|ID
+:-:|:-:|-
+Golden Ivory|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_01.png" style="width:64px;height:64px;">|`jup_camo_ob_iw9_comp_01`
+Spinel Husk|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_02.png" style="width:64px;height:64px;">|`jup_camo_ob_iw9_comp_02`
+Arachnida|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_03.png" style="width:64px;height:64px;">|`jup_camo_ob_iw9_comp_03`
+Bioluminescent|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_04.png" style="width:64px;height:64px;">|`jup_camo_ob_iw9_comp_04`
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
