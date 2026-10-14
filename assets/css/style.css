@@ -1700,7 +1700,6 @@ img[src*="/assets/images/key-art/"] {
 }
 
 img[src*="/assets/images/icons/seasons/"],
-img[src*="assets/images/icons/seasons/"] {
   border-radius: 0 !important;
 }
 
@@ -1714,7 +1713,11 @@ img[src*="assets/images/icons/seasons/"] {
   border-radius: 0 !important;
 }
 
-.theme-light img[src*="/assets/images/icons/"][src$=".svg"],
+.theme-light img[src*="/assets/images/icons/camos/"] {
+  border-radius: 10px !important;
+}
+
+.theme-light img[src*="assets/images/icons/"]:not([src*="assets/images/icons/seasons/"])[src$=".svg"],
 .theme-light svg.icon,
 .theme-light svg[class*="icon-"],
 .theme-light .icon-svg {
@@ -1723,8 +1726,7 @@ img[src*="assets/images/icons/seasons/"] {
   border-radius: 0 !important;
 }
 
-.theme-light img[src*="/assets/images/icons/seasons/"],
-.theme-light img[src*="/assets/images/icons/seasons/"] {
+.theme-light img[src*="assets/images/icons/seasons/"] {
   filter: invert(1) !important;
   box-shadow: none !important;
   border: none !important;
