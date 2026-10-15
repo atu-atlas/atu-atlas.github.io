@@ -1726,6 +1726,10 @@ img[src*="/assets/images/icons/seasons/"],
   border-radius: 0 !important;
 }
 
+.theme-light.theme-mw .article-content table img[src*="IW8-icon.svg"] {
+  filter: brightness(0) !important;
+}
+
 .theme-light img[src*="assets/images/icons/seasons/"] {
   filter: invert(1) !important;
   box-shadow: none !important;
