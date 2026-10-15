@@ -1717,7 +1717,7 @@ img[src*="/assets/images/icons/seasons/"],
   border-radius: 10px !important;
 }
 
-.theme-light img[src*="assets/images/icons/"]:not([src*="assets/images/icons/seasons/"]):not([src*="assets/images/icons/light/"])[src$=".svg"],
+.theme-light img[src*="assets/images/icons/"]:not([src*="assets/images/icons/seasons/"]):not([src*="assets/images/icons/light/"]):not([src*="Atlas.svg"])[src$=".svg"],
 .theme-light svg.icon,
 .theme-light svg[class*="icon-"],
 .theme-light .icon-svg {
