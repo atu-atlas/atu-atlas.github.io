@@ -270,11 +270,18 @@ function getCurrentTheme() {
 function applyTheme(theme) {
   document.body.classList.remove('theme-light', 'theme-dark');
   document.body.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark');
-  document.querySelectorAll('.cod-nav .nav-game-icon[data-icon-dark][data-icon-light]').forEach((icon) => {
-    const source = theme === 'light' && icon.dataset.iconLight
-      ? icon.dataset.iconLight
-      : icon.dataset.iconDark;
-    if (source && icon.getAttribute('src') !== source) icon.setAttribute('src', source);
+  document.querySelectorAll('img[src*="assets/images/icons/"][src$=".svg"]').forEach((icon) => {
+    const darkSource = icon.dataset.iconDark || icon.getAttribute('src');
+    const darkPath = darkSource.split(/[?#]/, 1)[0];
+    const iconMatch = darkPath.match(/(?:^|\/)assets\/images\/icons\/([^/]+\.svg)$/i);
+    if (!iconMatch || ['atlas.svg', 's4-icon.svg'].includes(iconMatch[1].toLowerCase())) return;
+
+    const lightSource = icon.dataset.iconLight
+      || darkSource.replace(/(^|\/)assets\/images\/icons\//i, '$1assets/images/icons/light/');
+    icon.dataset.iconDark = darkSource;
+    icon.dataset.iconLight = lightSource;
+    const source = theme === 'light' ? lightSource : darkSource;
+    if (icon.getAttribute('src') !== source) icon.setAttribute('src', source);
   });
   document.querySelectorAll('[data-logo-dark][data-logo-light]').forEach((logo) => {
     const source = theme === 'light' && logo.dataset.logoLight
@@ -856,6 +863,7 @@ async function renderPage(pageKey) {
     setupExpandableCommands(content);
     buildTOC(content);
     setupCopyButtons(content);
+    applyTheme(getCurrentTheme());
     hideLoader();
 
     if (window.location.hash) {

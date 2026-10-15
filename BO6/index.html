@@ -41,8 +41,6 @@ Operator selection menu without factions, for Warzone 2.0.
 Multi-purpose commands
 - `setgamemode mp;xstartprivateparty;luiOpenMenu privatematchlobby;xstartlobby_patched`
 Multiplayer private match trigger.
-- `setgamemode zm;xstartprivateparty;luiOpenMenu zmpubliclobby;xstartlobby_patched`
-Zombie match trigger.
 - `r_dof_enable`
 This will enable/disable depth of field (0-1)
 - `lui_cod_points_enabled`
@@ -64,6 +62,29 @@ Fists|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`
 Death machine|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_deathmachine`|`96279`
 War machine|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_warmachine`|`91894`
 Hand cannon|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`t10_ks_handcannon`|`91419`
+
+### Camouflages
+**Multiplayer mastery**
+Name|Icon|ID|Index
+-|:-:|-|-
+Gold|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_01_mp`|`72158`
+Diamond |<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_02_mp`|?
+Dark Spine|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_03_mp`|?
+Dark Matter|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_04_mp`|?
+
+## Zombies
+<img src="/assets/images/key-art/BO6-Zombies.jpg">
+
+*"Welcome to Liberty Falls, population... well... less than yesterday.."*
+
+## DVARs
+- `setgamemode zm;xstartprivateparty;luiOpenMenu zmpubliclobby;xstartlobby_patched`
+Zombie match trigger.
+
+### Exclusive/Wonder weapons
+
+Name|Icon|ID|Index
+-|:-:|-|-
 Mangler cannon|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_mangler_cannon.png" style="height:64px;">|`t10_la_mangler_cannon`|`27987`
 Ray Gun|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun.png" style="height:64px;">|`t10_pi_p19_raygun`|`65018`
 Ray Gun Mark II|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2`|`65465`
@@ -82,13 +103,6 @@ Balmung|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_blood
 Gorgofex|<img src="/assets/images/icons/items/cerberus/gorgo.png" style="height:64px;">|`t10_pi_p19_jadeww`|`94414`
 
 ### Camouflages
-**Multiplayer mastery**
-Name|Icon|ID|Index
--|:-:|-|-
-Gold|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_01_mp`|`72158`
-Diamond |<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_02_mp`|?
-Dark Spine|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_03_mp`|?
-Dark Matter|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_04_mp`|?
 
 **Zombies mastery**
 Name|Icon|ID|Index
@@ -97,14 +111,6 @@ Mystic Gold|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_zm
 Opal|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_zm.png" style="width:128px  ;height:128px;">|`cer_camo_comp_02_zm`|?
 Afterlife|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_zm.png" style="width:128px;height:128px;">|`cer_camo_comp_03_zm`|?
 Nebula|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_zm.png" style="width:128px;height:128px;">|`cer_camo_comp_04_zm`|?
-
-**Warzone mastery**
-Name|Icon|ID|Index
--|:-:|-|-
-Gold Tiger|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_01_wz`|?
-King’s Ransom|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_02_wz`|?
-Catalyst|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_03_wz`|?
-Abyss|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_04_wz`|?
 
 ## WZ 2
 <img src="/assets/images/key-art/Warzone-2-cer.jpg">
@@ -124,6 +130,14 @@ Weapon setup, ex: *setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "w
 Weapon setup camouflage, ex: *setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID" 72158*
 
 ### Camouflages
+
+**Warzone mastery**
+Name|Icon|ID|Index
+-|:-:|-|-
+Gold Tiger|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_01_wz`|?
+King’s Ransom|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_02_wz`|?
+Catalyst|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_03_wz`|?
+Abyss|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_04_wz`|?
 
 **MWIII Multiplayer mastery**
 Name|Icon|ID
