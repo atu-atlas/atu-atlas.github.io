@@ -21,7 +21,7 @@
   </div>
   <header class="cod-nav" id="site-nav"></header>
   <main id="page-root"></main>
-  <footer class="footer">Atlas | by atu</footer>
+  <footer class="footer">Atlas|by atu</footer>
   <script id="md-inline-bo7" type="text/plain">
 ## Menus
 Useful & interesting menus
@@ -36,13 +36,20 @@ Bundle list menu, inventory and version dependent.
 - `luiopenmenu frontendcameramover`
 **<img src="/assets/images/in-game/saturn/frontendcameramover.png"> Frontend Camera Mover**
 Camera control menu for frontend scenes.
+- `luiopenmenu relicselectmenu`
+**<img src="/assets/images/in-game/saturn/relicselectmenu.png"> Relic select menu**
+Relic selection menu, for Zombies cursed mode.
 
 ## DVARs
 Multi-purpose commands
+- `setgamemode mp;xstartprivateparty;luiOpenMenu privatematchlobby;xstartlobby_patched`
+Multiplayer private match trigger.
 - `r_dof_enable`
 This will enable/disable depth of field (0-1)
 - `lui_cod_points_enabled`
 This will show/hide COD Points on menus (0-1)
+- `set player_sustainammo 1`
+Infinite ammo, 0-1, disabled by default.
 
 ## Inventories
 - `setStorageFile sat_mp_loadouts_private loadouts 0 name`
@@ -63,11 +70,21 @@ Shattered Gold|<img src="/assets/images/icons/que.png" style="width:64px;height:
 
 *"Welcome... to the party."*
 
-### Zombies DVARs
+### DVARs
 - `setgamemode zm;xstartprivateparty;luiOpenMenu zmpubliclobby;xstartlobby_patched`
 Zombie match trigger.
+- `setgametype`
+Select a zombie game type.
+- `uimapname`
+Set the zombie map.
+- `set zombie_cheat`
+This will enable a developer cheat for all players with high value loot, depending on the number. Can be used once per weapon upgrade (0-3)
+- `set enable_ee_headphones`
+Enable/disable easter egg songs triggers 1-0, disabled by default.
+- `set ammorestockcooldown`
+Enable/disable ammo box cooldown, 0-1, disabled by default.
 
-### Zombies Inventories
+### Inventories
 - `setStorageFile "sat_zm_loadouts" "loadouts" 0 "name"`
 Loadout name, ex: *setStorageFile "sat_zm_loadouts" "loadouts" 0 "name" "Fist of iron"*
 - `setStorageFile "sat_zm_loadouts" "loadouts" 0 "weaponSetups" 0 "weaponlootid"`
@@ -90,16 +107,86 @@ Warden's Blight|<img src="/assets/images/icons/que.png" style="width:64px;height
 Thrustodyne M23 (DOA4)|<img src="/assets/images/icons/items/cerberus/ui_icon_zm_wonder_weapon_jetgun.png" style="height:64px;">|`sat_lm_ztronjetgun`|`98083`
 Wunderwaffe DG-2 (DOA4)|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_dg2.png" style="height:64px;">|`sat_ar_ztrondg2`|`100641`
 
+### Camouflages
+
+**Pack-a-Punch**
+Map/Level|ID|Index
+-|-|-
+Pack-a-Punch IV|`sat_camo_pap_global_04`|`116579`
+Liberty Falls I|`cer_camo_pap_garnet_01`|`58117`
+Liberty Falls II|`cer_camo_pap_garnet_02`|`58118`
+Liberty Falls III|`cer_camo_pap_garnet_03`|`58119`
+Ashes of the dammed I|`sat_camo_pap_firefly_01`|`116505`
+Ashes of the dammed II|`sat_camo_pap_firefly_02`|`116514`
+Ashes of the dammed III|`sat_camo_pap_firefly_03`|`116535`
+Astra Mallorum I|`sat_camo_pap_ruby_01`|`116520`
+Astra Mallorum II|`sat_camo_pap_ruby_02`|`116515`
+Astra Mallorum III|`sat_camo_pap_ruby_03`|`116511`
+Kowakujō I|`sat_camo_pap_hornet_01`|`116503`
+Kowakujō II|`sat_camo_pap_hornet_02`|`116534`
+Kowakujō III|`sat_camo_pap_hornet_03`|`116532`
+Totenreich I|`sat_camo_pap_locust_01`|`116508`
+Totenreich II|`sat_camo_pap_locust_02`|`116516`
+Totenreich III|`sat_camo_pap_locust_03`|`116522`
+Paradox Junction I|`sat_camo_pap_mantis_01`|`116518`
+Paradox Junction II|`sat_camo_pap_mantis_02`|`116524`
+Paradox Junction III|`sat_camo_pap_mantis_03`|`116533`
+Rex Infernus I|`sat_camo_pap_scorpion_01`|`116517`
+Rex Infernus II|`sat_camo_pap_scorpion_02`|`116521`
+Rex Infernus III|`sat_camo_pap_scorpion_03`|`116502`
+
 ### Maps
+
 Name|ID
 -|-
-Ashes of the dammed|zm_sat_firefly
-Astra Mallorum|zm_sat_ruby
-Paradox Junction|zm_sat_mantis
-Totenreich|zm_sat_locust
-Kowakujō|zm_sat_hornet
-Rex Infernus|zm_sat_scarab
-Dead Ops Arcade 4|zm_sat_ztron4
+Ashes of the dammed|`zm_sat_firefly`
+Astra Mallorum|`zm_sat_ruby`
+Paradox Junction|`zm_sat_mantis`
+Totenreich|`zm_sat_locust`
+Kowakujō|`zm_sat_hornet`
+Rex Infernus|`zm_sat_scarab`
+Dead Ops Arcade 4|`zm_sat_ztron4`
+Vandorm Farm|`ui_mapname zm_sat_firefly;setgametype zm_rb_survival;set scr_zm_sat_firefly_survival_poi zone_farm`
+Exit 115|`ui_mapname zm_sat_firefly;setgametype zm_rb_survival;set scr_zm_sat_firefly_survival_poi zone_exit115`
+Zarya Cosmodrome|`ui_mapname zm_sat_firefly;setgametype zm_rb_survival;set scr_zm_sat_firefly_survival_poi zone_launchpad`
+Ashwood|`ui_mapname zm_sat_firefly;setgametype zm_rb_survival;set scr_zm_sat_firefly_survival_poi ashwood`
+Mars|`ui_mapname zm_sat_ruby;setgametype zm_rb_survival;set scr_zm_sat_ruby_survival_poi zone_temple`
+Nuked|`ui_mapname zm_sat_mantis;setgametype zm_rb_survival;set scr_zm_sat_mantis_survival_poi future`
+Eidskallen Lighthouse|`ui_mapname zm_sat_locust;setgametype zm_rb_survival;set scr_zm_sat_locust_survival_poi zone_lighthouse`
+Tenshu|`ui_mapname zm_sat_hornet;setgametype zm_rb_survival;set scr_zm_sat_hornet_survival_poi castle`
+
+### Modes
+Name|ID
+-|-
+Round based Zombies|zm_rb
+Directed|zm_guided
+Cursed|zm_rb_r_mod
+Survival|zm_rb_survival
+Survival cursed|zm_rb_r_mod_survival
+Rogue Run|zm_rb_echo
+Dead Ops Arcade 4|ztron
+Mister Peeks Mayhem|zm_rb_rh_mod
+Training course|zm_training_course
+
+### Quests
+- `set enable_firefly_ee 1;set enable_firefly_mq 1;set enable_firefly_sq 1;set enable_firefly_sq_c 1;set enable_firefly_sq_v 1;set enable_firefly_rh 1`
+Ashes of the Dammed main quest.
+- `set enable_ruby_ee 1;set enable_ruby_rh 1`
+Astra Malorum main quest.
+- `set enable_mantis_ee 1;set enable_mantis_mq 1;set enable_mantis_sq 1;set enable_mantis_rh 1`
+Paradox Junction main quest.
+- `set enable_locust_ee 1;set enable_locust_mq 1;set enable_locust_sq 1;set enable_locust_rh 1`
+Totenreich main quest.
+- `set scr_locust_gnomes_enabled 1;set scr_locust_robot_head_powerups_enabled 1;set scr_locust_viking_helmets_enabled 1;set scr_locust_big_mouth_enabled 1;set scr_locust_richtofen_enabled 1`
+Totenreich side quests.
+- `set enable_hornet_ee 1;set enable_hornet_mq 1;set enable_hornet_sq 1;set enable_hornet_rh 1`
+Kowakujō main quest.
+- `set enable_hornet_ee_pew 1;set enable_hornet_ee_neigh 1;set enable_hornet_ee_cafe 1;set enable_hornet_ee_jump 1;set enable_hornet_ee_nya 1;set enable_hornet_ee_roll 1;set enable_hornet_ee_bat 1;set enable_hornet_ee_rocker 1`
+Kowakujō side quests.
+- `set enable_scarab_ee 1;set enable_scarab_sq 1;set enable_scarab_rh 1;set enable_scarab_br 1`
+Rex Infernus main quest.
+- `set enable_rh 1;set skip_zm_rh_validation 1;set enable_zm_relics 1`
+"Super easter egg".
 
 ## WZ 2
 <img src="/assets/images/key-art/Warzone-2-sat.jpg">
@@ -109,6 +196,10 @@ Dead Ops Arcade 4|zm_sat_ztron4
 ### DVARs
 - `setgamemode wz;xstartprivateparty;luiOpenMenu warzoneprivatematchlobby;xstartlobby_patched`
 Warzone private match trigger.
+- `setgametype`
+Select a WZ2 game type.
+- `uimapname`
+Set the WZ2 map.
 
 ### Inventories
 - `setStorageFile "sat_wz_loadouts_private" "loadouts" 0 "name"`
@@ -119,6 +210,7 @@ Weapon setup, ex: *setStorageFile "sat_wz_loadouts_private" "loadouts" 0 "weapon
 Weapon setup camouflage, ex: *setStorageFile "sat_wz_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID" 105203*
 
 ### Camouflages
+
 **BO6 Multiplayer mastery**
 Name|Icon|ID|Index
 -|:-:|-|-
@@ -143,6 +235,47 @@ King’s Ransom|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_0
 Catalyst|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_03_wz`|`72165`
 Abyss|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_04_wz`|`72168`
 
+**MWIII Multiplayer mastery**
+Name|Icon|ID|Index
+:-:|:-:|-|-
+Gilded|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_01.png" style="width:128px;height:128px;">|`jup_camo_comp_01`|`36833`
+Forged|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_02.png" style="width:128px;height:128px;">|`jup_camo_comp_02`|`36834`
+Priceless|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_03.png" style="width:128px;height:128px;">|`jup_camo_comp_03`|`36835`
+Interstellar|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_04.png" style="width:128px;height:128px;">|`jup_camo_comp_04`|`32513`
+
+**MWIII Weapon Prestige**
+Name|Icon|ID|Index
+:-:|:-:|-|-
+One Trick|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_01.png" style="width:128px;height:128px;">|`jup_camo_prest_01`|`61305`
+Molten Obsidian|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_02.png" style="width:128px;height:128px;">|`jup_camo_prest_02`|`63955`
+Mercury|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_03.png" style="width:128px;height:128px;">|`jup_camo_prest_03`|`68140`
+Constellation's End|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_04.gif" style="width:128px;height:128px;">|`jup_camo_prest_04`|`68141`
+
+**MWII Multiplayer mastery**
+Name|Icon|ID|Index
+:-:|:-:|-|-
+Gold|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_01.png" style="width:128px;height:128px;">|`camo_comp_01`|`12244`
+Platinum|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_02.png" style="width:128px;height:128px;">|`camo_comp_02`|`12256`
+Polyatomic|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_03.png" style="width:128px;height:128px;">|`camo_comp_03`|`12247`
+Orion|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_04.png" style="width:128px;height:128px;">|`camo_comp_04`|`12237`
+
+**MWIII ZM Mastery**
+Name|Icon|ID|Index
+:-:|:-:|-|-
+Golden Enigma|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_01.png" style="width:128px;height:128px;">|`jup_camo_ob_comp_01`|`45992`
+Zircon Scale|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_02.png" style="width:128px;height:128px;">|`jup_camo_ob_comp_02`|`45993`
+Serpentinite|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_03.png" style="width:128px;height:128px;">|`jup_camo_ob_comp_03`|`45994`
+Borealis|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_04.png" style="width:128px;height:128px;">|`jup_camo_ob_comp_04`|`39591`
+
+**MWII ZM Mastery**
+Name|Icon|ID|Index
+:-:|:-:|-|-
+Golden Ivory|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_01.png" style="width:128px;height:128px;">|`jup_camo_ob_iw9_comp_01`|`45992`
+Spinel Husk|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_02.png" style="width:128px;height:128px;">|`jup_camo_ob_iw9_comp_02`|`45993`
+Arachnida|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_03.png" style="width:128px;height:128px;">|`jup_camo_ob_iw9_comp_03`|`45993`
+Bioluminescent|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_04.png" style="width:128px;height:128px;">|`jup_camo_ob_iw9_comp_04`|`45714`
+
+
 ### Maps
 Name|ID
 -|-
@@ -152,6 +285,16 @@ Rebirth Island|mp_saw_escape
 Fortune's Keep|mp_saw_sm_island
 Haven's Hollow|mp_saw_manticore
 Haunted Hollow|mp_saw_manticore_s6
+
+### Modes
+Name|ID
+-|-
+Resurgence (solos)|resur_solos
+Resurgence (duos)|resur_duos
+Resurgence (quads)|resur_quads
+Lockdown|zonecontrol
+Giant Infected|blight
+
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
