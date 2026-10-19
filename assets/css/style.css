@@ -996,15 +996,12 @@ body.theme-light .article-content blockquote {
   border-bottom-right-radius: 18px;
 }
 
-td img[src*="/assets/images/icons/"]:not([src*="/assets/images/icons/camos/"]) {
-  border: none !important;
-}
-
 .article-content table img,
 .article-content table td img,
 table img {
   vertical-align: middle;
   display: inline-block;
+  border: none !important;
 }
 
 .article-content table th {
