@@ -499,6 +499,12 @@ body.theme-light .cod-nav-inner {
   max-width: 9ch;
 }
 
+.hero-title .page-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .hero-desc {
   margin: 18px 0 0;
   color: #e8ebef;
@@ -1646,6 +1652,20 @@ img[src*="/assets/images/key-art/"] {
   -webkit-tap-highlight-color: transparent;
 }
 
+.copy-btn.command-copy {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.copy-btn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
 .copy-btn:hover {
   transform: translateY(-2px);
   border-color: var(--color-accent);
@@ -1670,7 +1690,12 @@ img[src*="/assets/images/key-art/"] {
   color: var(--text);
 }
 
-.copy-btn.copied .copy-btn-text {
+.copy-btn.copy-failed {
+  border-color: #e06464;
+  color: #e06464;
+}
+
+.copy-btn.copied .copy-btn-icon {
   animation: copyPop 0.25s ease;
 }
 
@@ -1693,6 +1718,12 @@ img[src*="/assets/images/key-art/"] {
     padding: 0 16px;
     font-size: 0.95rem;
     border-radius: 12px;
+  }
+
+  .copy-btn.command-copy {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
   }
 }
 
@@ -1757,7 +1788,7 @@ body.theme-light .cod-nav .nav-game-icon[data-icon-light]:not(.nav-game-icon-vg)
     transform: none;
   }
 
-  .copy-btn.copied .copy-btn-text {
+  .copy-btn.copied .copy-btn-icon {
     animation: none;
   }
 }

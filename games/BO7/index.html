@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
 </head>
 <body>
   <div id="site-loader">
@@ -24,6 +24,7 @@
   <footer class="footer">Atlas|by atu</footer>
   <script id="md-inline-bo7" type="text/plain">
 ## Menus
+
 Useful & interesting menus
 - `luiOpenMenu mainlockoutmenu`
 **<img src="/assets/images/in-game/saturn/mainmenu.png"> Main menu**
@@ -41,6 +42,7 @@ Camera control menu for frontend scenes.
 Relic selection menu, for Zombies cursed mode.
 
 ## DVARs
+
 Multi-purpose commands
 - `setgamemode mp;xstartprivateparty;luiOpenMenu privatematchlobby;xstartlobby_patched`
 Multiplayer private match trigger.
@@ -56,21 +58,45 @@ This will set the current season, (0-6), 0 will disable blackcell & battlepass.
 Infinite ammo, 0-1, disabled by default.
 
 ## Inventories
-- `setStorageFile sat_mp_loadouts_private loadouts 0 name`
-Loadout name, ex: *setStorageFile sat_mp_loadouts_private loadouts 0 name "Fist of iron"*
-- `setStorageFile sat_mp_loadouts_private loadouts 0 weaponSetups 0 weaponlootid`
-Weapon setup, ex: *setStorageFile sat_mp_loadouts_private loadouts 0 weaponSetups 0 weaponlootid 88933*
-- `setStorageFile sat_mp_loadouts_private loadouts 0 weaponSetups 0 camoLootID`
-Weapon setup camouflage, ex: *setStorageFile sat_mp_loadouts_private loadouts 0 weaponSetups 0 camoLootID 105203*
+
+- `setStorageFile "sat_mp_loadouts_private" "loadouts" 0 "name"`
+Loadout name, ex: *setStorageFile "sat_mp_loadouts_private" "loadouts" 0 "name" "Fist of iron"*
+- `setStorageFile "sat_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "weaponlootid"`
+Weapon setup, ex: *setStorageFile "sat_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "weaponlootid" 88933*
+- `setStorageFile "sat_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID"`
+Weapon setup camouflage, ex: *setStorageFile "sat_mp_loadouts_private" "loadouts" 0 "weaponSetups" 0 "camoLootID" 105203*
 
 ### Camouflages
+
+**Co-Op/Endgame mastery**
+Name|Icon|ID|Index
+:-:|:-:|:-:|:-:
+Molten Gold|<img src="https://static.wikia.nocookie.net/callofduty/images/f/f6/MoltenGold_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_01_wc`|`105196`
+Moonstone|<img src="https://static.wikia.nocookie.net/callofduty/images/f/ff/Moonstone_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_02_wc`|`105190`
+Chroma Flux|<img src="https://static.wikia.nocookie.net/callofduty/images/e/ee/ChromaFlux_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_03_wc`|`105237`
+Genesis|<img src="https://static.wikia.nocookie.net/callofduty/images/9/94/Genesis_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_04_wc`|`105213`
+
+**Endgame exotics**
+ID|Index
+:-|:-:
+`sat_camo_exotic_01`|`109725`
+`sat_camo_exotic_02`|`109731`
+`sat_camo_exotic_03`|`109723`
+`sat_camo_exotic_04`|`109729`
+`sat_camo_exotic_05`|`109730`
+`sat_camo_exotic_06`|`109726`
+`sat_camo_exotic_07`|`109727`
+`sat_camo_exotic_08`|`109728`
+`sat_camo_exotic_09`|`109722`
+`sat_camo_exotic_10`|`109724`
+
 **Multiplayer mastery**
 Name|Icon|ID|Index
--|:-:|-|-
+:-:|:-:|:-:|:-:
 Shattered Gold|<img src="https://static.wikia.nocookie.net/callofduty/images/8/88/ShatteredGold_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_01_mp`|`105203`
-Arclight|<img src="https://static.wikia.nocookie.net/callofduty/images/e/eb/Arclight_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_02_mp`|?
-Tempest|<img src="https://static.wikia.nocookie.net/callofduty/images/e/e8/Tempest_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_02_mp`|?
-Singularity|<img src="https://static.wikia.nocookie.net/callofduty/images/a/a4/Singularity_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_02_mp`|?
+Arclight|<img src="https://static.wikia.nocookie.net/callofduty/images/e/eb/Arclight_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_02_mp`|`105186`
+Tempest|<img src="https://static.wikia.nocookie.net/callofduty/images/e/e8/Tempest_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_03_mp`|`105188`
+Singularity|<img src="https://static.wikia.nocookie.net/callofduty/images/a/a4/Singularity_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_04_mp`|`105216`
 
 ## Zombies
 <img src="/assets/images/key-art/BO7-Zombies.jpg">
@@ -78,6 +104,7 @@ Singularity|<img src="https://static.wikia.nocookie.net/callofduty/images/a/a4/S
 *"Welcome... to the party."*
 
 ### DVARs
+
 - `setgamemode zm;xstartprivateparty;luiOpenMenu zmpubliclobby;xstartlobby_patched`
 Zombie match trigger.
 - `setgametype`
@@ -96,6 +123,7 @@ Enable/disable easter egg songs triggers, 0-1, disabled by default.
 Enable/disable ammo box cooldown, 0-1, disabled by default.
 
 ### Inventories
+
 - `setStorageFile "sat_zm_loadouts" "loadouts" 0 "name"`
 Loadout name, ex: *setStorageFile "sat_zm_loadouts" "loadouts" 0 "name" "Fist of iron"*
 - `setStorageFile "sat_zm_loadouts" "loadouts" 0 "weaponSetups" 0 "weaponlootid"`
@@ -106,7 +134,7 @@ Weapon setup camouflage, ex: *setStorageFile "sat_zm_loadouts" "loadouts" 0 "wea
 ### Wonder weapons
 
 Name|Icon|ID|Index
--|:-:|-|-
+:-:|:-:|:-:|:-:
 Ray Gun|<img src="https://static.wikia.nocookie.net/callofduty/images/5/53/RayGun_HUD_Icon_BO7.png" style="height:64px;">|`sat_ww_raygun`|`121970`
 Ray Gun Mark II|<img src="https://static.wikia.nocookie.net/callofduty/images/0/09/RayGunMarkII_HUD_Icon_BO7.png" style="height:64px;">|`sat_ww_raygunmark2`|`121969`
 Necrofluid Gauntlet|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b7/NecrofluidGauntlet_HUD_Icon_BO7.png" style="height:64px;">|`sat_ww_firefly`|`101506`
@@ -122,7 +150,7 @@ Wunderwaffe DG-2 (DOA4)|<img src="/assets/images/icons/items/cerberus/ui_icon_we
 
 **Pack-a-Punch**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Liberty Falls I|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`cer_camo_pap_garnet_01`|`58117`
 Liberty Falls II|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`cer_camo_pap_garnet_02`|`58118`
 Liberty Falls III|<img src="/assets/images/icons/que.png" style="width:64px;height:64px;">|`cer_camo_pap_garnet_03`|`58119`
@@ -149,7 +177,7 @@ Aeon|<img src="https://static.wikia.nocookie.net/callofduty/images/4/48/Aeon_Cam
 ### Maps
 
 Name|ID
--|-
+:-:|-
 Ashes of the dammed|`zm_sat_firefly`
 Astra Mallorum|`zm_sat_ruby`
 Paradox Junction|`zm_sat_mantis`
@@ -167,8 +195,9 @@ Eidskallen Lighthouse|`ui_mapname zm_sat_locust;setgametype zm_rb_survival;set s
 Tenshu|`ui_mapname zm_sat_hornet;setgametype zm_rb_survival;set scr_zm_sat_hornet_survival_poi castle`
 
 ### Modes
+
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Round Based|<img src="https://static.wikia.nocookie.net/callofduty/images/d/d7/Zombies_Icon_BO7.png" style="width:128px;height:128px;">|zm_rb
 Directed|<img src="https://static.wikia.nocookie.net/callofduty/images/9/98/DirectedMode_Zombies_Icon_BO7.png" style="width:128px;height:128px;">|zm_guided
 Cursed|<img src="https://static.wikia.nocookie.net/callofduty/images/8/82/Cursed_Zombies_Icon_BO7.png" style="width:128px;height:128px;">|zm_rb_r_mod
@@ -180,6 +209,7 @@ Mr. Peeks Mayhem|<img src="https://static.wikia.nocookie.net/callofduty/images/2
 Training Course|<img src="https://static.wikia.nocookie.net/callofduty/images/f/f9/TrainingCourse_Gamemode_Icon_MP_BO7.png" style="width:128px;height:128px;">|zm_training_course
 
 ### Quests
+
 - `set enable_firefly_ee 1;set enable_firefly_mq 1;set enable_firefly_sq 1;set enable_firefly_sq_c 1;set enable_firefly_sq_v 1;set enable_firefly_rh 1`
 Ashes of the Dammed main quest.
 - `set enable_ruby_ee 1;set enable_ruby_rh 1`
@@ -205,14 +235,18 @@ Rex Infernus main quest.
 *"Outloot. Outlast. Survive."*
 
 ### DVARs
+
 - `setgamemode wz;xstartprivateparty;luiOpenMenu warzoneprivatematchlobby;xstartlobby_patched`
 Warzone private match trigger.
 - `setgametype`
 Select a WZ2 game type.
-- `uimapname`
+- `ui_mapname`
 Set the WZ2 map.
+- `exec br_core.cfg`
+Should be used before starting a match.
 
 ### Inventories
+
 - `setStorageFile "sat_wz_loadouts_private" "loadouts" 0 "name"`
 Loadout name, ex: *setStorageFile "sat_wz_loadouts_private" "loadouts" 0 "name" "Fist of iron"*
 - `setStorageFile "sat_wz_loadouts_private" "loadouts" 0 "weaponSetups" 0 "weaponlootid"`
@@ -222,9 +256,17 @@ Weapon setup camouflage, ex: *setStorageFile "sat_wz_loadouts_private" "loadouts
 
 ### Camouflages
 
+**Warzone mastery**
+Name|Icon|ID|Index
+:-:|:-:|:-:|:-:
+Golden Damascus|<img src="https://static.wikia.nocookie.net/callofduty/images/f/f1/GoldenDamascus_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_01_wz`|`105215`
+Starglass|<img src="https://static.wikia.nocookie.net/callofduty/images/c/ca/Starglass_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_02_wz`|`105204`
+Absolute Zero|<img src="https://static.wikia.nocookie.net/callofduty/images/a/a0/AbsoluteZero_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_03_wz`|`105205`
+Apocalypse|<img src="https://static.wikia.nocookie.net/callofduty/images/e/e5/Apocalypse_Camo_Icon_BO7.png" style="width:128px;height:128px;">|`sat_camo_comp_04_wz`|`105189`
+
 **BO6 Multiplayer mastery**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Gold|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_01_mp`|`72158`
 Diamond |<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_02_mp`|`72161`
 Dark Spine|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_mp.png" style="width:128px;height:128px;">|`cer_camo_comp_03_mp`|`72164`
@@ -232,7 +274,7 @@ Dark Matter|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_mp
 
 **BO6 Zombies mastery**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Mystic Gold|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_zm.png" style="width:128px;height:128px;">|`cer_camo_comp_01_zm`|`72160`
 Opal|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_zm.png" style="width:128px  ;height:128px;">|`cer_camo_comp_02_zm`|`72163`
 Afterlife|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_zm.png" style="width:128px;height:128px;">|`cer_camo_comp_03_zm`|`72166`
@@ -240,7 +282,7 @@ Nebula|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_zm.png"
 
 **BO6 Warzone mastery**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Gold Tiger|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_01_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_01_wz`|`72159`
 King’s Ransom|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_02_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_02_wz`|`72162`
 Catalyst|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_03_wz.png" style="width:128px;height:128px;">|`cer_camo_comp_03_wz`|`72165`
@@ -248,7 +290,7 @@ Abyss|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_wz.png" 
 
 **MWIII Multiplayer mastery**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Gilded|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_01.png" style="width:128px;height:128px;">|`jup_camo_comp_01`|`36833`
 Forged|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_02.png" style="width:128px;height:128px;">|`jup_camo_comp_02`|`36834`
 Priceless|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_03.png" style="width:128px;height:128px;">|`jup_camo_comp_03`|`36835`
@@ -256,7 +298,7 @@ Interstellar|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_comp_04.pn
 
 **MWIII Weapon Prestige**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 One Trick|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_01.png" style="width:128px;height:128px;">|`jup_camo_prest_01`|`61305`
 Molten Obsidian|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_02.png" style="width:128px;height:128px;">|`jup_camo_prest_02`|`63955`
 Mercury|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_prest_03.png" style="width:128px;height:128px;">|`jup_camo_prest_03`|`68140`
@@ -264,7 +306,7 @@ Constellation's End|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_pre
 
 **MWII Multiplayer mastery**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Gold|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_01.png" style="width:128px;height:128px;">|`camo_comp_01`|`12244`
 Platinum|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_02.png" style="width:128px;height:128px;">|`camo_comp_02`|`12256`
 Polyatomic|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_03.png" style="width:128px;height:128px;">|`camo_comp_03`|`12247`
@@ -272,7 +314,7 @@ Orion|<img src="/assets/images/icons/camos/cortez/ui_camo_comp_04.png" style="wi
 
 **MWIII ZM Mastery**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Golden Enigma|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_01.png" style="width:128px;height:128px;">|`jup_camo_ob_comp_01`|`45992`
 Zircon Scale|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_02.png" style="width:128px;height:128px;">|`jup_camo_ob_comp_02`|`45993`
 Serpentinite|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_03.png" style="width:128px;height:128px;">|`jup_camo_ob_comp_03`|`45994`
@@ -280,7 +322,7 @@ Borealis|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_comp_04.png
 
 **MWII ZM Mastery**
 Name|Icon|ID|Index
-:-:|:-:|-|-
+:-:|:-:|:-:|:-:
 Golden Ivory|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_01.png" style="width:128px;height:128px;">|`jup_camo_ob_iw9_comp_01`|`45992`
 Spinel Husk|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_02.png" style="width:128px;height:128px;">|`jup_camo_ob_iw9_comp_02`|`45993`
 Arachnida|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_comp_03.png" style="width:128px;height:128px;">|`jup_camo_ob_iw9_comp_03`|`45993`
@@ -289,27 +331,27 @@ Bioluminescent|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_c
 
 ### Maps
 Name|Image|ID
-:-:|:-:|-
-Verdansk|<img src="https://static.wikia.nocookie.net/callofduty/images/d/d8/Verdansk_LoadingScreen_Season6_BO7_WZ2.jpg" style="height:256px;">|mp_saw_sierra
+:-:|:-:|:-:
+Verdansk|<img src="https://static.wikia.nocookie.net/callofduty/images/d/d8/Verdansk_LoadingScreen_Season6_BO7_WZ2.jpg" style="height:256px;">|`mp_saw_sierra`
 Avalon|<img src="https://static.wikia.nocookie.net/callofduty/images/6/67/Endgame_MenuScreen_BO7.png" style="height:256px;">|mp_saw_avalon
-Rebirth Island|<img src="https://static.wikia.nocookie.net/callofduty/images/9/95/RebirthIsland_LoadingScreen_Season4Reloaded_BO7_WZ2.jpg" style="height:256px;">|mp_saw_escape
-Fortune's Keep|<img src="https://static.wikia.nocookie.net/callofduty/images/3/35/FortunesKeep_LoadingScreen_BlackOps7_WZ2.png" style="height:256px;">|mp_saw_sm_island
-Haven's Hollow|<img src="https://static.wikia.nocookie.net/callofduty/images/2/2a/HavensHollow_LoadingScreen_WZ2.jpg" style="height:256px;">|mp_saw_manticore
-Haunted Hollow|<img src="https://static.wikia.nocookie.net/callofduty/images/5/54/HauntedHollow_LoadingScreen_WZ2.jpg" style="height:256px;">|mp_saw_manticore_s6
+Rebirth Island|<img src="https://static.wikia.nocookie.net/callofduty/images/9/95/RebirthIsland_LoadingScreen_Season4Reloaded_BO7_WZ2.jpg" style="height:256px;">|`mp_saw_escape`
+Fortune's Keep|<img src="https://static.wikia.nocookie.net/callofduty/images/3/35/FortunesKeep_LoadingScreen_BlackOps7_WZ2.png" style="height:256px;">|`mp_saw_sm_island`
+Haven's Hollow|<img src="https://static.wikia.nocookie.net/callofduty/images/2/2a/HavensHollow_LoadingScreen_WZ2.jpg" style="height:256px;">|`mp_saw_manticore`
+Haunted Hollow|<img src="https://static.wikia.nocookie.net/callofduty/images/5/54/HauntedHollow_LoadingScreen_WZ2.jpg" style="height:256px;">|`mp_saw_manticore_s6`
 
 ### Modes
 Name|Icon|ID
-:-:|:-:|-
-Resurgence (solos)|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b4/Resurgence_Icon_SeasonOne_BO7_WZ2.png" style="width:128px;height:128px;">|resur_solos
-Resurgence (duos)|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b4/Resurgence_Icon_SeasonOne_BO7_WZ2.png" style="width:128px;height:128px;">|resur_duos
-Resurgence (quads)|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b4/Resurgence_Icon_SeasonOne_BO7_WZ2.png" style="width:128px;height:128px;">|resur_quads
-Lockdown|<img src="/assets/images/icons/que.png" style="width:128px;height:128px;">|zonecontrol
-Giant Infected|<img src="/assets/images/icons/que.png" style="width:128px;height:128px;">|blight
+:-:|:-:|:-:
+Resurgence (solos)|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b4/Resurgence_Icon_SeasonOne_BO7_WZ2.png" style="width:128px;height:128px;">|`resur_solos`
+Resurgence (duos)|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b4/Resurgence_Icon_SeasonOne_BO7_WZ2.png" style="width:128px;height:128px;">|`resur_duos`
+Resurgence (quads)|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b4/Resurgence_Icon_SeasonOne_BO7_WZ2.png" style="width:128px;height:128px;">|`resur_quads`
+Lockdown|<img src="/assets/images/icons/que.png" style="width:128px;height:128px;">|`zonecontrol`
+Giant Infected|<img src="/assets/images/icons/que.png" style="width:128px;height:128px;">|`blight`
 
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../assets/js/site.js"></script>
+  <script src="../../assets/js/site.js"></script>
   <script>renderPage('bo7');</script>
 </body>
 </html>

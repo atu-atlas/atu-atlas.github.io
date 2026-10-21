@@ -340,19 +340,20 @@ function initTheme() {
 }
 
 function rootPrefix() {
-  return isHomePage() ? './' : '../';
+  if (isHomePage()) return './';
+  return window.location.pathname.includes('/games/') ? '../../' : '../';
 }
 
 function pageUrl(key) {
   const map = {
     atlas: 'FAQ/',
-    mw: 'MW/',
-    mwii: 'MWII/',
-    mwiii: 'MWIII/',
-    cw: 'CW/',
-    vg: 'VG/',
-    bo6: 'BO6/',
-    bo7: 'BO7/'
+    mw: 'games/MW/',
+    mwii: 'games/MWII/',
+    mwiii: 'games/MWIII/',
+    cw: 'games/CW/',
+    vg: 'games/VG/',
+    bo6: 'games/BO6/',
+    bo7: 'games/BO7/'
   };
   return rootPrefix() + map[key];
 }
@@ -459,8 +460,10 @@ function transformRenderedContent(container) {
       }
       </div>
 
-      <button class="copy-btn command-copy" data-copy="${escapeHtml(command)}" aria-label="Copy command">
-        <span class="copy-btn-text">Copy</span>
+      <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" title="Copy command">
+        <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+        </svg>
       </button>
     `;
 
@@ -579,8 +582,10 @@ function convertEventTables(container) {
         </div>
 
         <div class="event-footer">
-          <button class="copy-btn command-copy" data-copy="${escapeHtml(command)}" aria-label="Copy command">
-            <span class="copy-btn-text">Copy</span>
+          <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" title="Copy command">
+            <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
           </button>
         </div>
       `;
@@ -651,35 +656,36 @@ function setupCopyButtons(container) {
     if (btn.dataset.copyBound === 'true') return;
     btn.dataset.copyBound = 'true';
 
+    const icon = btn.querySelector('.copy-btn-icon');
+    const defaultIcon = icon.innerHTML;
+    const defaultLabel = btn.getAttribute('aria-label');
+    let resetTimeout;
+
     btn.addEventListener('click', async () => {
       const value = btn.getAttribute('data-copy');
       try {
         await navigator.clipboard.writeText(value);
-
-        const textNode = btn.querySelector('.copy-btn-text');
-        if (textNode) {
-          const old = textNode.textContent;
-          textNode.textContent = 'Copied';
-          btn.classList.add('copied');
-
-          setTimeout(() => {
-            textNode.textContent = old;
-            btn.classList.remove('copied');
-          }, 1400);
-        } else {
-          const old = btn.textContent;
-          btn.textContent = 'Copied';
-          btn.classList.add('copied');
-
-          setTimeout(() => {
-            btn.textContent = old;
-            btn.classList.remove('copied');
-          }, 1400);
-        }
+        clearTimeout(resetTimeout);
+        btn.classList.remove('copy-failed');
+        btn.classList.add('copied');
+        btn.setAttribute('aria-label', 'Copied');
+        btn.title = 'Copied';
+        icon.innerHTML = '<path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
       } catch {
-        const textNode = btn.querySelector('.copy-btn-text');
-        if (textNode) textNode.textContent = 'Copy failed';
+        clearTimeout(resetTimeout);
+        btn.classList.remove('copied');
+        btn.classList.add('copy-failed');
+        btn.setAttribute('aria-label', 'Copy failed');
+        btn.title = 'Copy failed';
+        icon.innerHTML = '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>';
       }
+
+      resetTimeout = setTimeout(() => {
+        btn.classList.remove('copied', 'copy-failed');
+        btn.setAttribute('aria-label', defaultLabel);
+        btn.title = defaultLabel;
+        icon.innerHTML = defaultIcon;
+      }, 1400);
     });
   });
 }

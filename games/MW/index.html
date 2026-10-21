@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
 </head>
 <body>
   <div id="site-loader">
@@ -93,21 +93,21 @@ This will show/hide developer info in an overlay (0-1) it might require an exter
 ## Inventories
 Item containers stored in your profile.
 
-- `setPrivateLoadout loadouts 0 name`
-Loadout name, example: *setPrivateLoadout loadouts 0 name "Fist of iron"*
-- `setPrivateLoadout loadouts 0 weaponSetups 0 weapon`
-Weapon setup, example: *setPrivateLoadout loadouts 0 weaponSetups 0 weapon iw8_ar_kilo433*
-- `setPrivateLoadout loadouts 0 weaponSetups 0 camo`
-Weapon setup camouflage, example: *setPrivateLoadout loadouts 0 weaponSetups 0 camo camo_11a*
-- `setPrivateLoadoutsPlayerData customizationSetup radial`
-Gestures customization, example: *setPrivateLoadoutsPlayerData customizationSetup radial 0 210000*
-- `setPrivateLoadoutsPlayerData customizationSetup operatorCustomization`
-Operator execution customization, example: *  setPrivateLoadoutsPlayerData customizationSetup operatorCustomization ghost_western execution 327*
+- `setPrivateLoadout "loadouts" 0 "name"`
+Loadout name, example: *setPrivateLoadout "loadouts" 0 "name" "Fist of iron"*
+- `setPrivateLoadout "loadouts" 0 "weaponSetups" 0 "weapon"`
+Weapon setup, example: *setPrivateLoadout "loadouts" 0 "weaponSetups" 0 "weapon" iw8_ar_kilo433*
+- `setPrivateLoadout "loadouts" 0 "weaponSetups" 0 "camo"`
+Weapon setup camouflage, example: *setPrivateLoadout "loadouts" 0 "weaponSetups" 0 "camo" camo_11a"*
+- `setPrivateLoadoutsPlayerData "customizationSetup" "radial"`
+Gestures customization, example: *setPrivateLoadoutsPlayerData "customizationSetup" "radial" 0 210000*
+- `setPrivateLoadoutsPlayerData "customizationSetup" "operatorCustomization"`
+Operator execution customization, example: *  setPrivateLoadoutsPlayerData "customizationSetup" "operatorCustomization" ghost_western execution 327*
 
 ### Camouflages
 
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Gold|<img src="/assets/images/icons/camos/odin/ui_camo_11a.png" style="width:128px;height:128px;">|`camo_11a`
 Platinum|<img src="/assets/images/icons/camos/odin/ui_camo_11b.png" style="width:128px;height:128px;">|`camo_11b`
 Damascus|<img src="/assets/images/icons/camos/odin/ui_camo_11c.png" style="width:128px;height:128px;">|`camo_11c`
@@ -199,24 +199,24 @@ Item containers stored in your WZ profile.
 
 - `setPrivateWZLoadout loadouts 0 name`
 Loadout name, example: *setWZPrivateLoadout loadouts 0 name "Fist of iron"*
-- `setPrivateWZLoadout loadouts 0 weaponSetups 0 weapon`
-Weapon setup, example: *setWZPrivateLoadout loadouts 0 weaponSetups 0 weapon iw8_ar_t9accurate*
-- `setPrivateWZLoadout loadouts 0 weaponSetups 0 camo`
-Weapon setup camouflage, example: *setWZPrivateLoadout loadouts 0 weaponSetups 0 camo camo_mp_t9mastery_gold*
+- `setPrivateWZLoadout "loadouts" 0 "weaponSetups" 0 weapon`
+Weapon setup, example: *setWZPrivateLoadout "loadouts" 0 "weaponSetups" 0 weapon iw8_ar_t9accurate*
+- `setPrivateWZLoadout "loadouts" 0 "weaponSetups" 0 camo`
+Weapon setup camouflage, example: *setWZPrivateLoadout "loadouts" 0 "weaponSetups" 0 camo camo_mp_t9mastery_gold*
 
 ### Camouflages
 Cross-titles camouflages.
 
 **Cold War, Multiplayer mastery¹**
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Gold|<img src="/assets/images/icons/camos/zeus/menu_camo_mastery_mp_gold_pattern.png" style="width:128px;height:128px;">|`camo_mp_t9mastery_gold`
 Diamond|<img src="/assets/images/icons/camos/zeus/menu_camo_mastery_mp_diamond_pattern.png" style="width:128px;height:128px;">|`camo_mp_t9mastery_diamond`
 Dark Matter Ultra|<img src="/assets/images/icons/camos/zeus/menu_camo_mastery_mp_darkmatter_pattern.png" style="width:128px;height:128px;">|`camo_mp_t9mastery_darkmatter`
 
 **Cold War, Zombies mastery²**
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Golden Viper|<img src="/assets/images/icons/camos/zeus/menu_camo_mastery_zm_gold_pattern.png" style="width:128px;height:128px;">|`camo_zm_t9mastery_gold`
 Plague Diamond|<img src="/assets/images/icons/camos/zeus/menu_camo_mastery_zm_diamond_pattern.png" style="width:128px;height:128px;">|`camo_zm_t9mastery_diamond`
 Dark Aether³|<img src="/assets/images/icons/camos/zeus/menu_camo_mastery_zm_darkmatter_pattern.png" style="width:128px;height:128px;">|`camo_zm_t9mastery_darkmatter`
@@ -228,7 +228,7 @@ Some camouflages might have unfinished model coverage on early versions.
 
 **Vanguard, Multiplayer mastery¹**
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Gold|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_110.png" style="width:128px;height:128px;">|`s4_camo_11a`
 Diamond|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_111.png" style="width:128px;height:128px;">|`s4_camo_11b`
 Atomic|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_112.png" style="width:128px;height:128px;">|`s4_camo_11c`
@@ -236,7 +236,7 @@ Unreleased camo|<img src="/assets/images/icons/que.png" style="width:128px;heigh
 
 **Events**
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Titanium Chrome|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_s4_camo_titanium_trials_01.png" style="width:128px;height:128px;">|`s4_camo_titanium_trials_01`
 Liquid Metal|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_s4_camo_titanium_trials_02.png" style="width:128px;height:128px;">|`s4_camo_titanium_trials_02`
 Skynet|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_s4_camo_titanium_trials_03.png" style="width:128px;height:128px;">|`s4_camo_titanium_trials_03`
@@ -245,7 +245,7 @@ False Protector|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_gold_d
 
 **Vanguard, Zombies mastery¹**
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Golden Viper|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_gold_zm_e_s.png" style="width:128px;height:128px;">|`s4_camo_11a_zm`
 Plague Diamond|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_diamond_zm_a_s.png" style="width:128px;height:128px;">|`s4_camo_11b_zm`
 Dark Aether|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_atomic_c_zm_c.png" style="width:128px;height:128px;">|`s4_camo_11c_zm`
@@ -256,7 +256,7 @@ Dark Aether|<img src="/assets/images/icons/camos/fore/v_ui_elmnt_camo_atomic_c_z
 Uncommon, and not accessible weapons.
 
 Name|Icon|ID
-:-:|:-:|-
+:-:|:-:|:-:
 Combat bow|<img src="/assets/images/icons/items/odin/icon_weapon_sn_t9explosivebow.png" style="height:128px;">|`iw8_sn_t9explosivebow`
 Lee Enfield|<img src="/assets/images/icons/items/fore/v_ui_icon_weapon_mr_lecho_00.png" style="height:128px;">|`s4_mr_lecho`
 War machine|<img src="/assets/images/icons/items/fore/v_ui_icon_weapon_la_walpha2_00.png" style="height:128px;">|`s4_la_walpha2`
@@ -264,7 +264,7 @@ Death machine|<img src="/assets/images/icons/items/fore/v_ui_icon_weapon_mg_from
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="../assets/js/site.js"></script>
+  <script src="../../assets/js/site.js"></script>
   <script>renderPage('mw');</script>
 </body>
 </html>
