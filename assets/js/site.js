@@ -9,13 +9,9 @@ const COD_SITE = {
   pages: {
     atlas: {
       key: 'atlas',
-      title: 'FAQ',
       name: 'FAQ',
-      kicker: 'Incoming Intel',
       hero: '/assets/images/key-art/COD-Franchise.png',
       file: 'md/Atlas.md',
-      quote: '“For guiding users in search of fun.”',
-      badge: 'info'
     },
     mw: {
       key: 'mw',
@@ -101,6 +97,8 @@ const COD_SITE = {
   ]
 };
 
+let sectionSearchIndexPromise = null;
+
 function renderNav(activeKey = 'atlas') {
   const nav = document.getElementById('site-nav');
   if (!nav) return;
@@ -126,8 +124,8 @@ function renderNav(activeKey = 'atlas') {
       `
       : '';
     const homeHtml = `
-      <a class="nav-link-item nav-link-home ${activeKey === 'atlas' ? 'active' : ''}" href="${pageUrl('atlas')}">
-        <span>FAQ</span>
+      <a class="nav-link-item nav-link-home ${activeKey === 'atlas' ? 'active' : ''}" href="${pageUrl('atlas')}" aria-label="FAQ" data-tooltip="FAQ" data-tooltip-position="below">
+        <img class="interface-icon" src="${assetUrl('assets/images/icons/help.svg')}" alt="">
       </a>
     `;
 
@@ -140,17 +138,28 @@ function renderNav(activeKey = 'atlas') {
     <div class="cod-nav-inner">
       <div class="nav-links">${linksWithBrand}</div>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" id="theme-toggle" type="button" aria-label="Color theme"></button>
-        <button class="theme-toggle-btn nav-visibility-btn" id="nav-toggle" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true">Collapse</button>
+        <button class="theme-toggle-btn site-search-toggle" id="site-search-toggle" type="button" aria-label="Open site search" aria-controls="site-search-panel" aria-expanded="false" data-tooltip="Search" data-tooltip-position="below">
+          <img class="interface-icon" src="${assetUrl('assets/images/icons/search.svg')}" alt="">
+        </button>
+        <button class="theme-toggle-btn theme-toggle" id="theme-toggle" type="button" aria-label="Color theme" data-tooltip-position="below"></button>
+        <button class="theme-toggle-btn nav-visibility-btn" id="nav-toggle" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true" data-tooltip-position="below"></button>
       </div>
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open navigation">☰</button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <img class="interface-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">
+      </button>
+    </div>
+
+    <div class="site-search-panel" id="site-search-panel" hidden>
+      <label class="visually-hidden" for="site-search-input">Search in Atlas</label>
+      <input class="site-search-input" id="site-search-input" type="search" placeholder="Search in Atlas" autocomplete="off">
+      <ul class="site-search-results" id="site-search-results" aria-live="polite" aria-relevant="additions removals"></ul>
     </div>
 
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-stack">
         ${linksWithBrand}
-        <button class="theme-toggle-btn mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Color theme"></button>
-        <button class="theme-toggle-btn nav-visibility-btn mobile-nav-visibility-btn" id="nav-toggle-mobile" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true">Collapse</button>
+        <button class="theme-toggle-btn theme-toggle mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Color theme" data-tooltip-position="below"></button>
+        <button class="theme-toggle-btn nav-visibility-btn mobile-nav-visibility-btn" id="nav-toggle-mobile" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true" data-tooltip-position="below"></button>
       </div>
     </div>
   `;
@@ -158,12 +167,150 @@ function renderNav(activeKey = 'atlas') {
   const toggle = document.getElementById('mobile-toggle');
   const menu = document.getElementById('mobile-menu');
   if (toggle && menu) {
-    toggle.addEventListener('click', () => menu.classList.toggle('open'));
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    });
   }
 
   setupNavVisibilityButtons(nav);
   initTheme();
   setupThemeToggleButtons();
+  setupSiteSearch(nav);
+}
+
+function normalizeSearchText(text) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase();
+}
+
+async function buildSectionSearchIndex() {
+  const pages = Object.values(COD_SITE.pages);
+  const results = await Promise.all(pages.map(async page => {
+    const response = await fetch(pageUrl(page.key));
+    if (!response.ok) throw new Error(`Unable to load ${page.name} for search (${response.status}).`);
+
+    const pageDocument = new DOMParser().parseFromString(await response.text(), 'text/html');
+    const markdown = pageDocument.getElementById(`md-inline-${page.key}`);
+    if (!markdown) throw new Error(`Search content is missing for ${page.name}.`);
+
+    const source = preprocessMarkdown(markdown.textContent || '');
+    const usedIds = new Set();
+    let sectionTitle = '';
+
+    return [...source.matchAll(/^#{2,3}\s+(.+?)\s*#*\s*$/gm)].map((heading, index) => {
+      const titleHtml = heading[1]
+        .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/(\*\*|__|\*|_|~~)/g, '');
+      const title = new DOMParser()
+        .parseFromString(titleHtml, 'text/html')
+        .body.textContent
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (heading[0].startsWith('## ')) sectionTitle = title;
+      const baseId = slugify(title) || `section-${index + 1}`;
+      let id = baseId;
+      let suffix = 2;
+      while (usedIds.has(id)) {
+        id = `${baseId}-${suffix}`;
+        suffix += 1;
+      }
+      usedIds.add(id);
+
+      return {
+        title,
+        pageName: page.name,
+        sectionTitle: heading[0].startsWith('### ') ? sectionTitle : '',
+        searchText: normalizeSearchText(`${page.name} ${page.key} ${page.kicker} ${page.badge} ${sectionTitle} ${title}`),
+        href: `${pageUrl(page.key)}#${id}`
+      };
+    });
+  }));
+
+  return results.flat();
+}
+
+function setupSiteSearch(nav) {
+  const toggle = nav.querySelector('#site-search-toggle');
+  const panel = nav.querySelector('#site-search-panel');
+  const input = nav.querySelector('#site-search-input');
+  const results = nav.querySelector('#site-search-results');
+  if (!toggle || !panel || !input || !results) return;
+
+  let requestId = 0;
+  const closeSearch = () => {
+    panel.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open site search');
+  };
+
+  toggle.addEventListener('click', () => {
+    const isOpen = !panel.hidden;
+    panel.hidden = isOpen;
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Open site search' : 'Close site search');
+    if (!isOpen) input.focus();
+  });
+
+  document.addEventListener('pointerdown', event => {
+    if (panel.hidden || !(event.target instanceof Node)) return;
+    if (!panel.contains(event.target) && !toggle.contains(event.target)) closeSearch();
+  });
+
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeSearch();
+      toggle.focus();
+    }
+  });
+
+  input.addEventListener('input', async () => {
+    const currentRequestId = ++requestId;
+    const query = normalizeSearchText(input.value.trim());
+    results.replaceChildren();
+
+    if (!query) return;
+
+    try {
+      if (!sectionSearchIndexPromise) sectionSearchIndexPromise = buildSectionSearchIndex();
+      const index = await sectionSearchIndexPromise;
+      if (currentRequestId !== requestId) return;
+
+      const queryTerms = query.split(/\s+/);
+      const matches = index.filter(item => queryTerms.every(term => item.searchText.includes(term)));
+      const visibleMatches = matches.slice(0, 12);
+      visibleMatches.forEach(match => {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        const title = document.createElement('span');
+        const pageName = document.createElement('span');
+
+        link.href = match.href;
+        title.className = 'site-search-result-title';
+        title.textContent = match.title;
+        pageName.className = 'site-search-result-page';
+        pageName.textContent = match.sectionTitle
+          ? `${match.pageName} · ${match.sectionTitle}`
+          : match.pageName;
+        link.append(title, pageName);
+        item.appendChild(link);
+        results.appendChild(item);
+      });
+    } catch (error) {
+      if (currentRequestId !== requestId) return;
+      sectionSearchIndexPromise = null;
+      const item = document.createElement('li');
+      item.className = 'site-search-error';
+      item.textContent = 'Search could not load page content.';
+      results.appendChild(item);
+      console.error(error);
+    }
+  });
 }
 
 function setupNavVisibilityButtons(nav) {
@@ -182,8 +329,9 @@ function setupNavVisibilityButtons(nav) {
       nav.classList.remove('is-collapsed');
       toggleButtons.forEach((button) => {
         if (!button) return;
-        button.textContent = '−';
+        button.innerHTML = `<img class="interface-icon nav-expand-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">`;
         button.setAttribute('aria-label', 'Collapse navigation bar');
+        button.dataset.tooltip = 'Collapse navigation bar';
         button.setAttribute('aria-expanded', 'true');
       });
       navInner.getBoundingClientRect();
@@ -196,8 +344,9 @@ function setupNavVisibilityButtons(nav) {
     nav.classList.add('is-collapsed');
     toggleButtons.forEach((button) => {
       if (!button) return;
-      button.textContent = '+';
+      button.innerHTML = `<img class="interface-icon nav-expand-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">`;
       button.setAttribute('aria-label', 'Expand navigation bar');
+      button.dataset.tooltip = 'Expand navigation bar';
       button.setAttribute('aria-expanded', 'false');
     });
 
@@ -230,8 +379,9 @@ function setupNavVisibilityButtons(nav) {
 
   toggleButtons.forEach((button) => {
     if (button) {
-      button.textContent = '+';
+      button.innerHTML = `<img class="interface-icon nav-expand-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">`;
       button.setAttribute('aria-label', 'Expand navigation bar');
+      button.dataset.tooltip = 'Expand navigation bar';
       button.setAttribute('aria-expanded', 'false');
     }
     if (button) button.addEventListener('click', () => {
@@ -262,7 +412,7 @@ function getCurrentTheme() {
 function applyTheme(theme) {
   document.body.classList.remove('theme-light', 'theme-dark');
   document.body.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark');
-  document.querySelectorAll('img[src*="assets/images/icons/"][src$=".svg"]').forEach((icon) => {
+  document.querySelectorAll('img[src*="assets/images/icons/"][src$=".svg"]:not(.interface-icon)').forEach((icon) => {
     const darkSource = icon.dataset.iconDark || icon.getAttribute('src');
     const darkPath = darkSource.split(/[?#]/, 1)[0];
     const iconMatch = darkPath.match(/(?:^|\/)assets\/images\/icons\/([^/]+\.svg)$/i);
@@ -285,9 +435,9 @@ function applyTheme(theme) {
 
 function updateThemeToggleButtons(preference) {
   const options = {
-    auto: { icon: '🕒', label: 'Auto' },
-    light: { icon: '☀️', label: 'Light' },
-    dark: { icon: '🌙', label: 'Dark' },
+    auto: { label: 'Auto', icon: 'routine' },
+    light: { label: 'Light', icon: 'light_mode' },
+    dark: { label: 'Dark', icon: 'dark_mode' },
   };
   const option = options[preference];
   const buttons = [
@@ -297,8 +447,8 @@ function updateThemeToggleButtons(preference) {
 
   buttons.forEach((button) => {
     if (!button) return;
-    button.textContent = option.icon;
-    button.title = `${option.label} theme`;
+    button.innerHTML = `<img class="interface-icon theme-icon" src="${assetUrl(`assets/images/icons/${option.icon}.svg`)}" alt="">`;
+    button.dataset.tooltip = `${option.label} theme`;
     button.setAttribute('aria-label', `${option.label} theme. Click to change theme.`);
   });
 }
@@ -433,7 +583,7 @@ function transformRenderedContent(container) {
         <div class="command-label-row">
           <div class="command-label">Command</div>
           ${hasDescription
-        ? `<button class="command-info-btn" type="button" aria-expanded="false" data-info-target="${infoId}">i</button>`
+        ? `<button class="command-info-btn" type="button" aria-expanded="false" data-info-target="${infoId}" data-tooltip="Info">i</button>`
         : ''
       }
         </div>
@@ -452,7 +602,7 @@ function transformRenderedContent(container) {
       }
       </div>
 
-      <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" title="Copy command">
+      <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" data-tooltip="Copy command">
         <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
           <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
         </svg>
@@ -574,7 +724,7 @@ function convertEventTables(container) {
         </div>
 
         <div class="event-footer">
-          <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" title="Copy command">
+          <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" data-tooltip="Copy command">
             <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
               <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
             </svg>
@@ -644,7 +794,37 @@ function setupExpandableCommands(container) {
 }
 
 function setupCopyButtons(container) {
-  [...container.querySelectorAll('.command-copy')].forEach(btn => {
+  [...container.querySelectorAll('table code')].forEach(code => {
+    const value = code.textContent.trim();
+    if (!value || code.parentElement.classList.contains('table-value-copy-wrap')) return;
+
+    const cell = code.closest('td, th');
+    const table = cell?.closest('table');
+    const headerRow = table
+      ? [...table.rows].find(row => row.querySelector('th'))
+      : null;
+    const columnName = headerRow?.cells[cell.cellIndex]?.textContent.trim() || 'value';
+    const wrapper = document.createElement('span');
+    wrapper.className = 'table-value-copy-wrap';
+    const button = document.createElement('button');
+    button.className = 'copy-btn table-value-copy';
+    button.type = 'button';
+    button.dataset.copy = value;
+    button.dataset.copySuccessLabel = `Copied ${columnName}`;
+    button.dataset.copyErrorLabel = `Copy ${columnName} failed`;
+    button.setAttribute('aria-label', `Copy ${columnName}`);
+    button.dataset.tooltip = `Copy ${columnName}`;
+    button.innerHTML = `
+      <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+      </svg>
+    `;
+
+    code.parentNode.insertBefore(wrapper, code);
+    wrapper.append(code, button);
+  });
+
+  [...container.querySelectorAll('.command-copy, .table-value-copy')].forEach(btn => {
     if (btn.dataset.copyBound === 'true') return;
     btn.dataset.copyBound = 'true';
 
@@ -660,26 +840,65 @@ function setupCopyButtons(container) {
         clearTimeout(resetTimeout);
         btn.classList.remove('copy-failed');
         btn.classList.add('copied');
-        btn.setAttribute('aria-label', 'Copied');
-        btn.title = 'Copied';
+        btn.setAttribute('aria-label', btn.dataset.copySuccessLabel || 'Copied');
+        btn.dataset.tooltip = btn.dataset.copySuccessLabel || 'Copied';
         icon.innerHTML = '<path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
       } catch {
         clearTimeout(resetTimeout);
         btn.classList.remove('copied');
         btn.classList.add('copy-failed');
-        btn.setAttribute('aria-label', 'Copy failed');
-        btn.title = 'Copy failed';
+        btn.setAttribute('aria-label', btn.dataset.copyErrorLabel || 'Copy failed');
+        btn.dataset.tooltip = btn.dataset.copyErrorLabel || 'Copy failed';
         icon.innerHTML = '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>';
       }
 
       resetTimeout = setTimeout(() => {
         btn.classList.remove('copied', 'copy-failed');
         btn.setAttribute('aria-label', defaultLabel);
-        btn.title = defaultLabel;
+        btn.dataset.tooltip = defaultLabel;
         icon.innerHTML = defaultIcon;
       }, 1400);
     });
   });
+}
+
+function setupQuoteAudio(container) {
+  const quote = [...container.querySelectorAll('p')]
+    .find(paragraph => paragraph.textContent.trim() === '"Five seconds, five seconds!"');
+  if (!quote) return;
+
+  const button = document.createElement('button');
+  button.className = 'quote-audio-btn';
+  button.type = 'button';
+  button.setAttribute('aria-label', 'Play quote audio');
+  button.dataset.tooltip = 'Play audio';
+  button.innerHTML = `
+    <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05a4.5 4.5 0 0 0 2.5-4.02zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
+    </svg>
+  `;
+
+  const audio = new Audio(assetUrl('assets/audio/quotes/iw9.br.br_dmz_common.dx_br_dmzc_infl_ldms_drop_fivesecondsfivesecon.sn.75.36000.english.wav'));
+  audio.preload = 'none';
+  audio.addEventListener('ended', () => {
+    button.dataset.tooltip = 'Play audio';
+    button.setAttribute('aria-label', 'Play quote audio');
+  });
+
+  button.addEventListener('click', () => {
+    audio.currentTime = 0;
+    audio.play().catch(error => {
+      button.dataset.tooltip = 'Audio playback failed';
+      button.setAttribute('aria-label', 'Audio playback failed');
+      console.error('Unable to play quote audio.', error);
+    });
+  });
+
+  const wrapper = document.createElement('span');
+  wrapper.className = 'quote-audio-wrap';
+  while (quote.firstChild) wrapper.appendChild(quote.firstChild);
+  wrapper.append(' ', button);
+  quote.appendChild(wrapper);
 }
 
 
@@ -721,6 +940,7 @@ function buildTOC(container) {
       const toggle = document.createElement('button');
       toggle.className = 'toc-toggle';
       toggle.type = 'button';
+      toggle.innerHTML = `<img class="interface-icon toc-expand-icon" src="${assetUrl('assets/images/icons/double_arrow_down.svg')}" alt="">`;
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', `Expand ${link.textContent} subcategories`);
       toggle.setAttribute('aria-controls', `toc-children-${heading.id}`);
@@ -858,6 +1078,7 @@ async function renderPage(pageKey) {
     content.innerHTML = html;
 
     transformRenderedContent(content);
+    if (pageKey === 'mwii') setupQuoteAudio(content);
     if (pageKey === 'atlas') createFAQItems(content);
     convertEventTables(content);
     setupExpandableCommands(content);
@@ -980,17 +1201,20 @@ function renderHome() {
           ${collections.map(page => `
             <a class="game-card collection-${page.key}" href="${pageUrl(page.key)}">
               <div class="game-thumb" style="--card-image:url('${new URL(assetUrl(page.hero), document.baseURI).href}')">
-                <span class="game-tag">${page.name}</span>
-              </div>
-              <div class="game-body">
-                <span class="collection-kicker">${page.kicker}</span>
-                <span class="hero-kicker collection-hero-kicker">${page.badge}</span>
+                <div class="game-thumb-copy">
+                  <span class="game-tag">${page.name}</span>
+                  <div class="game-kicker-row">
+                    <span class="collection-kicker">${page.kicker}</span>
+                    <span class="hero-kicker collection-hero-kicker">${page.badge}</span>
+                  </div>
+                </div>
               </div>
             </a>
           `).join('')}
         </div>
       </section>
   `;
+
   hideLoader();
 }
 
