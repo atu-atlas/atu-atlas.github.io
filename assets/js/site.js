@@ -12,7 +12,6 @@ const COD_SITE = {
       title: 'FAQ',
       name: 'FAQ',
       kicker: 'Incoming Intel',
-      desc: 'Atlas for video-games information, all in one place',
       hero: '/assets/images/key-art/COD-Franchise.png',
       file: 'md/Atlas.md',
       quote: '“For guiding users in search of fun.”',
@@ -23,7 +22,6 @@ const COD_SITE = {
       title: buildGameLogo('assets/images/logos/IW8-logo.svg', 'assets/images/logos/light/IW8-logo.svg', 'Modern Warfare'),
       name: 'Modern Warfare',
       kicker: 'Odin',
-      desc: 'Grounded combat and fast-paced action.',
       hero: '/assets/images/key-art/ModernWarfare.jpg',
       file: 'md/MW.md',
       quote: '“We get dirty and the world stays clean. That`s the mission.”',
@@ -34,7 +32,6 @@ const COD_SITE = {
       title: buildGameLogo('assets/images/logos/Cortez-logo.svg', 'assets/images/logos/light/Cortez-logo.svg', 'Modern Warfare II'),
       name: 'Modern Warfare II',
       kicker: 'Cortez',
-      desc: 'Unprecedented global conflict and high-stakes infiltration tactics.',
       hero: '/assets/images/key-art/ModernWarfare-II.jpg',
       file: 'md/MWII.md',
       quote: '“Be careful who you trust, Sergeant. People you know can hurt you the most.”',
@@ -45,7 +42,6 @@ const COD_SITE = {
       title: buildGameLogo('assets/images/logos/Jupiter-logo.svg', 'assets/images/logos/light/Jupiter-logo.svg', 'Modern Warfare III'),
       name: 'Modern Warfare III',
       kicker: 'Jupiter',
-      desc: 'Adapt or die in a fight against the ultimate threat.',
       hero: '/assets/images/key-art/ModernWarfare-III.jpg',
       file: 'md/MWIII.md',
       quote: '“Take this to hell with you, Captain... Never bury your enemies alive.”',
@@ -56,7 +52,6 @@ const COD_SITE = {
       title: buildGameLogo('assets/images/logos/T9-logo.svg', 'assets/images/logos/light/T9-logo.svg', 'Black Ops Cold War'),
       name: 'Black Ops: Cold War',
       kicker: 'Zeus',
-      desc: 'Descend into the dark center of a global conspiracy to destabilize the global balance of power.',
       hero: '/assets/images/key-art/ColdWar.jpg',
       file: 'md/CW.md',
       quote: '“And now the training is complete. We just need to give the subject a name.”',
@@ -67,7 +62,6 @@ const COD_SITE = {
       title: buildGameLogo('assets/images/logos/S4-logo.svg', 'assets/images/logos/light/S4-logo.svg', 'Vanguard'),
       name: 'Vanguard',
       kicker: 'Fore',
-      desc: 'Rise on every front.',
       hero: '/assets/images/key-art/Vanguard.jpg',
       file: 'md/VG.md',
       quote: '“Ever heard of Vanguard? I created Vanguard.”',
@@ -78,7 +72,6 @@ const COD_SITE = {
       title: buildGameLogo('assets/images/logos/Cerberus-logo.svg', 'assets/images/logos/light/Cerberus-logo.svg', 'Black Ops 6'),
       name: 'Black Ops 6',
       kicker: 'Cerberus',
-      desc: 'Forced to go rogue. Hunted from within.',
       hero: '/assets/images/key-art/BlackOps-6.jpg',
       file: 'md/BO6.md',
       quote: '“I got a message for Woods, tell him: Bishop takes Rook”',
@@ -89,7 +82,6 @@ const COD_SITE = {
       title: buildGameLogo('assets/images/logos/Saturn-logo.svg', 'assets/images/logos/light/Saturn-logo.svg', 'Black Ops 7'),
       name: 'Black Ops 7',
       kicker: 'Saturn',
-      desc: 'Embrace the madness.',
       hero: '/assets/images/key-art/BlackOps-7.jpg',
       file: 'md/BO7.md',
       quote: '“Sorry, Mason. Playing the good guy only gets you so far.”',
@@ -798,9 +790,11 @@ async function renderPage(pageKey) {
         <aside class="hero-rail">
         </aside>
         <div class="hero-copy">
-          <div class="hero-kicker">${page.badge}</div>
+          <div class="hero-kicker-row">
+            <span class="hero-kicker collection-hero-kicker">${page.badge}</span>
+            <span class="collection-kicker">${page.kicker}</span>
+          </div>
           <h1 class="hero-title">${page.title}</h1>
-          <p class="hero-desc">${page.desc}</p>
           <div class="hero-quote">${page.quote}</div>
         </div>
       </div>
@@ -968,7 +962,6 @@ function renderHome() {
           <div class="hero-copy">
             <div class="hero-kicker">Community-driven</div>
             <h1 class="hero-title">Atlas</h1>
-            <p class="hero-desc">Video-games information, all in one place.</p>
             <div class="home-actions">
               <a class="home-action" href="#collections">Browse collections</a>
               <a class="home-action" href="${pageUrl('atlas')}">Read FAQ</a>
@@ -991,7 +984,7 @@ function renderHome() {
               </div>
               <div class="game-body">
                 <span class="collection-kicker">${page.kicker}</span>
-                <p>${page.desc}</p>
+                <span class="hero-kicker collection-hero-kicker">${page.badge}</span>
               </div>
             </a>
           `).join('')}
