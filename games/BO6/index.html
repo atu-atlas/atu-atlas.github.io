@@ -45,6 +45,10 @@ Multiplayer private match trigger.
 This will enable/disable depth of field (0-1)
 - `lui_cod_points_enabled`
 This will show/hide COD Points on menus (0-1)
+- `lui_store_disabled`
+This will show/hide the store on menus, disabled by default (0-1)
+- `current_season`
+This will set the current season, (0-6), 0 will disable blackcell & battlepass.
 
 ## Inventories
 - `setStorageFile "cerberus_mp_loadouts_private" "loadouts" 0 "name"`
@@ -58,10 +62,10 @@ Weapon setup camouflage, ex: *setStorageFile "cerberus_mp_loadouts_private" "loa
 
 Name|Icon|ID|Index
 -|:-:|-|-
-Fists|<img src="https://static.wikia.nocookie.net/callofduty/images/f/f5/Fists_HUD_Icon_BO6.png" style="height:64px;">|`t10_me_fists`|`83193`
+Fists|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_melee_fist.png" style="height:64px;">|`t10_me_fists`|`83193`
 Death machine|<img src="https://static.wikia.nocookie.net/callofduty/images/c/cf/DeathMachine_Scorestreak_HUD_Icon_BO6.png" style="height:128px;">|`t10_ks_deathmachine`|`96279`
 War machine|<img src="https://static.wikia.nocookie.net/callofduty/images/3/39/WarMachine_Scorestreak_HUD_Icon_BO6.png" style="height:128px;">|`t10_ks_warmachine`|`91894`
-Hand cannon|<img src="/assets/images/icons/items/ui_icon_weapon_t10_ks_handcannon.png" style="height:128px;">|`t10_ks_handcannon`|`91419`
+Hand cannon|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_t10_ks_handcannon.png" style="height:128px;">|`t10_ks_handcannon`|`91419`
 
 
 ### Camouflages
@@ -97,14 +101,14 @@ Ray Gun Mark II-P|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_z
 Ray Gun Mark II-R|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_raygun_mark2.png" style="height:64px;">|`t10_pi_p19_raygunmark2r`|`94229`
 Thrustodyne M23|<img src="/assets/images/icons/items/cerberus/ui_icon_zm_wonder_weapon_jetgun.png" style="height:64px;">|`t10_lm_p19_jetgun`|`19730`
 Wunderwaffe DG-2|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_dg2.png" style="height:64px;">|`t10_ar_p19_dg2`|`86214`
-Staff of Ice|<img src="/assets/images/icons/items/cerberus/ice_staff.png" style="height:64px;">|`t10_la_p19_opalww`|`51131`
+Staff of Ice|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_opal.png" style="height:64px;">|`t10_la_p19_opalww`|`51131`
 DRI-11 Beamsmasher|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_drillgun.png" style="height:64px;">|`t10_lm_p25_drillgun`|`50898`
 Bastard Sword|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstoneww.png" style="height:64px;">|`t10_me_p19_bloodstoneww`|`63101`
 Durendal|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstoneeasy.png" style="height:64px;">|`t10_me_p19_bloodstoneeasy`|`85534`
 Caliburn|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstonefun.png" style="height:64px;">|`t10_me_p19_bloodstonefun`|`85399`
 Solais|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstonelife.png" style="height:64px;">|`t10_me_p19_bloodstonelife`|`5400`
 Balmung|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_ww_bloodstonedope.png" style="height:64px;">|`t10_me_p19_bloodstonedope`|`87545`
-Gorgofex|<img src="/assets/images/icons/items/cerberus/gorgo.png" style="height:64px;">|`t10_pi_p19_jadeww`|`94414`
+Gorgofex|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_jade.png" style="height:64px;">|`t10_pi_p19_jadeww`|`94414`
 Mangler cannon|<img src="/assets/images/icons/items/cerberus/ui_icon_weapon_zm_mangler_cannon.png" style="height:64px;">|`t10_la_mangler_cannon`|`27987`
 
 ### Camouflages
@@ -120,14 +124,26 @@ Nebula|<img src="/assets/images/icons/camos/cerberus/ui_cer_camo_comp_04_zm.png"
 ### Maps
 Name|Image|ID
 :-:|:-:|-
-Liberty Falls|<img src="https://static.wikia.nocookie.net/callofduty/images/b/bb/LibertyFalls_AARSummary_Background_BO6.png" style="width:512px;">|zm_t10_garnet
-Terminus|<img src="https://static.wikia.nocookie.net/callofduty/images/6/6e/Terminus_AARSummary_Background_BO6.png" style="width:512px;">|zm_t10_quartz
-Citadelle des Morts|<img src="https://static.wikia.nocookie.net/callofduty/images/2/2b/CitadelleDesMorts_LobbyScreen_BO6.jpg" style="width:512px;">|zm_t10_bloodstone
-The Tomb|<img src="https://static.wikia.nocookie.net/callofduty/images/3/39/TheTomb_LobbyScreen_BO6.jpg" style="width:512px;">|zm_t10_opal
-Shattered Veil|<img src="https://static.wikia.nocookie.net/callofduty/images/8/8a/ShatteredVeil_LobbyScreen_BO6.jpg" style="width:512px;">|zm_t10_topaz
-Reckoning|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b9/Reckoning_LobbyScreen_BO6.jpg" style="width:512px;">|zm_t10_jade
+Liberty Falls|<img src="/assets/images/maps/cerberus/t10_loading_zm_libertyfalls_bg.png" style="width:512px;">|`zm_t10_garnet`
+Terminus|<img src="/assets/images/maps/cerberus/t10_loading_zm_quartz_bg.png" style="width:512px;">|`zm_t10_quartz`
+Citadelle des Morts|<img src="/assets/images/maps/cerberus/cer_ui_menu_loading_zm_bloodstone.png" style="width:512px;">|`zm_t10_bloodstone`
+The Tomb|<img src="/assets/images/maps/cerberus/t10_loading_zm_opal_bg.png" style="width:512px;">|`zm_t10_opal`
+Shattered Veil|<img src="/assets/images/maps/cerberus/t10_loading_zm_topaz_bg.png" style="width:512px;">|`zm_t10_topaz`
+Reckoning|<img src="/assets/images/maps/cerberus/t10_loading_zm_jade_bg.png" style="width:512px;">|`zm_t10_jade`
 
-## WZ 2
+### Modes
+
+Name|Icon|ID
+:-:|:-:|:-:
+Round Based|<img src="/assets/images/icons/modes/cerberus/cer_icon_gamemode_zm_rbz.png" style="width:128px;height:128px;">|`zm_rb`
+Directed|<img src="/assets/images/icons/modes/cerberus/cer_icon_gamemode_zm_storymode.png" style="width:128px;height:128px;">|`zm_guided`
+Training Course|<img src="/assets/images/icons/modes/cerberus/icon_global_training_course.png" style="width:128px;height:128px;">|`zm_training_course`
+Jingle Hells|<img src="/assets/images/icons/modes/cerberus/cer_icon_gamemode_zm_jinglehells.png" style="width:128px;height:128px;">|``
+Grief|<img src="/assets/images/icons/modes/cerberus/cer_icon_gamemode_zm_grief.png" style="width:128px;height:128px;">|``
+Cranked|<img src="/assets/images/icons/modes/cerberus/cer_icon_gamemode_zm_cranked.png" style="width:128px;height:128px;">|``
+Abomination|<img src="/assets/images/icons/modes/cerberus/cer_icon_gamemode_zm_abomination.png" style="width:128px;height:128px;">|``
+
+## <span class="visually-hidden">WZ 2</span><img class="section-title-icon" src="/assets/images/icons/WZ2-icon.svg" alt="">
 <img src="/assets/images/key-art/Warzone-2-cer.jpg">
 
 *"Welcome home."*
@@ -141,6 +157,8 @@ Warzone private match trigger.
 Select a WZ2 game type.
 - `uimapname`
 Set the WZ2 map.
+- `exec br_core.cfg`
+Should be used before starting a match.
 
 ### Inventories
 - `setStorageFile "cerberus_wz_loadouts_private" "loadouts" 0 "name"`
@@ -203,9 +221,16 @@ Bioluminescent|<img src="/assets/images/icons/camos/jupiter/ui_jup_camo_ob_iw9_c
 ### Maps
 Name|Image|ID
 :-:|:-:|-
-Verdansk|<img src="https://static.wikia.nocookie.net/callofduty/images/b/b8/Verdansk_LoadingScreen_WZ2.jpg" style="height:256px;">|`mp_wz2_sierra`
-Rebirth Island|<img src="https://static.wikia.nocookie.net/callofduty/images/8/85/RebirthIsland_LoadingScreen_Season3_BO6_WZ2.png" style="height:256px;">|`mp_wz2_escape`
-Area 99|<img src="https://static.wikia.nocookie.net/callofduty/images/e/e9/Area99_LoadingScreen_Season1Reloaded_WZ2.jpg" style="height:256px;">|`mp_t10_area99`
+Verdansk|<img src="/assets/images/maps/cerberus/cer_ui_menu_loading_br_wz_verdansk_bg.png" style="height:256px;">|`mp_wz2_sierra`
+Rebirth Island|<img src="/assets/images/maps/cerberus/cer_ui_menu_loading_wz_escape_bg.png" style="height:256px;">|`mp_wz2_escape`
+Area 99|<img src="/assets/images/maps/cerberus/cer_ui_menu_loading_wz_a99_bg.png" style="height:256px;">|`mp_t10_area99`
+
+### Modes
+Name|Icon|ID
+:-:|:-:|:-:
+Battle Royale|<img src="/assets/images/icons/modes/cerberus/ui_icon_gamemode_wz_br.png" style="height:128px;">|`br_solos`/`br_duos`/`br_trios`/`br_quads`
+Battle Royale Casual|<img src="/assets/images/icons/modes/cerberus/ui_icon_gamemode_wz_br_casual.png" style="width:128px;height:128px;">|`br_sierra_quads_bots`
+Resurgence|<img src="/assets/images/icons/modes/cerberus/ui_icon_gamemode_wz_resurgence_a99.png" style="width:128px;height:128px;">|`resur_solos`/`resur_duos`/`resur_trios`/`resur_quads`
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
