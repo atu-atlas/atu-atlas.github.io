@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada | Atlas</title>
+</head>
+<body>
+  <main>
+    <h1>Página no encontrada</h1>
+    <p id="message">No encontramos esa página. <a href="/">Volver al inicio</a>.</p>
+  </main>
+  <script>
+    const gameRoutes = {
+      MW: '/games/MW/',
+      MWII: '/games/MWII/',
+      MWIII: '/games/MWIII/',
+      CW: '/games/CW/',
+      VG: '/games/VG/',
+      BO6: '/games/BO6/',
+      BO7: '/games/BO7/'
+    };
+    const alias = window.location.pathname.replace(/\/+$/, '').split('/').pop();
+    const destination = gameRoutes[alias];
+
+    if (destination) {
+      window.location.replace(destination + window.location.search + window.location.hash);
+    }
+  </script>
+</body>
+</html>
