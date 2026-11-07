@@ -862,9 +862,9 @@ function setupCopyButtons(container) {
   });
 }
 
-function setupQuoteAudio(container) {
-  const quote = [...container.querySelectorAll('p')]
-    .find(paragraph => paragraph.textContent.trim() === '"Five seconds, five seconds!"');
+function setupQuoteAudio(container, quoteText, audioFile) {
+  const quote = [...container.querySelectorAll('p, .hero-quote')]
+    .find(element => element.textContent.trim().replace(/^[“"]|[”"]$/g, '') === quoteText);
   if (!quote) return;
 
   const button = document.createElement('button');
@@ -878,12 +878,8 @@ function setupQuoteAudio(container) {
     </svg>
   `;
 
-  const audio = new Audio(assetUrl('assets/audio/quotes/iw9.br.br_dmz_common.dx_br_dmzc_infl_ldms_drop_fivesecondsfivesecon.sn.75.36000.english.wav'));
+  const audio = new Audio(assetUrl(audioFile));
   audio.preload = 'none';
-  audio.addEventListener('ended', () => {
-    button.dataset.tooltip = 'Play audio';
-    button.setAttribute('aria-label', 'Play quote audio');
-  });
 
   button.addEventListener('click', () => {
     audio.currentTime = 0;
@@ -1037,6 +1033,10 @@ async function renderPage(pageKey) {
 
   applyTheme(getCurrentTheme());
 
+  if (pageKey === 'mwii') {
+    setupQuoteAudio(shell, 'Be careful who you trust, Sergeant. People you know can hurt you the most.', 'assets/audio/quotes/MWII.wav');
+  }
+
   const sectionGrid = shell.querySelector('.section-grid');
   const sidePanelToggle = document.getElementById('toc-panel-toggle');
   if (sectionGrid && sidePanelToggle) {
@@ -1078,7 +1078,15 @@ async function renderPage(pageKey) {
     content.innerHTML = html;
 
     transformRenderedContent(content);
-    if (pageKey === 'mwii') setupQuoteAudio(content);
+    if (pageKey === 'mw') {
+      setupQuoteAudio(content, 'We get dirty and the world stays clean. That`s the mission.', 'assets/audio/quotes/MW.wav');
+    if (pageKey === 'mwii') {
+      setupQuoteAudio(content, 'Five seconds, five seconds!', 'assets/audio/quotes/WZ2.wav');
+      setupQuoteAudio(content, 'Welcome to the DMZ. Enemy threat is high, so expect contact.', 'assets/audio/quotes/DMZ.wav');
+    }
+    if (pageKey === 'mwiii') {
+      setupQuoteAudio(content, 'All stations, this is Shadow-01. Deployment to the Warzone has been autorized.', 'assets/audio/quotes/WZ23.wav');
+    }
     if (pageKey === 'atlas') createFAQItems(content);
     convertEventTables(content);
     setupExpandableCommands(content);
