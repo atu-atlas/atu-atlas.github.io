@@ -1,16 +1,194 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página no encontrada | Atlas</title>
-</head>
-<body>
-  <main>
-    <h1>Página no encontrada</h1>
-    <p id="message">No encontramos esa página. <a href="/">Volver al inicio</a>.</p>
-  </main>
+  <meta name="theme-color" content="#08090a">
+  <meta name="description" content="This page is off the grid. Return to Atlas or visit the FAQ.">
+  <title>Error 404 | Atlas</title>
+  <base href="/">
   <script>
+    if (window.location.protocol === 'file:') {
+      document.querySelector('base').href = new URL('./', window.location.href);
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <style>
+    :root {
+      --error-accent: #d7e46a;
+    }
+
+    body.error-body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body.error-body.theme-light {
+      color-scheme: light;
+      --error-accent: #566620;
+      --color-accent: var(--error-accent);
+    }
+
+    .error-hero {
+      min-height: min(690px, calc(100svh - 76px));
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+      border-bottom: 1px solid var(--line);
+      background: var(--hero-bg);
+    }
+
+    .error-hero::before,
+    .error-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .error-hero::before {
+      z-index: -2;
+      background: url("./assets/images/key-art/numbers.jpg") center 43% / cover no-repeat;
+      opacity: 0.55;
+      transform: scale(1.02);
+    }
+
+    body.error-body.theme-light .error-hero::before {
+      opacity: 1;
+      filter: brightness(1.08) saturate(1.05);
+    }
+
+    .error-hero::after {
+      z-index: -1;
+      background:
+        linear-gradient(90deg, #08090a 0%, rgba(8, 9, 10, 0.92) 34%, rgba(8, 9, 10, 0.38) 76%, rgba(8, 9, 10, 0.72) 100%),
+        linear-gradient(0deg, #08090a 0%, transparent 42%, rgba(8, 9, 10, 0.38) 100%);
+    }
+
+    body.error-body.theme-light .error-hero::after {
+      background:
+        linear-gradient(90deg, rgba(239, 243, 249, 0.5) 0%, rgba(239, 243, 249, 0.38) 30%, rgba(239, 243, 249, 0.17) 62%, rgba(239, 243, 249, 0.1) 100%),
+        linear-gradient(180deg, rgba(239, 243, 249, 0.02) 0%, rgba(239, 243, 249, 0.08) 35%, rgba(239, 243, 249, 0.5) 100%);
+    }
+
+    .error-hero-inner {
+      width: min(100% - 48px, 1240px);
+      margin: 0 auto;
+      padding: 74px 0 84px;
+    }
+
+    .error-copy {
+      max-width: 720px;
+    }
+
+    .error-code {
+      margin: 0 0 12px -0.06em;
+      color: transparent;
+      font: 700 clamp(8rem, 24vw, 17rem)/0.76 "Oswald", sans-serif;
+      letter-spacing: -0.065em;
+      -webkit-text-stroke: 1px rgba(245, 247, 250, 0.48);
+    }
+
+    body.error-body.theme-light .error-code {
+      color: var(--text);
+      -webkit-text-stroke: 0;
+    }
+
+    .error-title {
+      max-width: 20ch;
+      margin: 28px 0 12px;
+      font: 700 clamp(2rem, 5.3vw, 4.5rem)/0.98 "Oswald", sans-serif;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .error-message {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(0.94rem, 1.6vw, 1.08rem);
+      line-height: 1.7;
+    }
+
+    .error-footer {
+      margin: 0;
+      padding: 18px 24px 24px;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    @media (max-width: 680px) {
+      .error-hero {
+        min-height: 590px;
+        min-height: min(680px, 100svh);
+      }
+
+      .error-hero::before {
+        background-position: 58% center;
+      }
+
+      .error-hero::after {
+        background:
+          linear-gradient(90deg, rgba(8, 9, 10, 0.9), rgba(8, 9, 10, 0.42)),
+          linear-gradient(0deg, #08090a 0%, transparent 62%, rgba(8, 9, 10, 0.3) 100%);
+      }
+
+      .error-hero-inner {
+        width: min(100% - 36px, 1240px);
+        padding: 56px 0 64px;
+      }
+
+      .error-title {
+        margin-top: 24px;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="error-body">
+  <header class="cod-nav" id="site-nav"></header>
+
+  <main>
+    <section class="error-hero" aria-labelledby="error-title">
+      <div class="error-hero-inner">
+        <div class="error-copy">
+          <div class="hero-kicker">Error</div>
+          <p class="error-code" aria-hidden="true">404</p>
+          <h1 class="error-title" id="error-title">The numbers, what do they mean?</h1>
+          <p class="error-message">We're sorry, the information you request isn't avaliable right now.</p>
+          <div class="home-actions">
+            <a class="home-action" href="/#collections">Browse collections</a>
+            <a class="home-action" href="/FAQ/">Open FAQ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="error-footer">Atlas | by atu</footer>
+
+  <script src="./assets/js/site.js"></script>
+  <script>
+    renderNav('');
+
     const gameRoutes = {
       MW: '/games/MW/',
       MWII: '/games/MWII/',

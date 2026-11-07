@@ -482,7 +482,7 @@ function initTheme() {
 }
 
 function rootPrefix() {
-  if (isHomePage()) return './';
+  if (isHomePage() || document.body.classList.contains('error-body')) return './';
   return window.location.pathname.includes('/games/') ? '../../' : '../';
 }
 
@@ -1080,6 +1080,7 @@ async function renderPage(pageKey) {
     transformRenderedContent(content);
     if (pageKey === 'mw') {
       setupQuoteAudio(content, 'We get dirty and the world stays clean. That`s the mission.', 'assets/audio/quotes/MW.wav');
+    }
     if (pageKey === 'mwii') {
       setupQuoteAudio(content, 'Five seconds, five seconds!', 'assets/audio/quotes/WZ2.wav');
       setupQuoteAudio(content, 'Welcome to the DMZ. Enemy threat is high, so expect contact.', 'assets/audio/quotes/DMZ.wav');
