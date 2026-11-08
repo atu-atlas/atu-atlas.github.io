@@ -96,7 +96,19 @@ const COD_SITE = {
     { key: 'bo7', label: 'BO7', icon: 'assets/images/icons/Sat-icon.svg', iconLight: 'assets/images/icons/light/Sat-icon.svg' }
   ]
 };
-
+const SEARCH_ALIASES = {
+  camouflages: ['camos'],
+  dvars: ['commands'],
+  menus: ['lua'],
+  versions: ['patches'],
+  versions: ['builds'],
+  inventories: ['items'],
+  WZ: ['Warzone'],
+  WZ2: ['Warzone 2'],
+  WZ2: ['Warzone 2.0'],
+  WZ2: ['Warzone'],
+  MWZ: ['Zombies'],
+};
 let sectionSearchIndexPromise = null;
 
 function renderNav(activeKey = 'atlas') {
@@ -222,11 +234,12 @@ async function buildSectionSearchIndex() {
       }
       usedIds.add(id);
 
+      const aliases = SEARCH_ALIASES[normalizeSearchText(title)] || [];
       return {
         title,
         pageName: page.name,
         sectionTitle: heading[0].startsWith('### ') ? sectionTitle : '',
-        searchText: normalizeSearchText(`${page.name} ${page.key} ${page.kicker} ${page.badge} ${sectionTitle} ${title}`),
+        searchText: normalizeSearchText(`${page.name} ${page.key} ${page.kicker} ${page.badge} ${sectionTitle} ${title} ${aliases.join(' ')}`),
         href: `${pageUrl(page.key)}#${id}`
       };
     });
@@ -898,10 +911,11 @@ function setupQuoteAudio(container, quoteText, audioFile) {
 }
 
 
-function buildTOC(container) {
-  const toc = document.getElementById('toc');
+function buildTOC(container, tocId = 'toc', topLevelOnly = false) {
+  const toc = document.getElementById(tocId);
   if (!toc) return;
-  const headings = [...container.querySelectorAll('h2, h3')].filter(h => h.id);
+  const headings = [...container.querySelectorAll(topLevelOnly ? 'h2' : 'h2, h3, details.faq-item[id]')]
+    .filter(h => h.id);
   const sections = [];
   headings.forEach(heading => {
     if (heading.tagName === 'H2') {
@@ -917,16 +931,19 @@ function buildTOC(container) {
   }
 
   const list = document.createElement('div');
-  list.className = 'toc-list';
+  list.className = topLevelOnly ? 'faq-quick-links-list' : 'toc-list';
   sections.forEach(({ heading, children }) => {
     const section = document.createElement('section');
     section.className = 'toc-section';
 
+    const getHeadingText = (item) => item.tagName === 'DETAILS'
+      ? item.querySelector('summary')?.textContent || item.textContent
+      : item.textContent;
     const row = document.createElement('div');
     row.className = 'toc-section-row';
     const link = document.createElement('a');
     link.href = `#${heading.id}`;
-    link.textContent = heading.textContent.replace(/\s+/g, ' ').trim();
+    link.textContent = getHeadingText(heading).replace(/\s+/g, ' ').trim();
     row.appendChild(link);
 
     if (children.length) {
@@ -939,13 +956,14 @@ function buildTOC(container) {
       toggle.innerHTML = `<img class="interface-icon toc-expand-icon" src="${assetUrl('assets/images/icons/double_arrow_down.svg')}" alt="">`;
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', `Expand ${link.textContent} subcategories`);
-      toggle.setAttribute('aria-controls', `toc-children-${heading.id}`);
+      const childListId = `toc-children-${heading.id}`;
+      toggle.setAttribute('aria-controls', childListId);
 
-      childList.id = `toc-children-${heading.id}`;
+      childList.id = childListId;
       children.forEach(child => {
         const childLink = document.createElement('a');
         childLink.href = `#${child.id}`;
-        childLink.textContent = child.textContent.replace(/\s+/g, ' ').trim();
+        childLink.textContent = getHeadingText(child).replace(/\s+/g, ' ').trim();
         childList.appendChild(childLink);
       });
 
@@ -965,6 +983,13 @@ function buildTOC(container) {
     list.appendChild(section);
   });
   toc.replaceChildren(list);
+  toc.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    const target = document.getElementById(link.hash.slice(1));
+    const details = target?.closest('details');
+    if (details) details.open = true;
+  });
 }
 
 async function renderPage(pageKey) {
@@ -996,6 +1021,9 @@ async function renderPage(pageKey) {
       <header class="faq-header">
         <h1>FAQ</h1>
       </header>
+      <nav class="faq-quick-links" id="faq-toc" aria-label="FAQ sections">
+        <span>Loading sections…</span>
+      </nav>
       <div id="content" class="article-content faq-content">
         <div class="loading-state"><div class="spinner"></div><div>Loading...</div></div>
       </div>
@@ -1019,7 +1047,7 @@ async function renderPage(pageKey) {
     <div class="section-grid">
         <aside class="side-panel" id="toc-panel">
           <button class="side-panel-toggle" id="toc-panel-toggle" type="button" aria-label="Collapse table of contents" aria-controls="toc" aria-expanded="true"></button>
-          <div id="toc" class="toc-list"><span>Loading…</span></div>
+          <nav id="toc" aria-label="On this page"><span>Loading…</span></nav>
         </aside>
 
         <main class="content-panel" id="main-content">
@@ -1035,6 +1063,9 @@ async function renderPage(pageKey) {
 
   if (pageKey === 'mwii') {
     setupQuoteAudio(shell, 'Be careful who you trust, Sergeant. People you know can hurt you the most.', 'assets/audio/quotes/MWII.wav');
+  }
+  if (pageKey === 'mw') {
+    setupQuoteAudio(shell, 'We get dirty and the world stays clean. That`s the mission.', 'assets/audio/quotes/MW.wav');
   }
 
   const sectionGrid = shell.querySelector('.section-grid');
@@ -1091,14 +1122,18 @@ async function renderPage(pageKey) {
     if (pageKey === 'atlas') createFAQItems(content);
     convertEventTables(content);
     setupExpandableCommands(content);
-    buildTOC(content);
+    buildTOC(content, pageKey === 'atlas' ? 'faq-toc' : 'toc', pageKey === 'atlas');
     setupCopyButtons(content);
     applyTheme(getCurrentTheme());
     hideLoader();
 
     if (window.location.hash) {
       const target = document.getElementById(window.location.hash.slice(1));
-      if (target) target.scrollIntoView();
+      if (target) {
+        const details = target.closest('details');
+        if (details) details.open = true;
+        target.scrollIntoView();
+      }
     }
   } catch (err) {
     document.getElementById('content').innerHTML = `<div class="error-state">Failed to load page content.</div>`;
@@ -1107,6 +1142,18 @@ async function renderPage(pageKey) {
 }
 
 function createFAQItems(container) {
+  const usedIds = new Set([...container.querySelectorAll('[id]')].map(element => element.id));
+  const assignQuestionId = (item, question) => {
+    const baseId = slugify(question) || 'faq-question';
+    let id = baseId;
+    let suffix = 2;
+    while (usedIds.has(id)) {
+      id = `${baseId}-${suffix}`;
+      suffix += 1;
+    }
+    usedIds.add(id);
+    item.id = id;
+  };
   const isQuestion = (element) => {
     if (element.tagName !== 'P') return false;
     const question = element.textContent.trim();
@@ -1117,6 +1164,7 @@ function createFAQItems(container) {
   [...container.querySelectorAll('p')].filter(isQuestion).forEach((question) => {
     const item = document.createElement('details');
     item.className = 'faq-item';
+    assignQuestionId(item, question.textContent.trim());
 
     const summary = document.createElement('summary');
     summary.textContent = question.textContent.trim();
@@ -1224,6 +1272,7 @@ function renderHome() {
       </section>
   `;
 
+  setupQuoteAudio(root, '♫ So many elements for you to consider ♫', 'assets/audio/quotes/Pop.wav');
   hideLoader();
 }
 
