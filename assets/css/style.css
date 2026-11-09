@@ -246,7 +246,7 @@ h6 {
   interpolate-size: allow-keywords;
   width: max-content;
   max-width: min(1440px, calc(100% - 32px));
-  margin: 0 max(0px, calc((100% - 1440px) / 2));
+  margin: 0 max(16px, calc((100% - 1440px) / 2));
   min-height: 30px;
   padding: 3px 8px;
   display: flex;
@@ -806,6 +806,9 @@ body.theme-light .site-search-input {
   grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
   gap: 28px;
   align-items: start;
+  width: min(calc(100% - 56px), 1440px);
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 28px;
   transition: grid-template-columns 0.28s ease;
 }
@@ -1209,10 +1212,13 @@ body.theme-light .hero::after {
 }
 
 body.theme-light .hero-title,
-body.theme-light .hero-kicker,
 body.theme-light .hero-quote,
 body.theme-light .home-action {
   color: var(--text);
+}
+
+body.theme-light .hero-kicker {
+  color: var(--color-accent);
 }
 
 body.theme-light .home-action:hover {
@@ -1310,11 +1316,6 @@ table img {
 
   .home-panel {
     margin-inline: 28px;
-  }
-
-  .section-grid {
-    margin-left: max(0px, calc((100% - 1440px) / 2));
-    margin-right: 28px;
   }
 }
 
@@ -1629,7 +1630,7 @@ table img {
 
 .collection-kicker {
   display: inline-flex;
-  color: var(--collection-accent);
+  color: var(--color-accent);
   font-family: "Hitmarker Condensed", sans-serif;
   font-size: 0.76rem;
   letter-spacing: 0.08em;
@@ -1642,7 +1643,7 @@ table img {
 }
 
 .collection-hero-kicker {
-  color: var(--collection-accent);
+  color: var(--color-accent);
   margin: 0;
   font-size: 0.76rem;
   line-height: 1;
@@ -1827,6 +1828,10 @@ body.theme-light .section-heading p {
   .section-grid,
   .card-grid:not(.home-collection-grid) {
     grid-template-columns: 1fr;
+  }
+
+  .section-grid {
+    width: calc(100% - 36px);
   }
 
   .section-grid.is-sidebar-collapsed {
