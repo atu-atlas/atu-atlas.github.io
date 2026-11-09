@@ -183,7 +183,7 @@
 }
 .theme-mwiii {
   --color-accent: #D70000;
-  --color-accent-soft: #5ac1f540;
+  --color-accent-soft: #18a2e740;
   --color-accent-contrast: #ffffff;
 }
 .theme-cw {
@@ -193,7 +193,7 @@
 }
 .theme-vg {
   --color-accent: #cfa64e;
-  --color-accent-soft: rgba(146, 7, 7, 0.225);
+  --color-accent-soft: rgba(133, 71, 9, 0.225);
   --color-accent-contrast: #12131a;
 }
 .theme-bo6 {
@@ -987,7 +987,7 @@ body.theme-light .site-search-input {
 
 .article-content h2 {
   font-size: clamp(2.25rem, 3.6vw, 3.15rem);
-  margin-top: 2.6rem;
+  margin: 2.6rem 0 0.85rem;
   scroll-margin-top: 96px;
 }
 
@@ -1039,7 +1039,7 @@ body.theme-light .site-search-input {
 
 .article-content h3 {
   font-size: clamp(1.2rem, 2vw, 1.6rem);
-  margin-top: 1.7rem;
+  margin: 1.7rem 0 0.55rem;
 }
 
 .article-content p,
@@ -2094,7 +2094,7 @@ img[src*="/assets/images/icons/seasons/"],
   border-radius: 10px !important;
 }
 
-.theme-light img[src*="assets/images/icons/"]:not(.interface-icon):not([src*="assets/images/icons/seasons/"]):not([src*="assets/images/icons/light/"]):not([src*="Atlas.svg"])[src$=".svg"],
+.theme-light img[src*="assets/images/icons/"]:not(.interface-icon):not([src*="assets/images/icons/seasons/"]):not([src*="assets/images/icons/light/"]):not([src*="Atlas.svg"]):not([src*="S4-icon.svg"])[src$=".svg"],
 .theme-light svg.icon,
 .theme-light svg[class*="icon-"],
 .theme-light .icon-svg {
@@ -2316,8 +2316,8 @@ body.theme-light.theme-cw {
 }
 
 body.theme-light.theme-vg {
-  --color-accent-soft: rgba(146, 7, 7, 0.28);
-  --card-gradient-end: rgba(146, 7, 7, 0.03);
+  --color-accent-soft: rgba(133, 71, 9, 0.28);
+  --card-gradient-end: rgba(133, 71, 9, 0.03);
 }
 
 body.theme-light.theme-bo6 {
