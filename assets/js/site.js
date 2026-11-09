@@ -1109,6 +1109,9 @@ async function renderPage(pageKey) {
     if (pageKey === 'mwiii') {
       setupQuoteAudio(content, 'All stations, this is Shadow-01. Deployment to the Warzone has been autorized.', 'assets/audio/quotes/WZ23.wav');
     }
+    if (pageKey === 'bo6') {
+      setupQuoteAudio(content, 'Welcome to Liberty Falls, population... well... less than yesterday.', 'assets/audio/quotes/Blanchard.ogg');
+    }
     if (pageKey === 'atlas') createFAQItems(content);
     convertEventTables(content);
     setupExpandableCommands(content);
