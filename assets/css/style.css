@@ -1,3 +1,83 @@
+@font-face {
+  font-family: "Hitmarker Text";
+  src: url("../fonts/HitmarkerText-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hitmarker Text";
+  src: url("../fonts/HitmarkerText-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hitmarker Text";
+  src: url("../fonts/HitmarkerText-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hitmarker Condensed";
+  src: url("../fonts/HitmarkerCondensed-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hitmarker Condensed";
+  src: url("../fonts/HitmarkerCondensed-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kairo Sans Condensed";
+  src: url("../fonts/KairoSansCondensed-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kairo Sans Condensed";
+  src: url("../fonts/KairoSansCondensed-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kairo Sans Condensed";
+  src: url("../fonts/KairoSansCondensed-Black.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monospace 821";
+  src: url("../fonts/Monospace821-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monospace 821";
+  src: url("../fonts/Monospace821-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --bg: #000000;
   --bg-gradient-start: #0a0a0b;
@@ -92,38 +172,39 @@
 }
 
 .theme-mw {
-  --color-accent: #3dc2ff;
-  --color-accent-soft: rgba(61, 162, 255, 0.25);
+  --color-accent: #8EC5FF;
+  --color-accent-soft: rgba(32, 89, 143, 0.25);
+  --color-accent-contrast: #12131a;
 }
-
 .theme-mwii {
-  --color-accent: #3dff6a;
-  --color-accent-soft: rgba(61, 255, 138, 0.25);
+  --color-accent: #7CC42C;
+  --color-accent-soft: rgba(124, 196, 44, 0.25);
+  --color-accent-contrast: #12131a;
 }
-
 .theme-mwiii {
-  --color-accent: #ff3434;
-  --color-accent-soft: rgba(255, 77, 77, 0.25);
+  --color-accent: #D70000;
+  --color-accent-soft: #5ac1f540;
+  --color-accent-contrast: #ffffff;
 }
-
 .theme-cw {
   --color-accent: #3d3dff;
-  --color-accent-soft: rgba(255, 77, 113, 0.25);
+  --color-accent-soft: rgba(255, 61, 106, 0.25);
+  --color-accent-contrast: #ffffff;
 }
-
 .theme-vg {
-  --color-accent: #ff950a;
-  --color-accent-soft: rgba(255, 193, 77, 0.25);
+  --color-accent: #cfa64e;
+  --color-accent-soft: rgba(146, 7, 7, 0.225);
+  --color-accent-contrast: #12131a;
 }
-
 .theme-bo6 {
-  --color-accent: #fc6c1f;
-  --color-accent-soft: rgba(255, 113, 77, 0.25);
+  --color-accent: #F96700;
+  --color-accent-soft: rgba(249, 158, 0, 0.2);
+  --color-accent-contrast: #12131a;
 }
-
 .theme-bo7 {
-  --color-accent: #fc6c1f;
+  --color-accent: #F96700;
   --color-accent-soft: rgba(77, 107, 255, 0.25);
+  --color-accent-contrast: #12131a;
 }
 
 * {
@@ -132,7 +213,7 @@
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Hitmarker Text", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
@@ -145,7 +226,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Kairo Sans Condensed", sans-serif;
 }
 
 .command-text {
@@ -201,7 +282,7 @@ body.theme-light .cod-nav-inner {
   display: flex;
   align-items: center;
   gap: 14px;
-  font-family: "Oswald", sans-serif;
+  font-family: "Hitmarker Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -587,7 +668,7 @@ body.theme-light .site-search-input {
 
 .hero-rail .eyebrow {
   color: var(--accent-2);
-  font-family: "Oswald", sans-serif;
+  font-family: "Hitmarker Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.9rem;
@@ -615,7 +696,7 @@ body.theme-light .site-search-input {
 
 .hero-kicker {
   color: var(--color-accent);
-  font-family: "Oswald", sans-serif;
+  font-family: "Hitmarker Condensed", sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.92rem;
@@ -635,10 +716,10 @@ body.theme-light .site-search-input {
 
 .hero-title {
   margin: 0;
-  font-family: "Oswald", sans-serif;
+  font-family: "Kairo Sans Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  font-size: clamp(2.6rem, 6vw, 5.6rem);
+  font-size: clamp(3.3rem, 7.5vw, 7rem);
   line-height: 0.95;
   max-width: 9ch;
 }
@@ -787,7 +868,7 @@ body.theme-light .site-search-input {
 }
 
 .panel-title {
-  font-family: "Oswald", sans-serif;
+  font-family: "Kairo Sans Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 1.25rem;
@@ -893,19 +974,19 @@ body.theme-light .site-search-input {
 .article-content h1,
 .article-content h2,
 .article-content h3 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Kairo Sans Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   line-height: 1.02;
 }
 
 .article-content h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.7rem, 5.2vw, 4rem);
   margin: 1rem 0 1rem;
 }
 
 .article-content h2 {
-  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+  font-size: clamp(2.25rem, 3.6vw, 3.15rem);
   margin-top: 2.6rem;
   scroll-margin-top: 96px;
 }
@@ -934,7 +1015,7 @@ body.theme-light .site-search-input {
 .article-content h2 .heading-anchor {
   margin-left: 0.45em;
   color: var(--soft);
-  font-family: "Inter", sans-serif;
+  font-family: "Hitmarker Text", sans-serif;
   font-size: 0.7em;
   font-weight: 500;
   opacity: 0;
@@ -1009,8 +1090,8 @@ body.theme-light .site-search-input {
 .faq-header h1 {
   margin: 0;
   color: var(--text);
-  font-family: "Inter", sans-serif;
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-family: "Kairo Sans Condensed", sans-serif;
+  font-size: clamp(3rem, 6.5vw, 4.4rem);
   font-weight: 750;
   letter-spacing: -0.045em;
 }
@@ -1024,8 +1105,8 @@ body.theme-light .site-search-input {
   padding: 0;
   border: 0;
   color: var(--text);
-  font-family: "Inter", sans-serif;
-  font-size: 1.15rem;
+  font-family: "Hitmarker Text", sans-serif;
+  font-size: 1.65rem;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
@@ -1161,7 +1242,7 @@ body.theme-light .article-content blockquote {
 }
 
 .article-content code {
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: "Monospace 821", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .article-content table {
@@ -1252,14 +1333,14 @@ table img {
   color: var(--color-accent-text, var(--color-accent));
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-family: "Oswald", sans-serif;
+  font-family: "Hitmarker Condensed", sans-serif;
   font-size: 0.8rem;
   margin-bottom: 6px;
 }
 
 .command-text {
   margin: 0;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Monospace 821", monospace;
   font-size: 0.96rem;
   word-break: break-word;
 }
@@ -1275,7 +1356,8 @@ table img {
   transition: background 0.18s ease, border-color 0.18s ease, transform 0.16s ease;
 }
 
-.command-copy:hover {
+.command-copy:hover,
+.command-info-btn:hover {
   border-color: var(--color-accent);
   background: var(--color-accent-soft);
 }
@@ -1300,47 +1382,10 @@ table img {
 
 .command-info-btn {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 40px;
   min-width: 40px;
   height: 40px;
   padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: linear-gradient(180deg, var(--panel), var(--panel-2));
-  color: var(--text);
-  font-size: 0.92rem;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  cursor: pointer;
-  transition:
-    transform 0.16s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.command-info-btn:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
-}
-
-.command-info-btn:active {
-  transform: translateY(0) scale(0.97);
-}
-
-.command-info-btn:focus-visible {
-  outline: none;
-  border-color: var(--color-accent);
-  box-shadow:
-    0 0 0 3px rgba(0, 76, 255, 0.22),
-    0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
 .quote-audio-wrap {
@@ -1405,7 +1450,7 @@ table img {
 }
 
 .command-info-title {
-  font-family: "Oswald", sans-serif;
+  font-family: "Hitmarker Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.9rem;
@@ -1443,44 +1488,6 @@ table img {
   vertical-align: middle;
 }
 
-[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #fff;
-  background: rgba(10, 10, 14, 0.95);
-  border: 1px solid var(--line);
-  opacity: 0;
-  pointer-events: none;
-  white-space: nowrap;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  z-index: 10;
-}
-
-[data-tooltip]:hover::after,
-[data-tooltip]:focus-visible::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-[data-tooltip-position="below"]::after {
-  top: 120%;
-  bottom: auto;
-  transform: translateX(-50%) translateY(-4px);
-}
-
-[data-tooltip-position="below"]:hover::after,
-[data-tooltip-position="below"]:focus-visible::after {
-  transform: translateX(-50%) translateY(0);
-}
-
 .note-box,
 .info-box {
   border-radius: 18px;
@@ -1499,7 +1506,7 @@ table img {
 }
 
 .note-title {
-  font-family: "Oswald", sans-serif;
+  font-family: "Kairo Sans Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 8px;
@@ -1577,53 +1584,9 @@ table img {
   scroll-margin-top: 96px;
 }
 
-.collection-mw {
-  --collection-accent: #3dc2ff;
-  --collection-glow: rgba(61, 194, 255, 0.32);
-  --collection-kicker-primary: #3dc2ff;
-  --collection-kicker-secondary: #3da2ff;
-}
-
-.collection-mwii {
-  --collection-accent: #3dff6a;
-  --collection-glow: rgba(61, 255, 106, 0.32);
-  --collection-kicker-primary: #3dff6a;
-  --collection-kicker-secondary: #3dff8a;
-}
-
-.collection-mwiii {
-  --collection-accent: #ff3434;
-  --collection-glow: rgba(255, 52, 52, 0.32);
-  --collection-kicker-primary: #ff3434;
-  --collection-kicker-secondary: #ff4d4d;
-}
-
-.collection-cw {
-  --collection-accent: #3d3dff;
-  --collection-glow: rgba(61, 61, 255, 0.32);
-  --collection-kicker-primary: #3d3dff;
-  --collection-kicker-secondary: #ff4d71;
-}
-
-.collection-vg {
-  --collection-accent: #ff950a;
-  --collection-glow: rgba(255, 149, 10, 0.32);
-  --collection-kicker-primary: #ff950a;
-  --collection-kicker-secondary: #ffc14d;
-}
-
-.collection-bo6 {
-  --collection-accent: #fc6c1f;
-  --collection-glow: rgba(252, 108, 31, 0.32);
-  --collection-kicker-primary: #fc6c1f;
-  --collection-kicker-secondary: #ff714d;
-}
-
-.collection-bo7 {
-  --collection-accent: #4d6bff;
-  --collection-glow: rgba(77, 107, 255, 0.32);
-  --collection-kicker-primary: #fc6c1f;
-  --collection-kicker-secondary: #4d6bff;
+.home-collection-grid .game-card {
+  --collection-accent: var(--color-accent);
+  --collection-glow: var(--color-accent-soft);
 }
 
 .card-grid.home-collection-grid {
@@ -1666,8 +1629,8 @@ table img {
 
 .collection-kicker {
   display: inline-flex;
-  color: var(--collection-kicker-primary);
-  font-family: "Oswald", sans-serif;
+  color: var(--collection-accent);
+  font-family: "Hitmarker Condensed", sans-serif;
   font-size: 0.76rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1679,14 +1642,10 @@ table img {
 }
 
 .collection-hero-kicker {
-  color: var(--collection-kicker-secondary);
+  color: var(--collection-accent);
   margin: 0;
   font-size: 0.76rem;
   line-height: 1;
-}
-
-body.theme-light .home-collection-grid .collection-hero-kicker {
-  color: var(--collection-kicker-secondary);
 }
 
 body.theme-light .home-collection-grid .collection-kicker,
@@ -1715,10 +1674,10 @@ body.theme-light .home-collection-grid .collection-hero-kicker {
 
 .section-heading h2 {
   margin: 0;
-  font-family: "Oswald", sans-serif;
+  font-family: "Kairo Sans Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.1rem);
 }
 
 .section-heading p {
@@ -1773,7 +1732,7 @@ body.theme-light .section-heading p {
   left: 16px;
   bottom: 16px;
   z-index: 1;
-  font-family: "Oswald", sans-serif;
+  font-family: "Kairo Sans Condensed", sans-serif;
   font-size: 1.7rem;
   text-transform: uppercase;
   color: #fff !important;
@@ -1982,6 +1941,13 @@ img[src*="/assets/images/key-art/"] {
   padding: 0;
 }
 
+.copy-btn.command-info-btn {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
 .table-value-copy-wrap {
   display: inline-flex;
   align-items: center;
@@ -2045,17 +2011,16 @@ img[src*="/assets/images/key-art/"] {
 }
 
 .copy-btn:focus-visible {
-  outline: none;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
   border-color: var(--color-accent);
-  box-shadow:
-    0 0 0 3px rgba(0, 76, 255, 0.22),
-    0 8px 18px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
 .copy-btn.copied {
-  background: linear-gradient(180deg, var(--color-accent));
+  background: var(--color-accent);
   border-color: var(--color-accent);
-  color: var(--text);
+  color: var(--color-accent-contrast, #12131a);
 }
 
 .copy-btn.copy-failed {
@@ -2095,9 +2060,10 @@ img[src*="/assets/images/key-art/"] {
     height: 44px;
   }
 
-  .command-info-btn {
+  .copy-btn.command-info-btn {
     width: 44px;
     min-width: 44px;
+    height: 44px;
     padding: 0;
   }
 }
@@ -2248,7 +2214,7 @@ body.theme-light img.interface-icon {
   padding: 12px;
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.35);
-  font-family: Consolas, monospace;
+  font-family: "Monospace 821", monospace;
   font-size: 0.85rem;
   word-break: break-word;
 }
@@ -2335,13 +2301,13 @@ body.theme-light.theme-mw {
 }
 
 body.theme-light.theme-mwii {
-  --color-accent-soft: rgba(61, 255, 138, 0.28);
-  --card-gradient-end: rgba(61, 255, 138, 0.03);
+  --color-accent-soft: rgba(124, 196, 44, 0.28);
+  --card-gradient-end: rgba(124, 196, 44, 0.03);
 }
 
 body.theme-light.theme-mwiii {
-  --color-accent-soft: rgba(255, 77, 77, 0.30);
-  --card-gradient-end: rgba(255, 77, 77, 0.04);
+  --color-accent-soft: rgba(51, 130, 170, 0.30);
+  --card-gradient-end: rgba(51, 130, 170, 0.04);
 }
 
 body.theme-light.theme-cw {
@@ -2350,13 +2316,18 @@ body.theme-light.theme-cw {
 }
 
 body.theme-light.theme-vg {
-  --color-accent-soft: rgba(255, 149, 10, 0.28);
-  --card-gradient-end: rgba(255, 149, 10, 0.03);
+  --color-accent-soft: rgba(146, 7, 7, 0.28);
+  --card-gradient-end: rgba(146, 7, 7, 0.03);
 }
 
-body.theme-light.theme-fn {
-  --color-accent-soft: rgba(173, 10, 255, 0.28);
-  --card-gradient-end: rgba(173, 10, 255, 0.03);
+body.theme-light.theme-bo6 {
+  --color-accent-soft: rgba(249, 103, 0, 0.28);
+  --card-gradient-end: rgba(249, 103, 0, 0.03);
+}
+
+body.theme-light.theme-bo7 {
+  --color-accent-soft: rgba(77, 107, 255, 0.28);
+  --card-gradient-end: rgba(77, 107, 255, 0.03);
 }
 
 .cod-nav-inner,
@@ -2441,7 +2412,7 @@ body.theme-light.theme-fn {
 }
 
 .loader-logo {
-  font-family: "Oswald", sans-serif;
+  font-family: "Hitmarker Condensed", sans-serif;
   letter-spacing: .2em;
   font-size: 1.2rem;
   margin-bottom: 24px;

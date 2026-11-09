@@ -53,16 +53,6 @@ const COD_SITE = {
       quote: '“And now the training is complete. We just need to give the subject a name.”',
       badge: 'T9'
     },
-    vg: {
-      key: 'vg',
-      title: buildGameLogo('assets/images/logos/S4-logo.svg', 'assets/images/logos/light/S4-logo.svg', 'Vanguard'),
-      name: 'Vanguard',
-      kicker: 'Fore',
-      hero: '/assets/images/key-art/Vanguard.jpg',
-      file: 'md/VG.md',
-      quote: '“Ever heard of Vanguard? I created Vanguard.”',
-      badge: 'S4'
-    },
     bo6: {
       key: 'bo6',
       title: buildGameLogo('assets/images/logos/Cerberus-logo.svg', 'assets/images/logos/light/Cerberus-logo.svg', 'Black Ops 6'),
@@ -82,6 +72,16 @@ const COD_SITE = {
       file: 'md/BO7.md',
       quote: '“Sorry, Mason. Playing the good guy only gets you so far.”',
       badge: 'IW9-Sat'
+    },
+    vg: {
+      key: 'vg',
+      title: buildGameLogo('assets/images/logos/S4-logo.svg', 'assets/images/logos/light/S4-logo.svg', 'Vanguard'),
+      name: 'Vanguard',
+      kicker: 'Fore',
+      hero: '/assets/images/key-art/Vanguard.jpg',
+      file: 'md/VG.md',
+      quote: '“Ever heard of Vanguard? I created Vanguard.”',
+      badge: 'S4'
     }
   },
 
@@ -91,23 +91,21 @@ const COD_SITE = {
     { key: 'mwii', label: 'MWII', icon: 'assets/images/icons/Cortez-icon.svg', iconLight: 'assets/images/icons/light/Cortez-icon.svg' },
     { key: 'mwiii', label: 'MWIII', icon: 'assets/images/icons/Jupiter-icon.svg', iconLight: 'assets/images/icons/light/Jupiter-icon.svg' },
     { key: 'cw', label: 'CW', icon: 'assets/images/icons/T9-icon.svg', iconLight: 'assets/images/icons/light/T9-icon.svg' },
-    { key: 'vg', label: 'VG', icon: 'assets/images/icons/S4-icon.svg' },
     { key: 'bo6', label: 'BO6', icon: 'assets/images/icons/Cer-icon.svg', iconLight: 'assets/images/icons/light/Cer-icon.svg' },
-    { key: 'bo7', label: 'BO7', icon: 'assets/images/icons/Sat-icon.svg', iconLight: 'assets/images/icons/light/Sat-icon.svg' }
+    { key: 'bo7', label: 'BO7', icon: 'assets/images/icons/Sat-icon.svg', iconLight: 'assets/images/icons/light/Sat-icon.svg' },
+    { key: 'vg', label: 'VG', icon: 'assets/images/icons/S4-icon.svg' }
   ]
 };
 const SEARCH_ALIASES = {
   camouflages: ['camos'],
   dvars: ['commands'],
   menus: ['lua'],
-  versions: ['patches'],
-  versions: ['builds'],
+  versions: ['patches', 'builds'],
   inventories: ['items'],
-  WZ: ['Warzone'],
-  WZ2: ['Warzone 2'],
-  WZ2: ['Warzone 2.0'],
-  WZ2: ['Warzone'],
-  MWZ: ['Zombies'],
+  wz: ['warzone'],
+  wz2: ['warzone', 'warzone 2', 'warzone 2.0'],
+  'wz 2': ['warzone', 'warzone 2', 'warzone 2.0'],
+  mwz: ['modern warfare zombies', 'zombies']
 };
 let sectionSearchIndexPromise = null;
 
@@ -136,7 +134,7 @@ function renderNav(activeKey = 'atlas') {
       `
       : '';
     const homeHtml = `
-      <a class="nav-link-item nav-link-home ${activeKey === 'atlas' ? 'active' : ''}" href="${pageUrl('atlas')}" aria-label="FAQ" data-tooltip="FAQ" data-tooltip-position="below">
+      <a class="nav-link-item nav-link-home ${activeKey === 'atlas' ? 'active' : ''}" href="${pageUrl('atlas')}" aria-label="FAQ">
         <img class="interface-icon" src="${assetUrl('assets/images/icons/help.svg')}" alt="">
       </a>
     `;
@@ -150,11 +148,11 @@ function renderNav(activeKey = 'atlas') {
     <div class="cod-nav-inner">
       <div class="nav-links">${linksWithBrand}</div>
       <div class="nav-actions">
-        <button class="theme-toggle-btn site-search-toggle" id="site-search-toggle" type="button" aria-label="Open site search" aria-controls="site-search-panel" aria-expanded="false" data-tooltip="Search" data-tooltip-position="below">
+        <button class="theme-toggle-btn site-search-toggle" id="site-search-toggle" type="button" aria-label="Open site search" aria-controls="site-search-panel" aria-expanded="false">
           <img class="interface-icon" src="${assetUrl('assets/images/icons/search.svg')}" alt="">
         </button>
-        <button class="theme-toggle-btn theme-toggle" id="theme-toggle" type="button" aria-label="Color theme" data-tooltip-position="below"></button>
-        <button class="theme-toggle-btn nav-visibility-btn" id="nav-toggle" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true" data-tooltip-position="below"></button>
+        <button class="theme-toggle-btn theme-toggle" id="theme-toggle" type="button" aria-label="Color theme"></button>
+        <button class="theme-toggle-btn nav-visibility-btn" id="nav-toggle" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true"></button>
       </div>
       <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
         <img class="interface-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">
@@ -170,8 +168,8 @@ function renderNav(activeKey = 'atlas') {
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-stack">
         ${linksWithBrand}
-        <button class="theme-toggle-btn theme-toggle mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Color theme" data-tooltip-position="below"></button>
-        <button class="theme-toggle-btn nav-visibility-btn mobile-nav-visibility-btn" id="nav-toggle-mobile" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true" data-tooltip-position="below"></button>
+        <button class="theme-toggle-btn theme-toggle mobile-theme-toggle" id="theme-toggle-mobile" type="button" aria-label="Color theme"></button>
+        <button class="theme-toggle-btn nav-visibility-btn mobile-nav-visibility-btn" id="nav-toggle-mobile" type="button" aria-label="Collapse navigation bar" aria-controls="site-nav" aria-expanded="true"></button>
       </div>
     </div>
   `;
@@ -344,7 +342,6 @@ function setupNavVisibilityButtons(nav) {
         if (!button) return;
         button.innerHTML = `<img class="interface-icon nav-expand-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">`;
         button.setAttribute('aria-label', 'Collapse navigation bar');
-        button.dataset.tooltip = 'Collapse navigation bar';
         button.setAttribute('aria-expanded', 'true');
       });
       navInner.getBoundingClientRect();
@@ -359,7 +356,6 @@ function setupNavVisibilityButtons(nav) {
       if (!button) return;
       button.innerHTML = `<img class="interface-icon nav-expand-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">`;
       button.setAttribute('aria-label', 'Expand navigation bar');
-      button.dataset.tooltip = 'Expand navigation bar';
       button.setAttribute('aria-expanded', 'false');
     });
 
@@ -394,7 +390,6 @@ function setupNavVisibilityButtons(nav) {
     if (button) {
       button.innerHTML = `<img class="interface-icon nav-expand-icon" src="${assetUrl('assets/images/icons/menu_open.svg')}" alt="">`;
       button.setAttribute('aria-label', 'Expand navigation bar');
-      button.dataset.tooltip = 'Expand navigation bar';
       button.setAttribute('aria-expanded', 'false');
     }
     if (button) button.addEventListener('click', () => {
@@ -461,7 +456,6 @@ function updateThemeToggleButtons(preference) {
   buttons.forEach((button) => {
     if (!button) return;
     button.innerHTML = `<img class="interface-icon theme-icon" src="${assetUrl(`assets/images/icons/${option.icon}.svg`)}" alt="">`;
-    button.dataset.tooltip = `${option.label} theme`;
     button.setAttribute('aria-label', `${option.label} theme. Click to change theme.`);
   });
 }
@@ -596,7 +590,7 @@ function transformRenderedContent(container) {
         <div class="command-label-row">
           <div class="command-label">Command</div>
           ${hasDescription
-        ? `<button class="command-info-btn" type="button" aria-expanded="false" data-info-target="${infoId}" data-tooltip="Info">i</button>`
+        ? `<button class="copy-btn command-info-btn" type="button" aria-label="Info" aria-expanded="false" data-info-target="${infoId}">i</button>`
         : ''
       }
         </div>
@@ -615,7 +609,7 @@ function transformRenderedContent(container) {
       }
       </div>
 
-      <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" data-tooltip="Copy command">
+      <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command">
         <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
           <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
         </svg>
@@ -737,7 +731,7 @@ function convertEventTables(container) {
         </div>
 
         <div class="event-footer">
-          <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command" data-tooltip="Copy command">
+          <button class="copy-btn command-copy" type="button" data-copy="${escapeHtml(command)}" aria-label="Copy command">
             <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
               <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
             </svg>
@@ -826,7 +820,6 @@ function setupCopyButtons(container) {
     button.dataset.copySuccessLabel = `Copied ${columnName}`;
     button.dataset.copyErrorLabel = `Copy ${columnName} failed`;
     button.setAttribute('aria-label', `Copy ${columnName}`);
-    button.dataset.tooltip = `Copy ${columnName}`;
     button.innerHTML = `
       <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
@@ -854,21 +847,18 @@ function setupCopyButtons(container) {
         btn.classList.remove('copy-failed');
         btn.classList.add('copied');
         btn.setAttribute('aria-label', btn.dataset.copySuccessLabel || 'Copied');
-        btn.dataset.tooltip = btn.dataset.copySuccessLabel || 'Copied';
         icon.innerHTML = '<path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
       } catch {
         clearTimeout(resetTimeout);
         btn.classList.remove('copied');
         btn.classList.add('copy-failed');
         btn.setAttribute('aria-label', btn.dataset.copyErrorLabel || 'Copy failed');
-        btn.dataset.tooltip = btn.dataset.copyErrorLabel || 'Copy failed';
         icon.innerHTML = '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>';
       }
 
       resetTimeout = setTimeout(() => {
         btn.classList.remove('copied', 'copy-failed');
         btn.setAttribute('aria-label', defaultLabel);
-        btn.dataset.tooltip = defaultLabel;
         icon.innerHTML = defaultIcon;
       }, 1400);
     });
@@ -884,7 +874,6 @@ function setupQuoteAudio(container, quoteText, audioFile) {
   button.className = 'quote-audio-btn';
   button.type = 'button';
   button.setAttribute('aria-label', 'Play quote audio');
-  button.dataset.tooltip = 'Play audio';
   button.innerHTML = `
     <svg class="copy-btn-icon" aria-hidden="true" viewBox="0 0 24 24">
       <path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05a4.5 4.5 0 0 0 2.5-4.02zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
@@ -897,7 +886,6 @@ function setupQuoteAudio(container, quoteText, audioFile) {
   button.addEventListener('click', () => {
     audio.currentTime = 0;
     audio.play().catch(error => {
-      button.dataset.tooltip = 'Audio playback failed';
       button.setAttribute('aria-label', 'Audio playback failed');
       console.error('Unable to play quote audio.', error);
     });
@@ -1067,7 +1055,9 @@ async function renderPage(pageKey) {
   if (pageKey === 'mw') {
     setupQuoteAudio(shell, 'We get dirty and the world stays clean. That`s the mission.', 'assets/audio/quotes/MW.wav');
   }
-
+  if (pageKey === 'vg') {
+    setupQuoteAudio(shell, 'Ever heard of Vanguard? I created Vanguard.', 'assets/audio/quotes/VG.wav');
+  }
   const sectionGrid = shell.querySelector('.section-grid');
   const sidePanelToggle = document.getElementById('toc-panel-toggle');
   if (sectionGrid && sidePanelToggle) {
@@ -1256,7 +1246,7 @@ function renderHome() {
         </div>
         <div class="card-grid home-collection-grid">
           ${collections.map(page => `
-            <a class="game-card collection-${page.key}" href="${pageUrl(page.key)}">
+            <a class="game-card theme-${page.key}" href="${pageUrl(page.key)}">
               <div class="game-thumb" style="--card-image:url('${new URL(assetUrl(page.hero), document.baseURI).href}')">
                 <div class="game-thumb-copy">
                   <span class="game-tag">${page.name}</span>
