@@ -1331,7 +1331,7 @@ table img {
 }
 
 .command-label {
-  color: var(--color-accent-text, var(--color-accent));
+  color: var(--color-accent);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-family: "Hitmarker Condensed", sans-serif;
@@ -1360,7 +1360,8 @@ table img {
 .command-copy:hover,
 .command-info-btn:hover {
   border-color: var(--color-accent);
-  background: var(--color-accent-soft);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast, #12131a);
 }
 
 .command-copy:active {
