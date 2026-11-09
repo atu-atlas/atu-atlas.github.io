@@ -1188,7 +1188,8 @@ body.theme-light .site-search-input {
   height: auto;
 }
 
-.article-content img[src*="assets/images/logos/"] {
+.article-content img[src*="assets/images/logos/"],
+.article-content img[src*="/assets/images/icons/modes/"] {
   border: none;
   border-radius: 0;
 }
