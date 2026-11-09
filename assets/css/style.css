@@ -1188,6 +1188,11 @@ body.theme-light .site-search-input {
   height: auto;
 }
 
+.article-content img[src*="assets/images/logos/"] {
+  border: none;
+  border-radius: 0;
+}
+
 .article-content img[src$=".svg"],
 .article-content svg {
   border-radius: 0;
